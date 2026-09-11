@@ -10,24 +10,31 @@
 :root{
   --bg:#FAF7F2; --card:#FFFFFF; --ink:#26221B; --muted:#6E675C; --line:#E5DFD4;
   --steel:#3D6B94; --brick:#B4402F; --brick-ink:#B4402F; --green:#1F8A4C; --amber:#8A6D1A;
-  --chip-bg:#EFE9DE; --brick-wash:#FBF1EF; --green-wash:#EDF6F0; --shadow:0 1px 2px rgba(38,34,27,.06);
+  --chip-bg:#EFE9DE; --brick-wash:#FBF1EF; --green-wash:#EDF6F0; --amber-wash:#F7F2E4;
+  --meter-track:#E5DFD4; --shadow:0 1px 2px rgba(38,34,27,.06);
 }
 @media (prefers-color-scheme: dark){
   :root{
     --bg:#1C1915; --card:#26221C; --ink:#EDE7DC; --muted:#A39A8B; --line:#3A342B;
     --steel:#7FA8CC; --brick:#C9563F; --brick-ink:#E08A78; --green:#4CAF7A; --amber:#CFA83A;
-    --chip-bg:#332E26; --brick-wash:#332320; --green-wash:#22312A; --shadow:none;
+    --chip-bg:#332E26; --brick-wash:#332320; --green-wash:#22312A; --amber-wash:#332C1C;
+    --meter-track:#3A342B; --shadow:none;
   }
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;
   margin:0;padding:32px 20px 48px;font-size:15px;line-height:1.45}
-.wrap{max-width:820px;margin:0 auto}
-header h1{font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size:26px;margin:0;letter-spacing:-.01em}
+.wrap{max-width:860px;margin:0 auto}
+header h1{font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size:27px;margin:0;letter-spacing:-.01em}
 .stamp{color:var(--muted);font-size:13px;margin-top:4px;font-variant-numeric:tabular-nums}
-.load{font-size:13px;margin-top:6px;font-variant-numeric:tabular-nums}
-.load b{color:var(--brick)}
-.load.ok b{color:var(--green)}
+.meter{margin-top:14px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow)}
+.meter .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+  font-size:13px;font-variant-numeric:tabular-nums}
+.meter .pct{font-family:Archivo,sans-serif;font-weight:700;font-size:17px;color:var(--brick)}
+.track{height:7px;border-radius:4px;background:var(--meter-track);margin:8px 0 6px;overflow:hidden;display:flex}
+.fill{background:var(--brick);height:100%}
+.meter .note{font-size:12.5px;color:var(--muted);line-height:1.5}
+.meter .note b{color:var(--amber)}
 h2{font-family:Archivo,sans-serif;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.08em;
   color:var(--muted);margin:28px 0 10px;display:flex;align-items:center;gap:8px}
 h2 .n{background:var(--chip-bg);color:var(--ink);border-radius:10px;padding:0 9px;font-size:12px;font-variant-numeric:tabular-nums}
@@ -35,9 +42,10 @@ h2 .n{background:var(--chip-bg);color:var(--ink);border-radius:10px;padding:0 9p
   padding:12px 16px;margin:8px 0;box-shadow:var(--shadow)}
 .card.stall{border-left-color:var(--brick);background:var(--brick-wash)}
 .card.motion{border-left-color:var(--green)}
-.card.paper{border-left-color:var(--amber)}
+.card.paper{border-left-color:var(--amber);background:var(--amber-wash)}
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
 .job{font-weight:600;font-size:15.5px}
+.gc{color:var(--muted);font-weight:400}
 .task{color:var(--muted);font-size:13.5px;margin-top:2px}
 .due{font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .due.over{color:#fff;background:var(--brick);border-radius:4px;padding:2px 8px}
@@ -45,10 +53,10 @@ h2 .n{background:var(--chip-bg);color:var(--ink);border-radius:10px;padding:0 9p
 .tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:2px 9px;border-radius:10px;
   vertical-align:2px;margin-left:8px}
 .tag.motion{background:var(--green-wash);color:var(--green)}
-.block{font-size:13px;color:var(--amber);font-weight:600;margin-top:7px}
 ul.subs{margin:7px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:2px}
 ul.subs li{font-size:12.5px;color:var(--muted)}
-footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid var(--line);padding-top:12px}
+.block{font-size:12.5px;color:var(--amber);font-weight:600;margin-top:6px;line-height:1.45}
+footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -56,39 +64,173 @@ footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid va
 <header>
   <h1>Bid Board</h1>
   <div class="stamp">Updated 09/11/2026 &middot; 15 estimates &amp; change orders in flight &middot; 5 overdue &middot; 5 due today &middot; 1 due this week</div>
-  <div class='load'>Week load <b>132%</b> (33h due / 25h available) &middot; 6h blocked, not counted</div>
+  <div class="meter">
+    <div class="row"><span><span class="pct">132%</span> week load</span><span>33h of work against 25h available</span></div>
+    <div class="track"><div class="fill" style="width:100%"></div></div>
+    <div class="note">
+      <b>Blocked: 6h not counted</b> &mdash; dSpace Bhasin (floor plans) and the Meyer Guild budget revision are both gated on inputs from others; each carried at 25% of stage hours and lands in full once unblocked.<br>
+      <b>If the week has to give:</b> the Byrne O'Shea Warranty review (stale 18 days, nobody chasing it) is the cheapest thing to let slip further; Ginsburg 885 Bluff St can't move faster regardless of hours spent &mdash; it's blocked on JMD's still-missing 2nd-floor drawing.
+    </div>
+  </div>
 </header>
 
-<h2>Not Yet Started <span class='n'>1</span></h2>
-<div class='card'><div class='top'><div><div class='job'>208 E 6th St - Scott Res</div><div class='task'>Scott - 208 E 6th St (Due 9/18/26)</div></div><span class='due'>due 09/18/26 (7d)</span></div><ul class='subs'><li>Write up the 9/9 site visit (measure + spec notes) — due 9/11</li><li>Confirm spec: prefinished or site finished, species, color, width — due 9/15</li><li>Price scraped 6&quot;-9&quot; material (quote + lead time) — due 9/17</li></ul><div class='block'>Open tab: blocked on JL&#x27;s site notes and the owner&#x27;s plans (Santi referral intake)</div></div>
+<h2>Not yet started <span class="n">1</span></h2>
+<div class="card">
+  <div class="top"><div><div class="job">208 E 6th St <span class="gc">(Scott Res)</span></div>
+  <div class="task">New site visit intake, restoration referral &mdash; blocked on JL's site notes and the owner's plans</div></div><span class="due">due 9/18 (7d)</span></div>
+  <ul class="subs">
+    <li>Write up the 9/9 site visit (measure + spec notes) &mdash; due 9/11</li>
+    <li>Confirm spec: prefinished or site finished, species, color, width &mdash; due 9/15</li>
+    <li>Price scraped 6&quot;-9&quot; material (quote + lead time) &mdash; due 9/17</li>
+  </ul>
+</div>
 
-<h2>In Progress <span class='n'>3</span></h2>
-<div class='card motion'><div class='top'><div><div class='job'>180 E Pearson, Seema (Power)</div><div class='task'>TAKEOFF FINISHED - Power - Seema 180e Pearson<span class='tag motion'>in motion</span></div></div><span class='due'>due 09/11/26</span></div></div>
-<div class='card stall'><div class='top'><div><div class='job'>Ginsburg - 885 Bluff St (JMD Builders)</div><div class='task'>JL NOTES NEEDED - JMD Builders - 885 Bluff St</div></div><span class='due over'>overdue 09/09/26</span></div><ul class='subs'><li>Walkthrough w/ Jerry — done 9/4</li><li>Get finish schedule / WD legend from DBA — done 9/8</li><li>Takeoff + stair scope from pricing set — due 9/11</li></ul><div class='block'>JT&#x27;s due date (9/09) is stale — the to-do&#x27;s own name and the rolling to-do both put the real bid deadline at 9/11</div><div class='block'>Still needs a real 2nd-floor drawing from JMD — a hand sketch won&#x27;t price (OI-035, waiting on Jerry Dardick)</div><div class='block'>JL&#x27;s walkthrough notes still owed</div></div>
-<div class='card motion'><div class='top'><div><div class='job'>Cochran Residence</div><div class='task'>TAKEOFF - Cochran - 810 Greenwood Dr<span class='tag motion'>in motion</span></div></div><span class='due'>due 09/11/26</span></div><ul class='subs'><li>Site visit: measure, joist direction, crawl moisture — done</li><li>Confirm with JL: McCaw contracts the floors or direct to Cochran</li></ul><div class='block'>JL is pricing off the 1,400 SF actual — 4 site-detail sub-tasks still gate a full budget</div></div>
+<h2>In progress <span class="n">3</span></h2>
+<div class="card motion">
+  <div class="top"><div><div class="job">180 E Pearson &mdash; Seema <span class="gc">(Power)</span><span class="tag motion">in motion</span></div>
+  <div class="task">Takeoff finished against the 09/04 revision plans &mdash; budget next</div></div><span class="due hot">due 9/11 &mdash; today</span></div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">Ginsburg &mdash; 885 Bluff St <span class="gc">(JMD Builders)</span></div>
+  <div class="task">Takeoff done for now &mdash; JL notes owed</div></div><span class="due over">OVERDUE 9/9 (2d)</span></div>
+  <ul class="subs">
+    <li>Walkthrough w/ Jerry &mdash; done 9/4</li>
+    <li>Get finish schedule / WD legend from DBA &mdash; done 9/8</li>
+    <li>Takeoff + stair scope from pricing set &mdash; due 9/11</li>
+  </ul>
+  <div class="block">&#9888; JT's due date (9/9) is stale &mdash; the to-do's own name and the rolling to-do both put the real bid deadline at 9/11. Still needs a real 2nd-floor drawing from JMD (a hand sketch won't price, OI-035 with Jerry Dardick) plus JL's walk notes.</div>
+</div>
+<div class="card motion">
+  <div class="top"><div><div class="job">Cochran Residence <span class="gc">(810 Greenwood Dr)</span><span class="tag motion">in motion</span></div>
+  <div class="task">New estimate per plan &mdash; JL pricing off the 1,400 SF actual</div></div><span class="due hot">due 9/11 &mdash; today</span></div>
+  <ul class="subs">
+    <li>Site visit: measure, joist direction, crawl moisture &mdash; done</li>
+    <li>Confirm with JL: McCaw contracts the floors or direct to Cochran</li>
+  </ul>
+  <div class="block">&#9888; Four site-detail sub-tasks still gate a full budget.</div>
+</div>
 
-<h2>Others owe info <span class='n'>2</span></h2>
-<div class='card stall'><div class='top'><div><div class='job'>dSpace - BHASIN Residence</div><div class='task'>NEED PLANS - New Estimate-Per Plan</div></div><span class='due over'>overdue 09/09/26</span></div><div class='block'>Waiting on Lillian Jones (dSpace) for updated floor plans — no date given as of 9/3</div></div>
-<div class='card motion'><div class='top'><div><div class='job'>Meyer Guild 270 Pearson</div><div class='task'>BUDGET REVISION - 270. E. Pearson Meyer Guild<span class='tag motion'>in motion</span></div></div><span class='due'>due 09/10/26</span></div><div class='block'>Same job also carries a JT Change Order to-do (REVISE BUDGET WITH PRICING OPTIONS) for what looks like the same underlying revision — counted once here</div><div class='block'>Verify ~1,600 SF against GW&#x27;s notes before pricing (3,120 was a wrong figure)</div><div class='block'>OI-050 glue method decision still needs JL</div></div>
+<h2>Others owe info <span class="n">2</span></h2>
+<div class="card stall">
+  <div class="top"><div><div class="job">dSpace &mdash; Bhasin Residence</div>
+  <div class="task">New estimate per plan</div></div><span class="due over">OVERDUE 9/9 (2d)</span></div>
+  <div class="block">&#9888; Waiting on Lillian Jones for updated floor plans &mdash; no date given as of 09/03.</div>
+</div>
+<div class="card motion">
+  <div class="top"><div><div class="job">Meyer Guild &mdash; 270 E Pearson #101 <span class="tag motion">in motion</span></div>
+  <div class="task">Budget revision &mdash; baths, master, guest; new subfloor plus patching the existing</div></div><span class="due">due 9/10</span></div>
+  <ul class="subs"><li>Confirm Peachey pricing + lead time (open since 08/07)</li></ul>
+  <div class="block">&#9888; Same job also carries a Change Order to-do (Revise Budget With Pricing Options) for what looks like the same revision. Verify ~1,600 SF against Grace's notes before pricing (3,120 was wrong). OI-050 glue method still needs JL.</div>
+</div>
 
-<h2>Ready to Review <span class='n'>2</span></h2>
-<div class='card stall'><div class='top'><div><div class='job'>Duplicate-Byrne OShea Warranty / Step1-Byrne O&#x27;Shea</div><div class='task'>JL Review-Byrne Oshea Warranty to barter with Step1?</div></div><span class='due over'>overdue 08/24/26</span></div><div class='block'>No reference anywhere in the rolling to-do — appears stale, confirm with JL whether it still needs action or can close</div></div>
-<div class='card motion'><div class='top'><div><div class='job'>Ridder Residence</div><div class='task'>JL REVIEW - Ridder Residence<span class='tag motion'>in motion</span></div></div><span class='due'>due 09/10/26</span></div><div class='block'>JT&#x27;s due date (9/10) conflicts with the to-do&#x27;s own name and the rolling to-do, both of which say 9/13 — JT looks stale</div><div class='block'>RFI to Spencer Douglas on the wood floor spec is still open</div></div>
+<h2>Ready to review <span class="n">2</span></h2>
+<div class="card stall">
+  <div class="top"><div><div class="job">Byrne O'Shea Warranty</div>
+  <div class="task">JL Review &mdash; warranty to barter with Step1?</div></div><span class="due over">OVERDUE 8/24 (18d)</span></div>
+  <div class="block">&#9888; No reference anywhere in the rolling to-do &mdash; confirm with JL whether it still needs action or can just close.</div>
+</div>
+<div class="card motion">
+  <div class="top"><div><div class="job">Ridder Residence <span class="gc">(Power)</span><span class="tag motion">in motion</span></div>
+  <div class="task">Final review &mdash; budget split into separate labor and material</div></div><span class="due">due 9/10</span></div>
+  <div class="block">&#9888; JT's due date (9/10) conflicts with the to-do's own name and the rolling to-do, both of which say 9/13 &mdash; JT looks stale. RFI to Spencer Douglas on the wood floor spec is still open.</div>
+</div>
 
-<h2>Change Orders <span class='n'>7</span></h2>
-<div class='card stall'><div class='top'><div><div class='job'>O&#x27;Brien-Gimlet Sun Valley</div><div class='task'>-JL Review Stromberg vent CO</div></div><span class='due over'>overdue 09/02/26</span></div><div class='block'>No reference in the rolling to-do — appears stale, confirm with JL</div></div>
-<div class='card stall'><div class='top'><div><div class='job'>Chudacoff Maintenance</div><div class='task'>C/O #2 - Chudacoff - Vents change order</div></div><span class='due over'>overdue 09/02/26</span></div><div class='block'>JT&#x27;s due date (9/02) is stale — the rolling to-do has this due 9/10, status OPEN - NOT BUILT</div><div class='block'>Also decide draft CO #64 ($6,215, unsent 30 days) and chase CO #65 / Final Invoice #60 ($25,919.99 pending 85 days)</div></div>
-<div class='card motion'><div class='top'><div><div class='job'>Walcott 1500 LSD #22A</div><div class='task'>REVISE BUDGET, HERRINGBONE IS ENGINEERED - WALCOTT<span class='tag motion'>in motion</span></div></div><span class='due'>due 09/10/26</span></div><div class='block'>OI-006: JL&#x27;s direction on foyer add / refinish pricing / borders still open since 8/21 (escalated)</div><div class='block'>Peachey engineered-material quote needs confirming before the walnut PO can release</div></div>
-<div class='card motion'><div class='top'><div><div class='job'>2336 W Walton #24D (Ratia/HLA)</div><div class='task'>STAIR TREAD PRICING NEEDED - RATIA WALTON 24D<span class='tag motion'>in motion</span></div></div><span class='due'>due 09/10/26</span></div></div>
-<div class='card'><div class='top'><div><div class='job'>Claire&#x27;s House</div><div class='task'>NEED MB PRICING C/O - Board repair change order</div></div><span class='due hot'>due 09/11/26</span></div><div class='block'>Blocked on Mike Boyer&#x27;s pricing — same block as 1291 Elm Tree Rd C/O</div></div>
-<div class='card'><div class='top'><div><div class='job'>1291 Elm Tree Rd C/O (Power)</div><div class='task'>NEED MB PRICING - Brass saddle inlay + touch-ups</div></div><span class='due hot'>due 09/11/26</span></div><div class='block'>OI-017: MB&#x27;s pricing direction is 19 days out and 5 nudges in — catching him in person beats a 6th email</div></div>
-<div class='card motion'><div class='top'><div><div class='job'>Sheahin Board Repair (DeGroot)</div><div class='task'>IN PROGRESS - DeGroot Sheahin - Board repair T&amp;M<span class='tag motion'>in motion</span></div></div><span class='due'>due 09/11/26</span></div><div class='block'>-JL Review- to-do also open on this job</div></div>
+<h2>Contract flip in review <span class="n">1</span></h2>
+<div class="card stall">
+  <div class="top"><div><div class="job">1646 N Oakley <span class="gc">(Formed Space)</span></div>
+  <div class="task">Review and flip</div></div><span class="due over">OVERDUE 9/1 (10d)</span></div>
+  <div class="block">&#9888; Estimate #6 approved $60,202 (08/27); Deposit #8 pending $29,624 &mdash; the flip is under way but unfinished, no PO yet. Insurance documentation deferred until the labor change order lands (OI-033). Live question: does an approved, signed-off sample exist? The architect is on record saying the last batch drifted &mdash; third ask to Grace Wittlinger (OI-040), no answer since 09/07.</div>
+</div>
 
-<h2>On paper, not yet in JobTread <span class='n'>2</span></h2>
-<div class='card paper'><div class='job'>Boothe/Lucas (Copper Rock)</div><div class='task'>CO#3 alternate approved 9/2 ($4,045) — chase CO #21 ($8,479, unsigned 49 days) and Estimate #25 ($1,238) to signed or void; no open JT to-do carries this</div></div>
-<div class='card paper'><div class='job'>Next Level - Delevan Lake</div><div class='task'>Site visit with JL done 8/25, re-budget pending; per OI-037 hold the rebid until Matt Zuckert sends the updated interior set (~early Oct) — no nudge before ~10/06</div></div>
+<h2>Change orders <span class="n">7</span></h2>
+<div class="card stall">
+  <div class="top"><div><div class="job">O'Brien-Gimlet Sun Valley</div>
+  <div class="task">JL Review &mdash; Stromberg vent CO</div></div><span class="due over">OVERDUE 9/2 (9d)</span></div>
+  <div class="block">&#9888; No reference in the rolling to-do &mdash; appears stale, confirm with JL.</div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">Chudacoff Maintenance</div>
+  <div class="task">C/O #2 &mdash; vents (separate from C/O #1 outlet covers)</div></div><span class="due over">OVERDUE 9/2 (9d)</span></div>
+  <div class="block">&#9888; JT's due date is stale &mdash; the rolling to-do has this due 9/10, status OPEN - NOT BUILT. Same customer also carries a draft repair C/O unsent 30 days and a Final Invoice pending $25,919.99 (85 days).</div>
+</div>
+<div class="card motion">
+  <div class="top"><div><div class="job">Walcott 1500 LSD #22A <span class="tag motion">in motion</span></div>
+  <div class="task">Revise budget &mdash; herringbone is engineered</div></div><span class="due">due 9/10</span></div>
+  <div class="block">&#9888; OI-006: JL's direction on foyer add / refinish pricing / borders still open since 8/21 (escalated). Peachey engineered-material quote needs confirming before the walnut PO can release.</div>
+</div>
+<div class="card motion">
+  <div class="top"><div><div class="job">2336 W Walton #24D <span class="gc">(Ratia / HLA)</span><span class="tag motion">in motion</span></div>
+  <div class="task">Stair tread pricing needed</div></div><span class="due">due 9/10</span></div>
+  <div class="block">&#9888; Same underlying job as the 77 E Walton #24D material-only pivot &mdash; that document is ready (job cloned, prior estimate copied across); a call to Grace and the revision itself (labor out, material +10%, prefinished stair material) are what's left.</div>
+</div>
+<div class="card">
+  <div class="top"><div><div class="job">Claire's House</div>
+  <div class="task">Board repair change order &mdash; large volume (08/28 production mtg)</div></div><span class="due hot">due 9/11 &mdash; today</span></div>
+  <div class="block">&#9888; Blocked on Mike Boyer's pricing &mdash; same block as 1291 Elm Tree Rd C/O.</div>
+</div>
+<div class="card">
+  <div class="top"><div><div class="job">1291 Elm Tree Rd C/O <span class="gc">(Power)</span></div>
+  <div class="task">Brass saddle inlay + touch-ups</div></div><span class="due hot">due 9/11 &mdash; today</span></div>
+  <div class="block">&#9888; OI-017: Mike Boyer's pricing direction is 19 days out and 5 nudges in &mdash; catching him in person beats a 6th email.</div>
+</div>
+<div class="card motion">
+  <div class="top"><div><div class="job">Sheahin Board Repair <span class="gc">(DeGroot)</span><span class="tag motion">in motion</span></div>
+  <div class="task">Board repair T&amp;M change order</div></div><span class="due hot">due 9/11 &mdash; today</span></div>
+  <div class="block">&#9888; Job is set up with cost items entered &mdash; issuing the T&amp;M change order is what's left. A separate internal review to-do is also open on the job.</div>
+</div>
 
-<footer>Excludes 1 non-estimate JT to-do (REVIEW AND FLIP W/ GW - 1646 Oakley, taskType Contract) — that&#x27;s a contract-flip item tracked in Open Items OI-033/OI-040, not bid work. 16 stale JT sub-tasks with no rolling-to-do reference and no matching current stage card were left off and not counted in the load (Mowat x5 dated 7/31-8/21 — OI-045 suggests the underlying red-oak and border/parking questions were already resolved 8/15-8/19; Klein-1601 Elmwood x4 dated 8/3-8/6; 1305 Grant Refinishing x1; the old 1291 Elm Tree Rd job x1, likely superseded by the new 1291 Elm Tree Rd C/O job; 1425 Waverly-Sacks Res x3; Main Maintenance x1; Power-2550 Lakeview #S2502 x1) — worth a JT cleanup pass. Week load is 132% (33h due / 25h available, plus 6h withheld as blocked-on-others) — over capacity before any extras; if something has to give, Ginsburg 885 Bluff St is blocked on JMD&#x27;s still-missing 2nd-floor drawing regardless of hours spent, and the Byrne O&#x27;Shea warranty review (18 days stale, no rolling-to-do reference) costs the least to let slip further. &mdash; Green = actively moving &middot; red = stalled past due &middot; amber = on paper, not yet in JobTread.</footer>
+<h2>Sub-tasks without a parent estimate <span class="n">7</span></h2>
+<div class="card stall">
+  <div class="top"><div><div class="job">Mowat &mdash; 1515 W Jackson <span class="gc">(TCE Builders)</span></div>
+  <div class="task">Five loose sub-tasks: walkthrough RSVP, pricing-set review, parlor-border plank match, 2nd-floor trim stain option</div></div><span class="due over">OVERDUE 8/21 (21d)</span></div>
+  <div class="block">&#9888; OI-045 suggests the underlying red-oak and border/parking questions were already resolved 08/15&ndash;08/19 &mdash; likely just needs closing in JT.</div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">Klein &mdash; 1601 Elmwood Ave <span class="gc">(JAR)</span></div>
+  <div class="task">Four loose sub-tasks: bid-set review, walk-through, stair-refinish confirm, flooring selections</div></div><span class="due over">OVERDUE 8/6 (36d)</span></div>
+  <div class="block">&#9888; No reference anywhere in the rolling to-do &mdash; likely dead or forgotten. Needs a disposition.</div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">1425 Waverly &mdash; Sacks Res <span class="gc">(Power)</span></div>
+  <div class="task">Three pricing sub-tasks: Madera Trio quote, Madera Trio pricing, stair treads/nosings/handrail</div></div><span class="due over">OVERDUE 8/21 (21d)</span></div>
+  <div class="block">&#9888; No estimate to-do behind them and no row on the working list &mdash; likely stale.</div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">1291 Elm Tree Rd <span class="gc">(Power, original job)</span></div>
+  <div class="task">Measure pantry/dining opening for brass saddle</div></div><span class="due over">OVERDUE 8/19 (23d)</span></div>
+  <div class="block">&#9888; Likely superseded by the new 1291 Elm Tree Rd C/O job created 09/01 &mdash; confirm and close.</div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">Power &mdash; 2550 Lakeview #S2502</div>
+  <div class="task">Resolve field finished vs prefinished</div></div><span class="due over">OVERDUE 8/28 (14d)</span></div>
+  <div class="block">&#9888; The bid invitation for this job went to a retired BuildingConnected company record and landed in the wrong mailbox &mdash; that record itself still needs fixing.</div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">Main Maintenance <span class="gc">(8801 Robert Rd)</span></div>
+  <div class="task">Finish/color match, same or slightly darker</div></div><span class="due over">OVERDUE 8/27 (15d)</span></div>
+  <div class="block">&#9888; Single loose sub-task, no estimate to-do behind it. Needs a disposition.</div>
+</div>
+<div class="card stall">
+  <div class="top"><div><div class="job">1305 Grant Refinishing</div>
+  <div class="task">1305 Valerie Overly *MB</div></div><span class="due over">OVERDUE 8/4 (38d)</span></div>
+  <div class="block">&#9888; Single loose sub-task, no estimate to-do behind it. Act on it or close it.</div>
+</div>
+
+<h2>On the to-do, not in JobTread <span class="n">2</span></h2>
+<div class="card paper">
+  <div class="job">Boothe/Lucas <span class="gc">(Copper Rock)</span></div>
+  <div class="task">CO#3 alternate approved 09/02 ($4,045) &mdash; chase CO #21 ($8,479, unsigned 49 days) and Estimate #25 ($1,238) to signed or void; due 9/11 per the rolling to-do, no JT to-do carries it.</div>
+</div>
+<div class="card paper">
+  <div class="job">Next Level &mdash; Delavan Lake <span class="gc">(2938 N Shore Dr rebid)</span></div>
+  <div class="task">Site visit with JL done 08/25, re-budget pending; per OI-037 hold the rebid until Matt Zuckert sends the updated interior set (~early Oct) &mdash; no nudge before ~10/06.</div>
+</div>
+
+<footer>
+Green = actively moving &middot; red = stalled past due &middot; amber = pre-pipeline or paused.<br>
+<b>Changed since the 09/10 board:</b> the six items due Friday are now due today. Sheahin Board Repair moved from paper-only to its own Change Orders card &mdash; job is set up, the T&amp;M CO itself is what's left. The Ratia/HLA unit's card is now keyed to its stair-tread-pricing to-do (2336 W Walton #24D) rather than a separate estimate-revision entry, and carries the 77 E Walton material-only-document status directly. Sub-tasks without a parent are now broken out by job (7 clusters, was folded into "on paper" before) so each stale cluster is visible on its own.<br>
+Source: JobTread org 22NMQUxCDU84, open to-dos with an end date on or after 7/28/26 (43 tasks, single page), cross-referenced against the JV Rolling To-Do workbook (Open Items + Open tabs), 09/11 pull. Load counts work due through 9/18 at stage-hour estimates; the two info-blocked cards are counted at 25% with the withheld hours shown separately. Refreshed each weekday morning.
+</footer>
 </div>
 </body>
 </html>
