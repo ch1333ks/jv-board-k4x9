@@ -15,24 +15,24 @@
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#070A16; --card:#131A2E; --ink:#E8EAF7; --muted:#9CA4C6; --line:#232C48;
-    --steel:#72C6E8; --brick:#DB4A73; --brick-ink:#FF9CB9; --green:#3FE1AC; --amber:#B39DFF;
-    --chip-bg:#1C2544; --brick-wash:#2B1930; --green-wash:#0E2A25; --amber-wash:#231C40;
-    --meter-track:#232C48; --shadow:none;
+    --bg:#080A14; --card:#161D35; --ink:#EAECF8; --muted:#AEB6D9; --line:#283152;
+    --steel:#72C6E8; --brick:#E15C82; --brick-ink:#FF9CB9; --green:#3FE1AC; --amber:#B7A6EC;
+    --chip-bg:#1E2749; --brick-wash:#2B1930; --green-wash:#0E2A25; --amber-wash:#231C40;
+    --meter-track:#283152; --shadow:none;
   }
+  /* Aurora sits in the sky, not underfoot: a calm flat ground with the glow and a
+     few stars anchored to the top ~500px so long lists of cards stay easy to read. */
   body{
-    background-color:#05060D;
+    background-color:#06070F;
     background-image:
-      radial-gradient(1px 1px at 15% 8%, rgba(255,255,255,.55), transparent),
-      radial-gradient(1px 1px at 68% 4%, rgba(255,255,255,.4), transparent),
-      radial-gradient(1.5px 1.5px at 40% 14%, rgba(255,255,255,.6), transparent),
-      radial-gradient(1px 1px at 85% 18%, rgba(255,255,255,.35), transparent),
-      radial-gradient(1px 1px at 25% 22%, rgba(255,255,255,.45), transparent),
-      radial-gradient(1.5px 1.5px at 92% 10%, rgba(255,255,255,.5), transparent),
-      linear-gradient(180deg, #05060D 0%, #0B0E22 20%, #171C3E 42%, #16304C 68%, #0E3B44 100%);
-    background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, no-repeat;
-    background-size: 420px 420px, 420px 420px, 420px 420px, 420px 420px, 420px 420px, 420px 420px, 100% 100%;
-    background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed;
+      radial-gradient(1px 1px at 12% 36px, rgba(255,255,255,.4), transparent),
+      radial-gradient(1px 1px at 55% 16px, rgba(255,255,255,.3), transparent),
+      radial-gradient(1.5px 1.5px at 35% 58px, rgba(255,255,255,.45), transparent),
+      radial-gradient(1px 1px at 80% 30px, rgba(255,255,255,.28), transparent),
+      radial-gradient(1px 1px at 92% 64px, rgba(255,255,255,.22), transparent),
+      radial-gradient(ellipse 820px 460px at 50% 0%, rgba(90,110,220,.28), transparent 65%),
+      radial-gradient(ellipse 760px 380px at 85% 0%, rgba(45,200,175,.16), transparent 65%);
+    background-repeat: no-repeat;
   }
 }
 *{box-sizing:border-box}
@@ -69,7 +69,7 @@ h2 .n{background:var(--chip-bg);color:var(--ink);border-radius:10px;padding:0 9p
 .tag.motion{background:var(--green-wash);color:var(--green)}
 ul.subs{margin:7px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:2px}
 ul.subs li{font-size:12.5px;color:var(--muted)}
-.block{font-size:12.5px;color:var(--amber);font-weight:600;margin-top:6px;line-height:1.45}
+.block{font-size:12.5px;color:var(--amber);font-weight:500;margin-top:6px;line-height:1.55}
 footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
 </style>
 </head>
