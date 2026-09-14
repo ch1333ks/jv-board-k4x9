@@ -8,17 +8,31 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
-  --bg:#FAF7F2; --card:#FFFFFF; --ink:#26221B; --muted:#6E675C; --line:#E5DFD4;
-  --steel:#3D6B94; --brick:#B4402F; --brick-ink:#B4402F; --green:#1F8A4C; --amber:#8A6D1A;
-  --chip-bg:#EFE9DE; --brick-wash:#FBF1EF; --green-wash:#EDF6F0; --amber-wash:#F7F2E4;
-  --meter-track:#E5DFD4; --shadow:0 1px 2px rgba(38,34,27,.06);
+  --bg:#F2F4FB; --card:#FFFFFF; --ink:#1C2136; --muted:#5B6482; --line:#DEE3F1;
+  --steel:#3B62B4; --brick:#C23A61; --brick-ink:#C23A61; --green:#12876B; --amber:#7856D6;
+  --chip-bg:#E6EAF9; --brick-wash:#FCF0F5; --green-wash:#E9F7F2; --amber-wash:#F0ECFC;
+  --meter-track:#DEE3F1; --shadow:0 1px 2px rgba(28,33,54,.07);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#1C1915; --card:#26221C; --ink:#EDE7DC; --muted:#A39A8B; --line:#3A342B;
-    --steel:#7FA8CC; --brick:#C9563F; --brick-ink:#E08A78; --green:#4CAF7A; --amber:#CFA83A;
-    --chip-bg:#332E26; --brick-wash:#332320; --green-wash:#22312A; --amber-wash:#332C1C;
-    --meter-track:#3A342B; --shadow:none;
+    --bg:#070A16; --card:#131A2E; --ink:#E8EAF7; --muted:#9CA4C6; --line:#232C48;
+    --steel:#72C6E8; --brick:#DB4A73; --brick-ink:#FF9CB9; --green:#3FE1AC; --amber:#B39DFF;
+    --chip-bg:#1C2544; --brick-wash:#2B1930; --green-wash:#0E2A25; --amber-wash:#231C40;
+    --meter-track:#232C48; --shadow:none;
+  }
+  body{
+    background-color:#05060D;
+    background-image:
+      radial-gradient(1px 1px at 15% 8%, rgba(255,255,255,.55), transparent),
+      radial-gradient(1px 1px at 68% 4%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1.5px 1.5px at 40% 14%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 85% 18%, rgba(255,255,255,.35), transparent),
+      radial-gradient(1px 1px at 25% 22%, rgba(255,255,255,.45), transparent),
+      radial-gradient(1.5px 1.5px at 92% 10%, rgba(255,255,255,.5), transparent),
+      linear-gradient(180deg, #05060D 0%, #0B0E22 20%, #171C3E 42%, #16304C 68%, #0E3B44 100%);
+    background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, no-repeat;
+    background-size: 420px 420px, 420px 420px, 420px 420px, 420px 420px, 420px 420px, 420px 420px, 100% 100%;
+    background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed;
   }
 }
 *{box-sizing:border-box}
