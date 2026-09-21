@@ -20,8 +20,6 @@
     --chip-bg:#1E2749; --brick-wash:#2B1930; --green-wash:#0E2A25; --amber-wash:#231C40;
     --meter-track:#283152; --shadow:none;
   }
-  /* Aurora sits in the sky, not underfoot: a calm flat ground with the glow and a
-     few stars anchored to the top ~500px so long lists of cards stay easy to read. */
   body{
     background-color:#06070F;
     background-image:
@@ -78,163 +76,59 @@ footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid va
 <div class="wrap">
 <header>
   <h1>Bid Board</h1>
-  <div class="stamp">Updated 09/18/2026 &middot; 18 estimates &amp; change orders in flight &middot; 7 overdue &middot; 4 due today &middot; 5 due this week</div>
+  <div class="stamp">Updated 09/21/2026 &middot; 13 estimates &amp; change orders in flight &middot; 4 overdue &middot; 5 due this week</div>
   <div class="meter">
-    <div class="row"><span><span class="pct">111%</span> week load</span><span>27.75h of work against 25h available</span></div>
-    <div class="track"><div class="fill" style="width:100%"></div></div>
-    <div class="note">
-      <b>Blocked: 8.25h not counted</b> &mdash; 180 E Pearson Seema, dSpace Bhasin, and Hawilo Maintenance are all Others-Owe-Info cards gated on outside answers; carried at 25% of stage hours and lands in full once unblocked.<br>
-      <b>Overdue held at 8, mix mostly unchanged from 9/16:</b> Ginsburg &amp; Sheahin cross into their second overdue week; Seema, Cochran, Hamood, Dallas, and JAR 7207 slipped into overdue overnight as their 9/17 dates passed. Meyer Guild is now 42 days overdue with no parent to-do left.<br>
-      <b>New this run:</b> Silvey MH &mdash; Tucker Lake and Oxbow Development &mdash; Ada MI entered Not Yet Started; two contract flips (Thierer Water Damage, Lowe Material &amp; Install) are due today alongside 1646 N Oakley's still-unconfirmed flip.<br>
-      <b>If the week has to give:</b> the Oxbow Development sub-tasks (4h, due 9/22, no external deadline pressure) and the overdue Meyer Guild/JAR 7207/Dallas confirmations (5h, already stalled on outside answers) have the most slack. Silvey MH (Two Ocean presents to the client Monday 9/21) and 208 E 6th St &mdash; Scott Res (8 days blocked on JL already) should not slip further.
-    </div>
+    <div class="row"><span><span class="pct">77%</span> week load</span><span>19.25h of work against 25h available</span></div>
+    <div class="track"><div class="fill" style="width:77%"></div></div>
+    <div class="note"><b>Blocked: 6.75h not counted</b> &mdash; Hawilo Maintenance and dSpace Bhasin are Others-Owe-Info cards gated on outside answers; carried at 25% of stage hours and lands in full once unblocked.<br><b>New this run:</b> Portillo 2026 Maintenance and Gemma Parker Maintenance field drafts folded in and are now overdue for review (1 day). Silvey MH graduated from Not Yet Started to In Progress and is due today &mdash; Two Ocean presents to the client this afternoon. Thierer Water Damage and Lowe Material &amp; Install contract flips are now 3 days overdue. Walcott's C/O due date moved from today to 9/25 as the herringbone-to-engineered material revision got underway.<br><b>If the week has to give:</b> the Oxbow Development sub-tasks (6h, due 9/22–9/23, no external deadline pressure) have the most slack. Silvey MH (client presentation today) and 208 E 6th St (11 days blocked on JL already) should not slip further.</div>
   </div>
 </header>
 
 <h2>Not yet started <span class="n">4</span></h2>
-<div class="card stall">
-  <div class="top"><div><div class="job">Silvey MH &mdash; Tucker Lake <span class="gc">(Two Ocean Builders)</span></div>
-  <div class="task">New B&amp;B + refinish estimate</div></div><span class="due hot">due 9/21 (3d)</span></div>
-  <ul class="subs">
-    <li>Confirm scope: MH only, refinish Option 2 priced? &mdash; overdue 1d</li>
-    <li>B&amp;B quote: Warmstone 10&quot;, 8&quot;, random 6/8/10 &mdash; due today</li>
-    <li>Wood SF takeoff, main + upper A2.3/A2.4 &mdash; due today</li>
-    <li>Freight quote to Wilson WY &mdash; due today</li>
-  </ul>
-  <div class="block">&#9888; CRITICAL PATH: waiting on Burchette &amp; Burchette pricing via JL &mdash; Bobby presents to the client Mon 9/21, ask-by already passed. Also waiting on Bobby Henninger for guest house in/out, refinish option priced?, and material-only vs install (3 questions, nudged 9/17); waiting on JL to name who owns this bid, Grace or Jim.</div>
-</div>
-<div class="card">
-  <div class="top"><div><div class="job">Oxbow Development &mdash; Ada MI <span class="gc">(Ballema)</span></div>
-  <div class="task">New estimate</div></div><span class="due">due 9/23 (5d)</span></div>
-  <ul class="subs">
-    <li>Price AX324 material, 7.5&quot; x 5/8&quot; natural grade &mdash; due 9/22 (4d)</li>
-    <li>Price install labor as a separate number &mdash; due 9/22 (4d)</li>
-    <li>OOT logistics: freight, travel, per diem &mdash; due 9/22 (4d)</li>
-    <li>Stair/landing scope, 18R &mdash; treads, risers, nosings &mdash; due 9/22 (4d)</li>
-  </ul>
-</div>
-<div class="card stall">
-  <div class="top"><div><div class="job">208 E 6th St <span class="gc">(Scott Res, Hinsdale)</span></div>
-  <div class="task">New estimate, not yet started</div></div><span class="due">due 10/2 (14d)</span></div>
-  <ul class="subs">
-    <li>Write up the 9/9 site visit (measure + spec notes) &mdash; due 9/22 (4d)</li>
-    <li>Confirm what test JL wanted before this gets estimated &mdash; due 9/22 (4d)</li>
-    <li>Confirm spec: species, color, sheen, width &mdash; due 9/25 (7d)</li>
-    <li>Confirm tear-out + disposal ours or not &mdash; due 9/25 (7d)</li>
-    <li>Plan-read takeoff off the permit set &mdash; due 9/29 (11d)</li>
-    <li>Price material once spec lands &mdash; due 9/30 (12d)</li>
-    <li>Price stair work &mdash; due 9/30 (12d)</li>
-  </ul>
-  <div class="block">&#9888; CRITICAL PATH: waiting on JL's write-up of the 9/9 site visit &mdash; the permit set has no finish schedule and nothing is measured (open since 9/10, 8 days). Also waiting on JL/MP on what test JL wanted run before this gets estimated.</div>
-</div>
-<div class="card stall">
-  <div class="top"><div><div class="job">55 W Delaware #1101 <span class="gc">(LS Construction / Reamer)</span></div>
-  <div class="task">New maintenance estimate</div></div><span class="due">due 10/9 (21d)</span></div>
-  <ul class="subs">
-    <li>Get JL site photos and notes for maintenance scope &mdash; due 9/25 (7d)</li>
-    <li>Heidler quote, 4in rift walnut solid long length &mdash; due 10/2 (14d)</li>
-    <li>Confirm building COI, dock and elevator rules &mdash; due 10/2 (14d)</li>
-    <li>Site visit and measure, after 9/30 before 10/21 &mdash; due 10/6 (18d)</li>
-  </ul>
-  <div class="block">&#9888; CRITICAL PATH: waiting on JL for the 9/10 site-visit photos + notes &mdash; the only record of the maintenance extent, ask-by already passed. Also waiting on Heidler Hardwood (no contact on file) and Tom at LS Construction for COI/dock/elevator rules and to confirm the address is 55 W (not E) Delaware Pl and the best contact name.</div>
-</div>
+<div class="card stall"><div class="top"><div><div class="job">Cynthia McCullough <span class="gc">(9 W Walton #702)</span></div><div class="task">Recoat estimate — budget built, RFIs open</div></div><span class="due hot">due 9/22 (1d)</span></div><div class="block">&#9888; Waiting on Cynthia McCullough for the existing finish system/sheen (CRITICAL PATH — a wrong sheen on a dark wire-brushed floor shows immediately), whether the unit will be empty of furniture, and building COI/dock/elevator rules. Waiting on John Palmer to confirm whether the kitchen board repairs are still open or already done. Also needs access to run the residue/bond test area before the full coat. Budget was built 9/18 at $9,302.45 assuming recoatable; JT still shows this to-do as Not Yet Started even though the budget exists.</div></div>
+<div class="card"><div class="top"><div><div class="job">Oxbow Development <span class="gc">(Ballema, Ada MI)</span></div><div class="task">New estimate</div></div><span class="due hot">due 9/23 (2d)</span></div><ul class="subs"><li>Price AX324 material, 7.5" x 5/8" natural grade — due 9/22</li><li>Price install labor as a separate number — due 9/22</li><li>OOT logistics: freight, travel, per diem — due 9/22</li><li>Stair/landing scope, 18R — treads, risers, nosings — due 9/22</li></ul></div>
+<div class="card stall"><div class="top"><div><div class="job">208 E 6th St <span class="gc">(Scott Res, Hinsdale)</span></div><div class="task">New estimate, not yet started</div></div><span class="due">due 10/2 (11d)</span></div><ul class="subs"><li>Write up the 9/9 site visit (measure + spec notes) — due 9/22</li><li>Confirm what test JL wanted before this gets estimated — due 9/22</li><li>Confirm spec: species, color, sheen, width — due 9/25</li><li>Confirm tear-out + disposal ours or not — due 9/25</li><li>Plan-read takeoff off the permit set — due 9/29</li><li>Price material once spec lands — due 9/30</li><li>Price stair work — due 9/30</li></ul><div class="block">&#9888; Waiting on JL's write-up of the 9/9 site visit — the permit set has no finish schedule and nothing is measured (open since 9/10, 11 days). Also waiting on JL/MP on what test JL wanted run before this gets estimated.</div></div>
+<div class="card stall"><div class="top"><div><div class="job">55 W Delaware #1101 <span class="gc">(LS Construction / Reamer)</span></div><div class="task">New maintenance estimate</div></div><span class="due">due 10/9 (18d)</span></div><ul class="subs"><li>Get JL site photos and notes for maintenance scope — due 9/25</li><li>Heidler quote, 4in rift walnut solid long length — due 10/2</li><li>Confirm building COI, dock and elevator rules — due 10/2</li><li>Site visit and measure, after 9/30 before 10/21 — due 10/6</li></ul><div class="block">&#9888; Waiting on JL for the 9/10 site-visit photos + notes — the only record of the maintenance extent, ask-by already passed. Also waiting on Heidler Hardwood (no contact on file) and Tom at LS Construction for COI/dock/elevator rules and to confirm the address is 55 W (not E) Delaware Pl and the best contact name.</div></div>
+
+<h2>In progress <span class="n">1</span></h2>
+<div class="card stall"><div class="top"><div><div class="job">Silvey MH — Tucker Lake <span class="gc">(Two Ocean Builders)</span></div><div class="task">New B&amp;B + refinish estimate</div></div><span class="due hot">due today</span></div><ul class="subs"><li>Confirm scope: MH only, refinish Option 2 priced? — due 9/18</li><li>B&amp;B quote: Warmstone 10", 8", random 6/8/10 — due 9/18</li><li>Wood SF takeoff, main + upper A2.3/A2.4 — due 9/18</li><li>Freight quote to Wilson WY — due 9/18</li></ul><div class="block">&#9888; CRITICAL PATH: waiting on Burchette &amp; Burchette pricing via JL — Bobby presents to the client today (Mon 9/21), ask-by already passed. Also waiting on Bobby Henninger for guest house in/out, refinish option priced?, and material-only vs install (3 questions, nudged 9/17); waiting on JL to name who owns this bid, Grace or Jim.</div></div>
 
 <h2>Others owe info <span class="n">3</span></h2>
-<div class="card motion">
-  <div class="top"><div><div class="job">180 E Pearson &mdash; Seema <span class="gc">(Power)</span><span class="tag motion">in motion</span></div>
-  <div class="task">Takeoff finished &mdash; budget next</div></div><span class="due over">OVERDUE 9/17 (1d)</span></div>
-  <div class="block">&#9888; JT's own to-do name still says &ldquo;TAKEOFF FINISHED&rdquo; but the stage has moved to Others Owe Info &mdash; stale label, trusting the end date. Zach confirmed 9/9 that QuietWalk is not board-approved; price the pre-approved Kinetics assembly instead.</div>
-</div>
-<div class="card stall">
-  <div class="top"><div><div class="job">dSpace &mdash; Bhasin Residence</div>
-  <div class="task">New estimate per plan</div></div><span class="due hot">due today</span></div>
-  <div class="block">&#9888; Blocked on plans &mdash; Lillian Jones (dSpace) was still finalizing design with the client as of 9/3, no date given.</div>
-</div>
-<div class="card stall">
-  <div class="top"><div><div class="job">Hawilo Maintenance <span class="gc">(2126 N Kenmore)</span></div>
-  <div class="task">Tornado water damage maintenance estimate</div></div><span class="due">due 9/25 (7d)</span></div>
-  <ul class="subs">
-    <li>Confirm species: IPE vs Brazilian Cherry &mdash; due 9/23 (5d)</li>
-    <li>MC readings, floor + subfloor &mdash; due 9/23 (5d)</li>
-  </ul>
-  <div class="block">&#9888; Waiting on Cristina Hawilo (phone only, no email on file) &mdash; has a restoration contractor already taken MC readings, and when can Apex get in to read floor and subfloor.</div>
-</div>
+<div class="card motion"><div class="top"><div><div class="job">180 E Pearson — Seema <span class="gc">(Power)</span><span class="tag motion">in motion</span></div><div class="task">Takeoff finished — budget next</div></div><span class="due over">OVERDUE 9/17 (4d)</span></div><div class="block">&#9888; JT's own to-do name still says “TAKEOFF FINISHED” but the stage has moved to Others Owe Info — stale label, trusting the end date. Zach confirmed 9/9 that QuietWalk is not board-approved; price the pre-approved Kinetics assembly instead. This is Jim's own next action (build the budget), not an external wait.</div></div>
+<div class="card stall"><div class="top"><div><div class="job">dSpace — Bhasin Residence</div><div class="task">New estimate per plan</div></div><span class="due">due 9/25 (4d)</span></div><div class="block">&#9888; Blocked on plans — Lillian Jones (dSpace) was still finalizing design with the client as of 9/3, no date given. Due date pushed from 9/18 to 9/25.</div></div>
+<div class="card stall"><div class="top"><div><div class="job">Hawilo Maintenance <span class="gc">(2126 N Kenmore)</span></div><div class="task">Tornado water damage maintenance estimate</div></div><span class="due">due 9/25 (4d)</span></div><ul class="subs"><li>Confirm species: IPE vs Brazilian Cherry — due 9/23</li><li>MC readings, floor + subfloor — due 9/23</li></ul><div class="block">&#9888; Waiting on Cristina Hawilo (phone only, no email on file) — has a restoration contractor already taken MC readings, and when can Apex get in to read floor and subfloor.</div></div>
 
-<h2>Ready to review <span class="n">1</span></h2>
-<div class="card motion">
-  <div class="top"><div><div class="job">Cochran Residence <span class="gc">(810 Greenwood Dr)</span><span class="tag motion">in motion</span></div>
-  <div class="task">JL pricing</div></div><span class="due over">OVERDUE 9/17 (1d)</span></div>
-  <div class="block">&#9888; Spec revised to live sawn RO 9/15 &mdash; First Grade's Lisa Gawlicki came back the same day saying that spec doesn't exist in live sawn; the alternative (plain sawn RO, $3.05/SF, in stock) needs Jim's call.</div>
-</div>
+<h2>Ready to review <span class="n">3</span></h2>
+<div class="card motion"><div class="top"><div><div class="job">Cochran Residence <span class="gc">(810 Greenwood Dr)</span><span class="tag motion">in motion</span></div><div class="task">JL pricing</div></div><span class="due over">OVERDUE 9/17 (4d)</span></div><div class="block">&#9888; Spec revised to live sawn RO 9/15 — First Grade's Lisa Gawlicki came back the same day saying that spec doesn't exist in live sawn; the alternative (plain sawn RO, $3.05/SF, in stock) needs Jim's call. JT's own to-do name says “Due 9/11/26” but the end date is 9/17 — stale label, trusting the end date.</div></div>
+<div class="card"><div class="top"><div><div class="job">Gemma Parker Maintenance <span class="gc">(370 N Western Ave, field draft)</span></div><div class="task">Review draft, adjust, issue estimate</div></div><span class="due over">OVERDUE 9/20 (1d)</span></div></div>
+<div class="card"><div class="top"><div><div class="job">Portillo 2026 Maintenance <span class="gc">(2712 31st St, field draft)</span></div><div class="task">Review draft, adjust, issue estimate</div></div><span class="due over">OVERDUE 9/20 (1d)</span></div></div>
 
 <h2>Contract flip in review <span class="n">3</span></h2>
-<div class="card stall">
-  <div class="top"><div><div class="job">1646 N Oakley <span class="gc">(Formed Space)</span></div>
-  <div class="task">Review and flip w/ GW</div></div><span class="due">due 9/25 (7d)</span></div>
-  <div class="block">&#9888; Waiting on MP/GW to confirm the flip &mdash; Estimate #6 approved $60,202 (8/27) but Deposit #8 is still pending $29,624 and there is no vendor PO yet, so the flip is not actually confirmed.</div>
-</div>
-<div class="card">
-  <div class="top"><div><div class="job">Thierer Water Damage</div>
-  <div class="task">Flip contract</div></div><span class="due hot">due today</span></div>
-</div>
-<div class="card">
-  <div class="top"><div><div class="job">Lowe Material &amp; Install</div>
-  <div class="task">Flip contract</div></div><span class="due hot">due today</span></div>
-</div>
+<div class="card stall"><div class="top"><div><div class="job">1646 N Oakley <span class="gc">(Formed Space)</span></div><div class="task">Review and flip w/ GW</div></div><span class="due">due 9/25 (4d)</span></div><div class="block">&#9888; Waiting on MP/GW to confirm the flip — Estimate #6 approved $60,202 (8/27) but Deposit #8 is still pending $29,624 and there is no vendor PO yet, so the flip is not actually confirmed.</div></div>
+<div class="card"><div class="top"><div><div class="job">Thierer Water Damage</div><div class="task">Flip contract</div></div><span class="due over">OVERDUE 9/18 (3d)</span></div></div>
+<div class="card"><div class="top"><div><div class="job">Lowe Material &amp; Install</div><div class="task">Flip contract</div></div><span class="due over">OVERDUE 9/18 (3d)</span></div></div>
 
 <h2>Change orders <span class="n">2</span></h2>
-<div class="card motion">
-  <div class="top"><div><div class="job">Walcott 1500 LSD #22A <span class="tag motion">in motion</span></div>
-  <div class="task">Revise budget &mdash; herringbone is engineered</div></div><span class="due hot">due today</span></div>
-  <div class="block">&#9888; Waiting on JL &mdash; foyer add / refinish pricing / borders direction, open since 8/21; the walnut PO is on hold pending this call. Revise material to HB engineered against the Peachey quote, then release the PO and reply to Jessica at Allegheny.</div>
-</div>
-<div class="card stall">
-  <div class="top"><div><div class="job">1291 Elm Tree Rd C/O <span class="gc">(Power)</span></div>
-  <div class="task">Brass saddle inlay + touch-ups</div></div><span class="due">due 9/25 (7d)</span></div>
-  <div class="block">&#9888; Waiting on Zach Muscari (Power) for the C/O go-ahead &mdash; 7 nudges since 8/21. Waiting on Mike Boyer for saddle pricing direction &mdash; 7 asks since 8/21, gates the ballpark owed to Power.</div>
-</div>
+<div class="card motion"><div class="top"><div><div class="job">Walcott 1500 LSD #22A<span class="tag motion">in motion</span></div><div class="task">Revise budget — herringbone is engineered</div></div><span class="due">due 9/25 (4d)</span></div><div class="block">&#9888; Waiting on JL — foyer add / refinish pricing / borders direction, open since 8/21; the walnut PO is on hold pending this call. Revise material to HB engineered against the Peachey quote, then release the PO and reply to Jessica at Allegheny.</div></div>
+<div class="card stall"><div class="top"><div><div class="job">1291 Elm Tree Rd C/O <span class="gc">(Power)</span></div><div class="task">Brass saddle inlay + touch-ups</div></div><span class="due">due 9/25 (4d)</span></div><div class="block">&#9888; Waiting on Zach Muscari (Power) for the C/O go-ahead — 8 nudges since 8/21. Waiting on Mike Boyer for saddle pricing direction — 8 asks since 8/21, gates the ballpark owed to Power.</div></div>
 
 <h2>Sub-tasks without a parent estimate <span class="n">5</span></h2>
-<div class="card motion">
-  <div class="top"><div><div class="job">Ginsburg &mdash; 885 Bluff St <span class="gc">(JMD Builders)</span><span class="tag motion">in motion</span></div>
-  <div class="task">Takeoff done for now &mdash; JL notes owed</div></div><span class="due over">OVERDUE 9/11 (7d)</span></div>
-  <div class="block">&#9888; The real GC bid deadline (Lillian Cohen) was Friday 9/11 and has passed. Waiting on Jessica Hickman Fresch (Allegheny/AMHF) and Alex Gilszmer (Peachey) for herringbone quotes, both nudged 9/16 &mdash; First Grade's quote is already back, and the budget was built 9/15 on placeholder pricing pending these two. JL's 2nd-floor walk notes still owed; the 2nd floor is only a hand sketch.</div>
-</div>
-<div class="card motion">
-  <div class="top"><div><div class="job">Sheahin Board Repair <span class="gc">(DeGroot)</span><span class="tag motion">in motion</span></div>
-  <div class="task">Board repair T&amp;M &mdash; job set up, T&amp;M CO pending</div></div><span class="due over">OVERDUE 9/11 (7d)</span></div>
-</div>
-<div class="card stall">
-  <div class="top"><div><div class="job">Dallas Residence <span class="gc">(Waggoner, 5080 W North Shore Ave)</span></div>
-  <div class="task">Price transition boards, confirm finish system, price repair allowance</div></div><span class="due over">OVERDUE 9/17 (1d)</span></div>
-  <div class="block">&#9888; Waiting on Mike Boyer &mdash; finish system/sheen, stain or natural, and whether the 2nd-floor hall + stairs are in scope. Batched RFI sent 9/16, no reply logged yet.</div>
-</div>
-<div class="card">
-  <div class="top"><div><div class="job">180 E Pearson &mdash; JAR 7207 <span class="gc">(Power)</span></div>
-  <div class="task">Confirm template process (Apex vs Step1) w/ John</div></div><span class="due over">OVERDUE 9/17 (1d)</span></div>
-</div>
-<div class="card stall">
-  <div class="top"><div><div class="job">Meyer Guild &mdash; 270 E Pearson #101</div>
-  <div class="task">Confirm Peachey pricing + lead time</div></div><span class="due over">OVERDUE 8/7 (42d)</span></div>
-</div>
+<div class="card motion"><div class="top"><div><div class="job">Ginsburg — 885 Bluff St <span class="gc">(JMD Builders)</span><span class="tag motion">in motion</span></div><div class="task">Takeoff done for now — JL notes owed</div></div><span class="due over">OVERDUE 9/11 (10d)</span></div><div class="block">&#9888; The real GC bid deadline (Lillian Cohen) was Friday 9/11 and has passed. All three vendor quotes are now in (First Grade 9/17, Hickman 9/18, Peachey 9/18) — JT budget 22PdgwVc8zsJ still needs updating from placeholder pricing. JL's 2nd-floor walk notes still owed; the 2nd floor is only a hand sketch.</div></div>
+<div class="card motion"><div class="top"><div><div class="job">Sheahin Board Repair <span class="gc">(DeGroot)</span><span class="tag motion">in motion</span></div><div class="task">Board repair T&amp;M — job set up, T&amp;M CO pending</div></div><span class="due over">OVERDUE 9/11 (10d)</span></div></div>
+<div class="card stall"><div class="top"><div><div class="job">Dallas Residence <span class="gc">(Waggoner, 5080 W North Shore Ave)</span></div><div class="task">Price transition boards, confirm finish system, price repair allowance</div></div><span class="due over">OVERDUE 9/17 (4d)</span></div><div class="block">&#9888; Waiting on Mike Boyer — finish system/sheen, stain or natural, and whether the 2nd-floor hall + stairs are in scope. Batched RFI sent 9/16, no reply logged yet.</div></div>
+<div class="card stall"><div class="top"><div><div class="job">180 E Pearson — JAR 7207 <span class="gc">(Power)</span></div><div class="task">Confirm template process (Apex vs Step1) w/ John</div></div><span class="due over">OVERDUE 9/17 (4d)</span></div><div class="block">&#9888; Waiting on John Lessick for the budget call on Step 1 making bent-board templates — MB appears to be proceeding with Step 1 operationally without an explicit JL budget confirmation on file; worth checking whether this is now moot.</div></div>
+<div class="card stall"><div class="top"><div><div class="job">Meyer Guild — 270 E Pearson #101</div><div class="task">Confirm Peachey pricing + lead time</div></div><span class="due over">OVERDUE 8/7 (45d)</span></div></div>
 
-<h2>On the to-do, not in JobTread <span class="n">3</span></h2>
-<div class="card paper">
-  <div class="job">Chudacoff &mdash; C/O for vents</div>
-  <div class="task">OPEN, not built (was due 9/10). Separate from the outlet-covers C/O (#65, pending since 8/28). No vents C/O exists yet in JT and no open to-do currently found for it &mdash; build or drop.</div>
-</div>
-<div class="card paper">
-  <div class="job">Claire's House</div>
-  <div class="task">Board repair change order, large volume from the 8/28 production meeting, blocked on Mike Boyer's pricing (was due 9/11). No open JT to-do currently found &mdash; worth a quick check whether it already closed.</div>
-</div>
-<div class="card paper">
-  <div class="job">Next Level &mdash; Delavan Lake <span class="gc">(2938 N Shore Dr rebid)</span></div>
-  <div class="task">Site visit done 8/25 with JL, re-budget pending. No JT job created yet &mdash; holding for Matt Zuckert's updated interior plan set, promised ~early October.</div>
-</div>
-
+<h2>On the to-do, not in JobTread <span class="n">6</span></h2>
+<div class="card paper"><div class="job">Chudacoff — C/O for vents</div><div class="task">OPEN, not built (was due 9/10). Separate from the outlet-covers C/O (#65, pending since 8/28). No vents C/O exists yet in JT and no open to-do currently found for it — build or drop.</div></div>
+<div class="card paper"><div class="job">Claire's House</div><div class="task">Board repair change order, large volume from the 8/28 production meeting, blocked on Mike Boyer's pricing (was due 9/11). No open JT to-do currently found — worth a quick check whether it already closed.</div></div>
+<div class="card paper"><div class="job">Next Level — Delavan Lake <span class="gc">(2938 N Shore Dr rebid)</span></div><div class="task">Site visit done 8/25 with JL, re-budget pending. No JT job created yet — holding for Matt Zuckert's updated interior plan set, promised ~early October.</div></div>
+<div class="card paper"><div class="job">Field draft: Lessick, John <span class="gc">(Eisenhower Lane South)</span></div><div class="task">Small refinish, ~150 SF, ballpark $3,300 (was due 9/16). No open JT to-do currently found for job 22PeWptu4WA3 — worth checking whether it was already issued.</div></div>
+<div class="card paper"><div class="job">Field draft: Smith, John <span class="gc">(59 Eisenhower Ln South)</span></div><div class="task">Refinish, 2,621 SF, ballpark $37,850 (was due 9/17). No open JT to-do currently found for job 22PeaMASGkQC — worth checking whether it was already issued.</div></div>
+<div class="card paper"><div class="job">Field draft: Lessick, Cam <span class="gc">(59 Eisenhower Ln South)</span></div><div class="task">Maintenance, 1,130 SF, ballpark $2,472 (was due 9/17). No open JT to-do currently found for job 22PeaKwLapCp — worth checking whether it was already issued.</div></div>
 <footer>
 Green = actively moving &middot; red = stalled past due &middot; amber = pre-pipeline or paused.<br>
-Source: JobTread org 22NMQUxCDU84, open to-dos with an end date on or after 8/4/26 (42 tasks, single page, completed&lt;1), cross-referenced against the JV Rolling To-Do workbook (Open Items + Open tabs), pulled 9/18. Load counts pipeline work due in the coming 7 days at rough stage-hour estimates; the three Others-Owe-Info cards in that window (Seema, Bhasin, Hawilo) are counted at 25%, with the withheld hours shown separately. Hamood confirmed sent by Jim 9/18 and dropped from this board; it will still show open in JT until closed there. This artifact, the public GitHub Pages board, and the private local board carry the same data.
+Source: JobTread org 22NMQUxCDU84, open to-dos with an end date on or after 8/7/26 (44 tasks, single page, completed<1), cross-referenced against the JV Rolling To-Do workbook (Open Items + Open tabs), pulled 9/21. Load counts pipeline work due in the coming 7 days at rough stage-hour estimates; Hawilo and dSpace Bhasin are Others-Owe-Info cards in that window, counted at 25% with the withheld hours shown separately. This board, the public GitHub Pages board, and the shareable artifact carry the same data.
 </footer>
 </div>
 </body>
