@@ -69,6 +69,20 @@ h2 .n{background:var(--chip-bg);color:var(--ink);border-radius:10px;padding:1px 
 .tag.decision{background:var(--amber-wash);color:var(--amber)}
 .job a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
 .job a:hover{border-bottom-style:solid;border-bottom-color:var(--ink)}
+.notes{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.notes .entry{background:var(--chip-bg);border-radius:8px;padding:8px 32px 8px 12px;margin:6px 0;font-size:13px;color:var(--ink);line-height:1.45;position:relative}
+.notes .entry .meta{font-size:11px;color:var(--muted);margin-top:4px}
+.notes .entry .del{position:absolute;top:4px;right:6px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:3px 7px;line-height:1;border-radius:4px}
+.notes .entry .del:hover{color:var(--brick);background:var(--brick-wash)}
+.note-add{margin-top:2px;background:none;border:1px dashed var(--line);color:var(--muted);font-size:12.5px;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:inherit}
+.note-add:hover{border-color:var(--steel);color:var(--steel)}
+.note-compose{margin-top:6px}
+.note-compose textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;padding:8px;font:inherit;font-size:13px;color:var(--ink);background:var(--card);resize:vertical;min-height:56px}
+.note-compose .row{display:flex;gap:8px;margin-top:6px}
+.note-compose button{font-size:12.5px;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-family:inherit}
+.note-compose button.save{background:var(--steel);border-color:var(--steel);color:#fff}
+.note-compose button:disabled{opacity:.6;cursor:default}
+.note-compose .err{color:var(--brick);font-size:12px;margin-top:4px}
 ul.subs{margin:9px 0 0;padding-left:19px;display:flex;flex-direction:column;gap:4px}
 ul.subs li{font-size:13.5px;color:var(--muted)}
 .block{font-size:13.5px;color:var(--amber);font-weight:500;margin-top:8px;line-height:1.55}
@@ -125,7 +139,7 @@ footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid va
 <div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22Nm7AH9CG4K" target="_blank">Chudacoff — C/O for vents</a></div><div class="task">OPEN, not built (was due 9/10, 12 days). No vents C/O exists yet in JT; also unresolved: draft CO #64 ($6,215, unsent 30+ days), CO #65 ($2,275 pending since 8/28), Final Invoice #60 ($25,919.99 pending since 6/16).</div></div>
 <div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PYUTTaftn6" target="_blank">Claire's</a></div><div class="task">Blocked on Mike Boyer for board-repair C/O pricing (was due 9/11) — same ask as the Elm Tree saddle work.</div></div>
 <div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22P82tWqynVa" target="_blank">Boothe/Lucas</a> <span class="gc">(Copper Rock)</span> — CO#3 alternate</div><div class="task">Alternate approved 9/2 — this is a signature chase, not a build: CO #21 ($8,479, unsigned 49+ days) and Estimate #25 ($1,238, pending since 8/5) still need to land signed or void.</div></div>
-<div class="card paper"><div class="job">Next Level — Delavan Lake <span class="gc">(2938 N Shore Dr rebid)</span></div><div class="task">On hold — Matt Zuckert (Next Level) is holding for an updated interior plan set, promised ~early October; don't nudge before ~10/6. No JT job created yet, so no link.</div></div>
+<div class="card paper" data-note-key="next-level-delavan-lake"><div class="job">Next Level — Delavan Lake <span class="gc">(2938 N Shore Dr rebid)</span></div><div class="task">On hold — Matt Zuckert (Next Level) is holding for an updated interior plan set, promised ~early October; don't nudge before ~10/6. No JT job created yet, so no link.</div></div>
 <div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PeWptu4WA3" target="_blank">Field draft: Lessick John — Eisenhower Lane South</a></div><div class="task">Refinish, 150 SF, ballpark $3,300 — review the field draft in JT and issue (was due 9/16, 6 days).</div></div>
 <div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PeaMASGkQC" target="_blank">Field draft: John Smith — 59 Eisenhower Ln South</a></div><div class="task">Refinish, 2621 SF, ballpark $37,850 — review and issue (was due 9/17, 5 days).</div></div>
 <div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PeaKwLapCp" target="_blank">Field draft: Cam Lessick — 59 Eisenhower Ln South</a></div><div class="task">Maintenance, 1130 SF, ballpark $2,472 — review and issue (was due 9/17, 5 days).</div></div>
@@ -135,5 +149,149 @@ Green = actively moving &middot; red = stalled past due &middot; amber = pre-pip
 Source: JobTread org 22NMQUxCDU84, open to-dos with an end date on or after 8/8/26 (34 tasks, single page, completed&lt;1; Ginsburg's Ready-to-Review to-do has no end date so it falls outside this filter but stays on the board on Jim's word), cross-referenced against the JV Rolling To-Do workbook (Open Items + Open tabs), pulled 9/22. Every job name links to its JobTread job page (app.jobtread.com/jobs/&lt;id&gt;), except Next Level — Delavan Lake, which has no JT job yet. Section order: Ready to Review, Needs John's Decision (combined, cards where JL has to choose/direct/approve something, ranked above Overdue even if otherwise overdue or a new estimate), Overdue (combined, everything else overdue except Change Orders), Others Owe Info, the rest of the pipeline, Contract flip in review, Change Orders, Overdue Change Orders, then paper-only items — ordered by closeness to done and by who's actually blocking it rather than raw pipeline sequence, approved by Jim 9/22. Load counts pipeline work due in the coming 7 days at rough stage-hour estimates; Hawilo, dSpace Bhasin, and Flooring Resources are Others-Owe-Info cards in that window, counted at 25% with the withheld hours shown separately. This board, the public GitHub Pages board, and the shareable artifact carry the same data.
 </footer>
 </div>
+<script>
+(function(){
+  if (!window.claude || typeof window.claude.use !== 'function') return;
+
+  function keyFor(card){
+    if (card.dataset.noteKey) return card.dataset.noteKey;
+    var a = card.querySelector('.job a');
+    if (!a) return null;
+    var m = (a.getAttribute('href') || '').match(/\/jobs\/([^/?#]+)/);
+    return m ? m[1] : null;
+  }
+
+  window.claude.use('db').then(function(db){
+    if (!db) return;
+    window.claude.use('user').then(function(user){
+      initNotes(db, user);
+    });
+  });
+
+  async function initNotes(db, user){
+    var myId = null;
+    try { myId = user ? await user.id() : null; } catch(e){}
+
+    var areas = {};
+    Array.prototype.slice.call(document.querySelectorAll('.card')).forEach(function(card){
+      var key = keyFor(card);
+      if (!key) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'notes';
+      var list = document.createElement('div');
+      list.className = 'entries';
+      var addBtn = document.createElement('button');
+      addBtn.type = 'button';
+      addBtn.className = 'note-add';
+      addBtn.textContent = '+ add note';
+      wrap.appendChild(list);
+      wrap.appendChild(addBtn);
+      card.appendChild(wrap);
+      areas[key] = { list: list, addBtn: addBtn, wrap: wrap };
+      addBtn.addEventListener('click', function(){ openComposer(key); });
+    });
+
+    function openComposer(key){
+      var area = areas[key];
+      if (!area || area.wrap.querySelector('.note-compose')) return;
+      area.addBtn.style.display = 'none';
+      var box = document.createElement('div');
+      box.className = 'note-compose';
+      box.innerHTML =
+        '<textarea placeholder="Add a note for this job…"></textarea>' +
+        '<div class="row">' +
+          '<button type="button" class="save">Save</button>' +
+          '<button type="button" class="cancel">Cancel</button>' +
+        '</div>';
+      area.wrap.appendChild(box);
+      var ta = box.querySelector('textarea');
+      ta.focus();
+      box.querySelector('.cancel').addEventListener('click', function(){
+        box.remove();
+        area.addBtn.style.display = '';
+      });
+      box.querySelector('.save').addEventListener('click', function(){
+        var saveBtn = this;
+        var text = ta.value.trim();
+        var old = box.querySelector('.err');
+        if (old) old.remove();
+        if (!text){
+          var err = document.createElement('div');
+          err.className = 'err';
+          err.textContent = 'Write something first.';
+          box.appendChild(err);
+          return;
+        }
+        saveBtn.disabled = true;
+        db.collection('notes').add({
+          cardKey: key,
+          text: text,
+          authorId: myId,
+          createdAt: new Date().toISOString()
+        }).then(function(){
+          box.remove();
+          area.addBtn.style.display = '';
+        }).catch(function(){
+          saveBtn.disabled = false;
+          var err2 = document.createElement('div');
+          err2.className = 'err';
+          err2.textContent = 'Could not save — try again.';
+          box.appendChild(err2);
+        });
+      });
+    }
+
+    function renderEntries(key, entries, profiles){
+      var area = areas[key];
+      if (!area) return;
+      area.list.innerHTML = '';
+      entries.forEach(function(n){
+        var row = document.createElement('div');
+        row.className = 'entry';
+        var who = (n.authorId && profiles[n.authorId] && profiles[n.authorId].name) || 'Someone';
+        var when = '';
+        try { when = new Date(n.createdAt).toLocaleDateString(undefined, {month:'short', day:'numeric'}); } catch(e){}
+        var textEl = document.createElement('div');
+        textEl.textContent = n.text;
+        var metaEl = document.createElement('div');
+        metaEl.className = 'meta';
+        metaEl.textContent = who + (when ? ' · ' + when : '');
+        row.appendChild(textEl);
+        row.appendChild(metaEl);
+        if (myId && n.authorId === myId){
+          var del = document.createElement('button');
+          del.type = 'button';
+          del.className = 'del';
+          del.setAttribute('aria-label', 'Delete note');
+          del.textContent = '×';
+          del.addEventListener('click', function(){ db.doc('notes/' + n.id).delete(); });
+          row.appendChild(del);
+        }
+        area.list.appendChild(row);
+      });
+    }
+
+    db.collection('notes').orderBy('createdAt').limit(500).onSnapshot(async function(snap){
+      var byKey = {};
+      var ids = [];
+      snap.docs.forEach(function(d){
+        var data = d.data();
+        if (!data || !data.cardKey) return;
+        (byKey[data.cardKey] = byKey[data.cardKey] || []).push({ id: d.id, text: data.text, authorId: data.authorId, createdAt: data.createdAt });
+        if (data.authorId) ids.push(data.authorId);
+      });
+      var profiles = {};
+      if (user && ids.length){
+        try { profiles = await user.profiles(ids); } catch(e){}
+      }
+      Object.keys(areas).forEach(function(key){
+        renderEntries(key, byKey[key] || [], profiles);
+      });
+    }, function(){
+      Object.keys(areas).forEach(function(key){ areas[key].addBtn.style.display = 'none'; });
+    });
+  }
+})();
+</script>
 </body>
 </html>
