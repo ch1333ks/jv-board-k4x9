@@ -21,7 +21,8 @@ body{background:var(--bg);color:var(--ink);font-family:"Public Sans",-apple-syst
 .wrap{max-width:860px;margin:0 auto}
 header h1{font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size:27px;margin:0;letter-spacing:-.01em}
 .stamp{color:var(--muted);font-size:13px;margin-top:4px;font-variant-numeric:tabular-nums}
-.meter{margin-top:14px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow)}
+header{margin-bottom:18px}
+.meter{margin-top:28px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow)}
 .meter .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
   font-size:13px;font-variant-numeric:tabular-nums}
 .meter .pct{font-family:Archivo,sans-serif;font-weight:700;font-size:17px;color:var(--brick)}
@@ -42,12 +43,15 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--muted);transition:transform
   text-transform:none;letter-spacing:normal;padding:12px 18px
 }
 .group-body{padding-top:2px}
-.group:not(.open) .card{padding:6px 16px;margin:5px 0;border-left-width:4px;cursor:pointer}
+.group:not(.open) .card{padding:6px 16px 6px 14px;margin:5px 0;border-left-width:10px;cursor:pointer}
 .group:not(.open) .card:hover{box-shadow:0 0 0 1px var(--muted)}
 .group:not(.open) .card .top{flex-wrap:nowrap;align-items:center;gap:10px}
 .group:not(.open) .card .top > div{min-width:0;flex:1 1 auto}
 @media (max-width:600px){
   .group:not(.open) h2{padding:18px 18px}
+  .group:not(.open) .card{padding:6px 10px 6px 10px;border-left-width:8px}
+  .group:not(.open) .card .top{gap:8px}
+  .group:not(.open) .card .due.over{font-size:11px;padding:1px 5px}
   .group:not(.open) .card .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
   .group:not(.open) .card .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .group:not(.open) .card .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
@@ -62,16 +66,18 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--muted);transition:transform
 .group:not(.open) .card ul.subs,
 .group:not(.open) .card .block,
 .group:not(.open) .card .notes{display:none}
-.card{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--steel);border-radius:8px;
-  padding:16px 20px;margin:12px 0;box-shadow:var(--shadow)}
-.card.stall{border-left-color:var(--brick);background:var(--brick-wash)}
-.card.motion{border-left-color:var(--green);background:var(--green-wash)}
-.card.paper{border-left-color:var(--amber);background:var(--amber-wash)}
-.card.ready,.card.paper.motion{border-left-color:var(--green);background:var(--green-wash)}
+.card{background:var(--card);border:1px solid var(--line);border-left:14px solid var(--steel);border-radius:8px;
+  padding:16px 20px 16px 22px;margin:12px 0;box-shadow:var(--shadow)}
+.card.stall{border-left-color:var(--brick)}
+.card.motion{border-left-color:var(--green)}
+.card.paper{border-left-color:var(--amber)}
+.card.ready,.card.paper.motion{border-left-color:var(--green)}
 .tag.ready{background:var(--green);color:var(--card)}
 .motion-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);cursor:pointer;margin-bottom:4px;user-select:none}
 .motion-toggle input{accent-color:var(--green);width:15px;height:15px;margin:0;cursor:pointer}
-.top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.top > div{flex:1 1 auto;min-width:0}
+.top > .due{flex:none}
 .job{font-weight:700;font-size:17.5px}
 .gc{color:var(--muted);font-weight:400}
 .task{color:var(--muted);font-size:15px;margin-top:4px}
@@ -101,7 +107,7 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--muted);transition:transform
 ul.subs{margin:9px 0 0;padding-left:19px;display:flex;flex-direction:column;gap:4px}
 ul.subs li{font-size:13.5px;color:var(--muted)}
 .block{font-size:13.5px;color:var(--amber);font-weight:500;margin-top:8px;line-height:1.55}
-footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
+footer{color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -109,11 +115,6 @@ footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid va
 <header>
   <h1>Bid Board</h1>
   <div class="stamp">Updated 09/23/2026, 12:45 PM &middot; 19 estimates &amp; change orders in flight &middot; 2 overdue &middot; 11 due this week</div>
-  <div class="meter">
-    <div class="row"><span><span class="pct">70%</span> week load</span><span>17.5h of work against 25h available</span></div>
-    <div class="track"><div class="fill" style="width:70%"></div></div>
-    <div class="note">Seven estimates are Ready to Review, all due today, counted at 1h each for the review pass; Oxbow joined them this morning. Scott, Reamer and dSpace are all waiting on others and due 10/2 or later, so none of their hours land in this week's window.</div>
-  </div>
 </header>
 
 <section class="group open">
@@ -184,6 +185,12 @@ footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid va
 <div class="card paper" data-note-key="next-level-delavan-lake"><div class="job">Next Level — Delavan Lake (2938 N Shore Dr rebid)</div><div class="task">On hold — Matt Zuckert is holding for an updated interior plan set, promised ~early October; don&#x27;t nudge before ~10/6. No JT job yet.</div></div>
 </div>
 </section>
+
+  <div class="meter">
+  <div class="row"><span><span class="pct">70%</span> week load</span><span>17.5h of work against 25h available</span></div>
+  <div class="track"><div class="fill" style="width:70%"></div></div>
+  <div class="note">Seven estimates are Ready to Review, all due today, counted at 1h each for the review pass; Oxbow joined them this morning. Scott, Reamer and dSpace are all waiting on others and due 10/2 or later, so none of their hours land in this week's window.</div>
+</div>
 
 <footer>
 Green = actively moving or ready &middot; red = stalled past due or blocked &middot; amber = paper-only or paused. Closed sections show one line per job; click any line or the section bar to open it for blockers, sub-tasks and notes.<br>Sources, pulled 9/23 12:45 PM: JobTread org 22NMQUxCDU84 open to-dos (completed&lt;1) with an end date on or after 8/9/26 (31 tasks) plus undated open to-dos created since 7/1 (7 tasks: Chudacoff&#x27;s vents C/O and the Sheahin JL-review sub-task are on the board; 2430 N Lakeview #5S, Dan Goodman Wet Bar, Chudacoff filler and PM/Production items are not bid work and are left off); the JV Rolling To-Do workbook Open and Open Items tabs. Changes since the 8 AM build: every Ready to Review end date (and Benton Harbor&#x27;s) moved from 9/22 to 9/23, so none are overdue any more; Oxbow moved to Ready to Review and its four pricing sub-tasks closed; Scott and Reamer moved to Others owe info; Heidler, Dan Antes, Cynthia McCullough and the Elm Tree rows were nudged again 9/23. Scott&#x27;s &quot;what test did JL want&quot; (OI-088) is a borderline JL decision — kept under Others owe info since the main gate is JL&#x27;s site write-up. Not on the board, possibly JL decisions: Blue Kettle CO#7 $3,961 unbilled labor increase (OI-097), the CO#39 rake-beam 300 vs 296 LF gap (OI-098), and the re-opened Poulos (OI-100) and 1040 LSD walk (OI-101) — no JT estimate to-do carries them. Load counts work due through 9/30 at rough stage hours (Ready-to-Review review pass 1h, change order 1.5h, sub-task 1h, field-draft review 1h); contract flips are not counted. Every job name links to its JobTread job. This board, the public GitHub Pages board and the shareable artifact carry the same data.
