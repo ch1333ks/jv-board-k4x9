@@ -12,7 +12,7 @@
   --steel:#3B62B4; --brick:#C23A61; --brick-ink:#C23A61; --green:#12876B; --amber:#7856D6;
   --chip-bg:#E6EAF9; --brick-wash:#FCF0F5; --green-wash:#E9F7F2; --amber-wash:#F0ECFC;
   --meter-track:#E6E0D0; --shadow:0 1px 2px rgba(28,33,54,.07);
-  --bar:#E2E1DC; --bar-hover:#D5D4CD; --bar-ink:#2E3038;
+  --bar:#55575F; --bar-hover:#46484F; --bar-ink:#F5F3EE;
   color-scheme: light;
 }
 *{box-sizing:border-box}
@@ -31,16 +31,16 @@ header{margin-bottom:18px}
 .meter .note{font-size:12.5px;color:var(--muted);line-height:1.5}
 .meter .note b{color:var(--amber)}
 .group{margin-top:12px}
-h2{font-family:Archivo,sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.05em;
-  color:var(--bar-ink);margin:0;padding:13px 18px;background:var(--bar);border-radius:8px;
+h2{font-family:Archivo,sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--bar-ink);margin:0;padding:16px 20px;background:var(--bar);border-radius:8px;
   display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
 h2:hover{background:var(--bar-hover)}
 h2 .n{background:var(--card);color:var(--ink);border-radius:10px;padding:1px 10px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
-h2 .chev{margin-left:auto;font-size:13px;color:var(--muted);transition:transform .15s ease}
+h2 .chev{margin-left:auto;font-size:13px;color:var(--bar-ink);opacity:.75;transition:transform .15s ease}
 .group.open h2 .chev{transform:rotate(90deg)}
 .group:not(.open) h2{
-  font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:16px;
-  text-transform:none;letter-spacing:normal;padding:12px 18px
+  font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:17px;
+  text-transform:none;letter-spacing:normal;padding:15px 20px
 }
 .group-body{padding-top:2px}
 .group:not(.open) .card{padding:6px 16px 6px 14px;margin:5px 0;border-left-width:10px;cursor:pointer}
@@ -48,7 +48,7 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--muted);transition:transform
 .group:not(.open) .card .top{flex-wrap:nowrap;align-items:center;gap:10px}
 .group:not(.open) .card .top > div{min-width:0;flex:1 1 auto}
 @media (max-width:600px){
-  .group:not(.open) h2{padding:18px 18px}
+  .group:not(.open) h2{padding:19px 18px}
   .group:not(.open) .card{padding:6px 10px 6px 10px;border-left-width:8px}
   .group:not(.open) .card .top{gap:8px}
   .group:not(.open) .card .due.over{font-size:11px;padding:1px 5px}
