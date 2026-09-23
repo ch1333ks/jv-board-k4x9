@@ -43,13 +43,13 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--bar-ink);opacity:.75;transi
   text-transform:none;letter-spacing:normal;padding:15px 20px
 }
 .group-body{padding-top:2px}
-.group:not(.open) .card{padding:6px 16px 6px 14px;margin:5px 0;border-left-width:10px;cursor:pointer}
+.group:not(.open) .card{padding:6px 16px 6px 14px;margin:5px 0;border-left-width:20px;cursor:pointer}
 .group:not(.open) .card:hover{box-shadow:0 0 0 1px var(--muted)}
 .group:not(.open) .card .top{flex-wrap:nowrap;align-items:center;gap:10px}
 .group:not(.open) .card .top > div{min-width:0;flex:1 1 auto}
 @media (max-width:600px){
   .group:not(.open) h2{padding:19px 18px}
-  .group:not(.open) .card{padding:6px 10px 6px 10px;border-left-width:8px}
+  .group:not(.open) .card{padding:6px 10px 6px 10px;border-left-width:16px}
   .group:not(.open) .card .top{gap:8px}
   .group:not(.open) .card .due.over{font-size:11px;padding:1px 5px}
   .group:not(.open) .card .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
@@ -66,7 +66,7 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--bar-ink);opacity:.75;transi
 .group:not(.open) .card ul.subs,
 .group:not(.open) .card .block,
 .group:not(.open) .card .notes{display:none}
-.card{background:var(--card);border:1px solid var(--line);border-left:14px solid var(--steel);border-radius:8px;
+.card{background:var(--card);border:1px solid var(--line);border-left:28px solid var(--steel);border-radius:8px;
   padding:16px 20px 16px 22px;margin:12px 0;box-shadow:var(--shadow)}
 .card.stall{border-left-color:var(--brick)}
 .card.motion{border-left-color:var(--green)}
@@ -118,7 +118,7 @@ footer{color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid va
 </header>
 
 <section class="group open">
-<h2>Ready to review <span class="n">6</span><span class="chev">&#9656;</span></h2>
+<h2>Ready to review <span class="n">7</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
 <div class="card ready"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PcWyg3USEh" target="_blank">Oxbow Development</a> <span class="gc">(Ballema, Ada MI)</span><span class="tag ready">ready to review</span></div><div class="task">Ready to review — moved from In Progress this morning; the four pricing sub-tasks (AX324 material, install labor, OOT logistics, stair/landing scope) are all closed</div></div><span class="due hot">due today</span></div></div>
 <div class="card ready"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PQAvGs43D5" target="_blank">180 E Pearson — Seema</a> <span class="gc">(Power)</span><span class="tag ready">ready to review</span></div><div class="task">Ready to review — rebuilt budget off the 9/8 re-takeoff (5,598 SF w/ 10% CA), replaces Estimate #3 $358,406</div></div><span class="due hot">due today</span></div><div class="block">&#9888; Kinetics assembly (QuietWalk not board-approved, per Zach 9/9). Stile (Letizia Splendorini) asked 9/22 to set a meeting with Lorenzo in Chicago Mon 9/28 — unanswered as of this morning.</div></div>
@@ -126,6 +126,7 @@ footer{color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid va
 <div class="card ready motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank">Hawilo Water Damage</a> <span class="gc">(2126 N Kenmore)</span><span class="tag ready">ready to review</span><span class="tag motion">in motion</span></div><div class="task">Ready to review — pick-one options: Cherry repair $19,397 / Allegheny rift WO full replacement $51,702</div></div><span class="due hot">due today</span></div><ul class="subs"><li>Confirm species: IPE vs Brazilian Cherry — due today</li><li>MC readings, floor + subfloor — due today</li></ul><div class="block">&#9888; First Grade (Lisa Gawlicki) quoted 9/22: unfinished solid 3/4&quot; x 2-1/4&quot; Clear Brazilian Cherry, RL 1&#x27;–7&#x27;, $4.75/SF, in stock.</div><div class="block">&#9888; Still waiting on Cristina Hawilo (phone only, no email) for MC readings / access — gates any sand or finish date (OI-070). JT name says “Due 9/25/26”, end date 9/23.</div><!--notes--><div class="notes notes-static"><div class="entry"><div>Lisa says IPE is now endangered and hasnt been able to buy it in years, Probably have to push full replacement</div><div class="meta">Jim Valfre · Sep 22</div></div></div><!--/notes--></div>
 <div class="card ready"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgwVc8zsJ" target="_blank">Ginsburg — 885 Bluff St</a> <span class="gc">(JMD Builders)</span><span class="tag ready">ready to review</span></div><div class="task">Ready to review</div></div><span class="due hot">due today</span></div><div class="block">&#9888; 2nd floor was still only a hand sketch and JL&#x27;s walk notes were owed as of the workbook&#x27;s last update — confirm both are in before issuing.</div></div>
 <div class="card ready"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PegQtJGKgt" target="_blank">Hamood</a><span class="tag ready">ready to review</span></div><div class="task">Ready to review — revision</div></div><span class="due hot">due today</span></div></div>
+<div class="card ready"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22P3imm2GtbK" target="_blank">Benton Harbor Residence</a> <span class="gc">(Power)</span><span class="tag ready">ready to review</span></div><div class="task">Stairs change order — ready</div></div><span class="due hot">due today</span></div><div class="block">&#9888; CO#5 tread refinish built 9/17 (day-priced, 2 days + 1 overnight).</div></div>
 </div>
 </section>
 
@@ -163,36 +164,28 @@ footer{color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid va
 </section>
 
 <section class="group">
-<h2>Change orders <span class="n">3</span><span class="chev">&#9656;</span></h2>
+<h2>Change orders <span class="n">2</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card ready"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22P3imm2GtbK" target="_blank">Benton Harbor Residence</a> <span class="gc">(Power)</span><span class="tag ready">ready to review</span></div><div class="task">Stairs C/O — ready</div></div><span class="due hot">due today</span></div><div class="block">&#9888; CO#5 tread refinish built 9/17 (day-priced, 2 days + 1 overnight).</div></div>
 <div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgAbL825m" target="_blank">1291 Elm Tree Rd C/O</a> <span class="gc">(Power)</span><span class="tag motion">in motion</span></div><div class="task">Material sent for approval — brass saddle inlay + touch-ups</div></div><span class="due hot">due 9/25 (2d)</span></div><div class="block">&#9888; JT to-do reads “Material Sent for Approval”, but the workbook still shows OI-017 (MB pricing) and OI-008 (Zach&#x27;s C/O go-ahead) open — both nudged again 9/23. Close them if MB has priced it.</div></div>
 <div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdSzDXXFYf" target="_blank">Chudacoff Maintenance</a></div><div class="task">C/O #2 — vents change order (separate from C/O #1 outlet covers)</div></div><span class="due">no due date</span></div><div class="block">&#9888; JT to-do has no end date; the workbook had it due 9/10 (OPEN - NOT BUILT). Also unresolved: draft CO #64 ($6,215), CO #65 ($2,275 pending since 8/28), Final Invoice #60 ($25,919.99 pending since 6/16).</div></div>
 </div>
 </section>
 
 <section class="group">
-<h2>On the to-do, not in JobTread <span class="n">8</span><span class="chev">&#9656;</span></h2>
+<h2>On the to-do, not in JobTread <span class="n">1</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PejqwFaLyB" target="_blank">Field draft: Parker, Gemma — 370 N Western Ave</a></div><div class="task">Maintenance, 570 SF, ballpark $2,572. JT to-do is closed, but the estimate isn&#x27;t done: JL agreed 9/22 to discount to $1,500; Jim is preparing it as a subtractive discount.</div></div>
-<div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PeWptu4WA3" target="_blank">Field draft: Lessick John — Eisenhower Lane South</a></div><div class="task">Refinish, 150 SF, ballpark $3,300 — review the field draft in JT and issue (was due 9/16, 7 days).</div></div>
-<div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PeaMASGkQC" target="_blank">Field draft: John Smith — 59 Eisenhower Ln South</a></div><div class="task">Refinish, 2621 SF, ballpark $37,850 — review and issue (was due 9/17, 6 days).</div></div>
-<div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PeaKwLapCp" target="_blank">Field draft: Cam Lessick — 59 Eisenhower Ln South</a></div><div class="task">Maintenance, 1130 SF, ballpark $2,472 — review and issue (was due 9/17, 6 days).</div></div>
-<div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PejwKVZUcu" target="_blank">Field draft: Portillo, Dick — 2712 31st St</a></div><div class="task">Maintenance, ballpark $9,888 — review and issue (was due 9/20, 3 days).</div></div>
-<div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22PYUTTaftn6" target="_blank">Claire&#x27;s</a></div><div class="task">Blocked on Mike Boyer for board-repair C/O pricing (was due 9/11); no open JT to-do in range. If Elm Tree&#x27;s MB pricing has landed, ask about this one too.</div></div>
 <div class="card paper"><div class="job"><a href="https://app.jobtread.com/jobs/22P82tWqynVa" target="_blank">Boothe/Lucas (Copper Rock) — CO#3 alternate</a></div><div class="task">Alternate approved 9/2 — a signature chase, not a build: CO #21 ($8,479, unsigned 63+ days) and Estimate #25 ($1,238, pending since 8/5).</div></div>
-<div class="card paper" data-note-key="next-level-delavan-lake"><div class="job">Next Level — Delavan Lake (2938 N Shore Dr rebid)</div><div class="task">On hold — Matt Zuckert is holding for an updated interior plan set, promised ~early October; don&#x27;t nudge before ~10/6. No JT job yet.</div></div>
 </div>
 </section>
 
   <div class="meter">
-  <div class="row"><span><span class="pct">66%</span> week load</span><span>16.5h of work against 25h available</span></div>
-  <div class="track"><div class="fill" style="width:66%"></div></div>
-  <div class="note">Six estimates are Ready to Review, all due today, counted at 1h each for the review pass; Oxbow joined them this morning, and 15 E Oak went out (Estimate #1, $4,072). Scott, Reamer and dSpace are all waiting on others and due 10/2 or later, so none of their hours land in this week's window.</div>
+  <div class="row"><span><span class="pct">50%</span> week load</span><span>12.5h of work against 25h available</span></div>
+  <div class="track"><div class="fill" style="width:50%"></div></div>
+  <div class="note">Six estimates and the Benton Harbor change order are Ready to Review, all due today, counted at 1h (estimates) and 1.5h (change order) for the review pass; 15 E Oak went out (Estimate #1, $4,072). The four field drafts were cleared off the to-do, which took their 4h out of the week. Scott, Reamer and dSpace are all waiting on others and due 10/2 or later, so none of their hours land in this week's window.</div>
 </div>
 
 <footer>
-Green = actively moving or ready &middot; red = stalled past due or blocked &middot; amber = paper-only or paused. Closed sections show one line per job; click any line or the section bar to open it for blockers, sub-tasks and notes.<br>Sources, pulled 9/23 12:45 PM: JobTread org 22NMQUxCDU84 open to-dos (completed&lt;1) with an end date on or after 8/9/26 (31 tasks) plus undated open to-dos created since 7/1 (7 tasks: Chudacoff&#x27;s vents C/O and the Sheahin JL-review sub-task are on the board; 2430 N Lakeview #5S, Dan Goodman Wet Bar, Chudacoff filler and PM/Production items are not bid work and are left off); the JV Rolling To-Do workbook Open and Open Items tabs. Changes since the 8 AM build: every Ready to Review end date (and Benton Harbor&#x27;s) moved from 9/22 to 9/23, so none are overdue any more; Oxbow moved to Ready to Review and its four pricing sub-tasks closed; Scott and Reamer moved to Others owe info; 15 E Oak (Flooring Resources) was sent — Estimate #1 $4,072 issued 9/23, its to-do is closed — and is off the board; Heidler, Dan Antes, Cynthia McCullough and the Elm Tree rows were nudged again 9/23. Scott&#x27;s &quot;what test did JL want&quot; (OI-088) is a borderline JL decision — kept under Others owe info since the main gate is JL&#x27;s site write-up. Not on the board, possibly JL decisions: Blue Kettle CO#7 $3,961 unbilled labor increase (OI-097), the CO#39 rake-beam 300 vs 296 LF gap (OI-098), and the re-opened Poulos (OI-100) and 1040 LSD walk (OI-101) — no JT estimate to-do carries them. Load counts work due through 9/30 at rough stage hours (Ready-to-Review review pass 1h, change order 1.5h, sub-task 1h, field-draft review 1h); contract flips are not counted. Every job name links to its JobTread job. This board, the public GitHub Pages board and the shareable artifact carry the same data.
+Green = actively moving or ready &middot; red = stalled past due or blocked &middot; amber = paper-only or paused. Closed sections show one line per job; click any line or the section bar to open it for blockers, sub-tasks and notes.<br>Sources, pulled 9/23 12:45 PM: JobTread org 22NMQUxCDU84 open to-dos (completed&lt;1) with an end date on or after 8/9/26 (31 tasks) plus undated open to-dos created since 7/1 (7 tasks: Chudacoff&#x27;s vents C/O and the Sheahin JL-review sub-task are on the board; 2430 N Lakeview #5S, Dan Goodman Wet Bar, Chudacoff filler and PM/Production items are not bid work and are left off); the JV Rolling To-Do workbook Open and Open Items tabs. Changes since the 8 AM build: every Ready to Review end date (and Benton Harbor&#x27;s) moved from 9/22 to 9/23, so none are overdue any more; Oxbow moved to Ready to Review and its four pricing sub-tasks closed; Scott and Reamer moved to Others owe info; 15 E Oak (Flooring Resources) was sent — Estimate #1 $4,072 issued 9/23, its to-do is closed — and is off the board; Gemma Parker and Portillo (estimates out), the three Eisenhower Ln South field drafts, Claire&#x27;s and Delavan Lake (tracked in JT, OI-037 tickler) were cleared off the rolling to-do at Jim&#x27;s call; ready change orders now sit in Ready to review, with Change orders holding only the ones that still need something first; Heidler, Dan Antes, Cynthia McCullough and the Elm Tree rows were nudged again 9/23. Scott&#x27;s &quot;what test did JL want&quot; (OI-088) is a borderline JL decision — kept under Others owe info since the main gate is JL&#x27;s site write-up. Not on the board, possibly JL decisions: Blue Kettle CO#7 $3,961 unbilled labor increase (OI-097), the CO#39 rake-beam 300 vs 296 LF gap (OI-098), and the re-opened Poulos (OI-100) and 1040 LSD walk (OI-101) — no JT estimate to-do carries them. Load counts work due through 9/30 at rough stage hours (Ready-to-Review review pass 1h, change order 1.5h, sub-task 1h, field-draft review 1h); contract flips are not counted. Every job name links to its JobTread job. This board, the public GitHub Pages board and the shareable artifact carry the same data.
 </footer>
 </div>
 <script>
