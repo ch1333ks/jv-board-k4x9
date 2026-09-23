@@ -8,10 +8,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
-  --bg:#F2F4FB; --card:#FFFFFF; --ink:#1C2136; --muted:#5B6482; --line:#DEE3F1;
+  --bg:#FAF6EC; --card:#FFFFFF; --ink:#1C2136; --muted:#5B6482; --line:#E6E0D0;
   --steel:#3B62B4; --brick:#C23A61; --brick-ink:#C23A61; --green:#12876B; --amber:#7856D6;
   --chip-bg:#E6EAF9; --brick-wash:#FCF0F5; --green-wash:#E9F7F2; --amber-wash:#F0ECFC;
-  --meter-track:#DEE3F1; --shadow:0 1px 2px rgba(28,33,54,.07);
+  --meter-track:#E6E0D0; --shadow:0 1px 2px rgba(28,33,54,.07);
+  --bar:#E2E1DC; --bar-hover:#D5D4CD; --bar-ink:#2E3038;
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -19,6 +20,7 @@
     --steel:#72C6E8; --brick:#E15C82; --brick-ink:#FF9CB9; --green:#3FE1AC; --amber:#B7A6EC;
     --chip-bg:#1E2749; --brick-wash:#2B1930; --green-wash:#0E2A25; --amber-wash:#231C40;
     --meter-track:#283152; --shadow:none;
+    --bar:#262A36; --bar-hover:#303544; --bar-ink:#EAECF8;
   }
   body{
     background-color:#06070F;
@@ -49,19 +51,30 @@ header h1{font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size
 .meter .note b{color:var(--amber)}
 .group{margin-top:12px}
 h2{font-family:Archivo,sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.05em;
-  color:var(--ink);margin:0;padding:10px 2px 12px;border-bottom:2px solid var(--line);
+  color:var(--bar-ink);margin:0;padding:13px 18px;background:var(--bar);border-radius:8px;
   display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
-h2 .n{background:var(--chip-bg);color:var(--ink);border-radius:10px;padding:1px 10px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+h2:hover{background:var(--bar-hover)}
+h2 .n{background:var(--card);color:var(--ink);border-radius:10px;padding:1px 10px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
 h2 .chev{margin-left:auto;font-size:13px;color:var(--muted);transition:transform .15s ease}
 .group.open h2 .chev{transform:rotate(90deg)}
 .group:not(.open) h2{
-  font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:14px;
-  text-transform:none;letter-spacing:normal;color:var(--muted);
-  margin:0;padding:10px 16px;border:1px solid var(--line);border-radius:8px;background:var(--card);box-shadow:var(--shadow)
+  font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:16px;
+  text-transform:none;letter-spacing:normal;padding:12px 18px
 }
-.group:not(.open) h2:hover{border-color:var(--steel);color:var(--ink)}
 .group-body{padding-top:2px}
-.group:not(.open) .card{padding:9px 20px;margin:6px 0}
+.group:not(.open) .card{padding:6px 16px;margin:5px 0;border-left-width:4px;cursor:pointer}
+.group:not(.open) .card:hover{box-shadow:0 0 0 1px var(--muted)}
+.group:not(.open) .card .top{flex-wrap:nowrap;align-items:center;gap:10px}
+.group:not(.open) .card .top > div{min-width:0;flex:1 1 auto}
+@media (max-width:600px){
+  .group:not(.open) .card .tag{display:none}
+  .group:not(.open) .card .job{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+.group:not(.open) .card .job{font-size:14.5px;line-height:1.35}
+.group:not(.open) .card .gc{display:none}
+.group:not(.open) .card .due{font-size:12.5px}
+.group:not(.open) .card .due.over{padding:1px 7px}
+.group:not(.open) .card .tag{font-size:11px;padding:2px 8px}
 .group:not(.open) .card .task,
 .group:not(.open) .card ul.subs,
 .group:not(.open) .card .block,
@@ -190,7 +203,7 @@ footer{color:var(--muted);font-size:12px;margin-top:36px;border-top:1px solid va
 </section>
 
 <footer>
-Green = actively moving or ready &middot; red = stalled past due or blocked &middot; amber = paper-only or paused. Closed sections show one line per job; open a section for blockers, sub-tasks and notes.<br>Sources, pulled 9/23 12:45 PM: JobTread org 22NMQUxCDU84 open to-dos (completed&lt;1) with an end date on or after 8/9/26 (31 tasks) plus undated open to-dos created since 7/1 (7 tasks: Chudacoff&#x27;s vents C/O and the Sheahin JL-review sub-task are on the board; 2430 N Lakeview #5S, Dan Goodman Wet Bar, Chudacoff filler and PM/Production items are not bid work and are left off); the JV Rolling To-Do workbook Open and Open Items tabs. Changes since the 8 AM build: every Ready to Review end date (and Benton Harbor&#x27;s) moved from 9/22 to 9/23, so none are overdue any more; Oxbow moved to Ready to Review and its four pricing sub-tasks closed; Scott and Reamer moved to Others owe info; Heidler, Dan Antes, Cynthia McCullough and the Elm Tree rows were nudged again 9/23. Scott&#x27;s &quot;what test did JL want&quot; (OI-088) is a borderline JL decision — kept under Others owe info since the main gate is JL&#x27;s site write-up. Not on the board, possibly JL decisions: Blue Kettle CO#7 $3,961 unbilled labor increase (OI-097), the CO#39 rake-beam 300 vs 296 LF gap (OI-098), and the re-opened Poulos (OI-100) and 1040 LSD walk (OI-101) — no JT estimate to-do carries them. Load counts work due through 9/30 at rough stage hours (Ready-to-Review review pass 1h, change order 1.5h, sub-task 1h, field-draft review 1h); contract flips are not counted. Every job name links to its JobTread job. This board, the public GitHub Pages board and the shareable artifact carry the same data.
+Green = actively moving or ready &middot; red = stalled past due or blocked &middot; amber = paper-only or paused. Closed sections show one line per job; click any line or the section bar to open it for blockers, sub-tasks and notes.<br>Sources, pulled 9/23 12:45 PM: JobTread org 22NMQUxCDU84 open to-dos (completed&lt;1) with an end date on or after 8/9/26 (31 tasks) plus undated open to-dos created since 7/1 (7 tasks: Chudacoff&#x27;s vents C/O and the Sheahin JL-review sub-task are on the board; 2430 N Lakeview #5S, Dan Goodman Wet Bar, Chudacoff filler and PM/Production items are not bid work and are left off); the JV Rolling To-Do workbook Open and Open Items tabs. Changes since the 8 AM build: every Ready to Review end date (and Benton Harbor&#x27;s) moved from 9/22 to 9/23, so none are overdue any more; Oxbow moved to Ready to Review and its four pricing sub-tasks closed; Scott and Reamer moved to Others owe info; Heidler, Dan Antes, Cynthia McCullough and the Elm Tree rows were nudged again 9/23. Scott&#x27;s &quot;what test did JL want&quot; (OI-088) is a borderline JL decision — kept under Others owe info since the main gate is JL&#x27;s site write-up. Not on the board, possibly JL decisions: Blue Kettle CO#7 $3,961 unbilled labor increase (OI-097), the CO#39 rake-beam 300 vs 296 LF gap (OI-098), and the re-opened Poulos (OI-100) and 1040 LSD walk (OI-101) — no JT estimate to-do carries them. Load counts work due through 9/30 at rough stage hours (Ready-to-Review review pass 1h, change order 1.5h, sub-task 1h, field-draft review 1h); contract flips are not counted. Every job name links to its JobTread job. This board, the public GitHub Pages board and the shareable artifact carry the same data.
 </footer>
 </div>
 <script>
@@ -208,8 +221,15 @@ Green = actively moving or ready &middot; red = stalled past due or blocked &mid
       });
       group.classList.add('open');
       h2.setAttribute('aria-expanded', 'true');
+      // Closing a taller group above can push this one off-screen; bring its bar back into view.
+      if (h2.getBoundingClientRect().top < 0) h2.scrollIntoView({block: 'start'});
     }
     h2.addEventListener('click', open);
+    group.addEventListener('click', function(e){
+      if (group.classList.contains('open')) return;
+      if (e.target.closest('a, button, input, label, textarea')) return;
+      if (e.target.closest('.card')) open();
+    });
     h2.addEventListener('keydown', function(e){
       if (e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
