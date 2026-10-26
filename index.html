@@ -21,7 +21,11 @@
    - Blockers use weight 500, not 600 (bold coloured sentences were tiring to read).
    - 2026-10-17 (Jim): page-first board. John's inbox on top, open by default with Overdue; groups toggle
      independently (no single-open accordion); chips are jump links; one task line + one blocker line per
-     card, the rest behind "more"; open-card strip narrows to 18px on phones so text gets the width. */
+     card, the rest behind "more"; open-card strip narrows to 18px on phones so text gets the width.
+   - 2026-10-26 (Jim): John's inbox is NOT on top of the board. It sits in a right-hand column beside the main
+     column; under 980px it stacks below the main column.
+   - 2026-10-26 (Jim): "Others owe info" (Waiting on others) sits in a LEFT column beside the main column. Under 1240px
+     it drops below the main column (inbox stays right); under 980px everything stacks: main, waiting, inbox. */
 :root{
   --bg:#FAF6EC; --card:#FFFFFF; --ink:#1C2136; --muted:#5B6482; --line:#E6E0D0;
   --steel:#3B62B4; --brick:#C23A61; --brick-ink:#C23A61; --green:#12876B; --amber:#7856D6;
@@ -34,7 +38,31 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;
   margin:0;padding:32px 20px 48px;font-size:15px;line-height:1.45}
-.wrap{max-width:860px;margin:0 auto}
+.wrap{max-width:1240px;margin:0 auto}
+.wrap.three{max-width:1560px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;grid-template-areas:"main side";gap:24px;align-items:start}
+.layout.three{grid-template-columns:320px minmax(0,1fr) 340px;grid-template-areas:"left main side"}
+.main-col{grid-area:main}
+.side-col{grid-area:side}
+.left-col{grid-area:left}
+.main-col,.side-col,.left-col{min-width:0}
+/* narrow side columns: let the job/due row wrap like it does on phones */
+.left-col .top,.side-col .ib-top{flex-wrap:wrap;gap:4px 10px}
+.left-col .top > div{flex:1 1 100%}
+.left-col .top > .due{order:-1}
+.left-col .tag{margin-left:0;margin-right:6px}
+.left-col .card{border-left-width:18px;padding:14px}
+.left-col .group:not(.open) .card .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
+.left-col .group:not(.open) .card .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.left-col .group:not(.open) .card .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
+@media (max-width:1240px){
+  .wrap.three{max-width:1240px}
+  .layout.three{grid-template-columns:minmax(0,1fr) 340px;grid-template-areas:"main side" "left side"}
+}
+@media (max-width:980px){
+  .layout,.layout.three{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "left" "side"}
+  .wrap,.wrap.three{max-width:860px}
+}
 header h1{font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size:27px;margin:0;letter-spacing:-.01em}
 .stamp{color:var(--muted);font-size:13px;margin-top:4px;font-variant-numeric:tabular-nums}
 header{margin-bottom:18px}
@@ -154,21 +182,29 @@ footer ul{margin:4px 0 0;padding-left:19px}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap three">
 
 <header>
   <h1>Bid Board</h1>
-  <div class="stamp">Updated 10/26/2026 &middot; 30 in flight (+14 sent, awaiting customer) &middot; 17 due within 7 days</div>
-  <nav class="chips" aria-label="Jump to a section"><a class="chip inbox" href="#inbox"><b>4</b> John's inbox</a><a class="chip hot" href="#overdue"><b>3</b> Overdue</a><a class="chip" href="#ready-to-review"><b>5</b> Ready to review</a><a class="chip" href="#others-owe-info"><b>6</b> Waiting on others</a><a class="chip" href="#sent-awaiting-customer"><b>14</b> Sent</a></nav>
+  <div class="stamp">Updated 10/26/2026 &middot; 28 in flight (+14 sent, awaiting customer) &middot; 17 due within 7 days</div>
+  <nav class="chips" aria-label="Jump to a section"><a class="chip inbox" href="#inbox"><b>4</b> John's inbox</a><a class="chip hot" href="#overdue"><b>1</b> Overdue</a><a class="chip" href="#ready-to-review"><b>5</b> Ready to review</a><a class="chip" href="#others-owe-info"><b>6</b> Waiting on others</a><a class="chip" href="#sent-awaiting-customer"><b>14</b> Sent</a></nav>
 </header>
 
-<section class="group open" id="inbox">
-<h2>John&#x27;s inbox <span class="n">4</span><span class="chev">&#9656;</span></h2>
+<div class="layout three">
+<aside class="left-col">
+<section class="group" id="others-owe-info">
+<h2>Others owe info <span class="n">6</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PVKF4TE7MM" target="_blank" rel="noopener">Walcott 1500 LSD #22A</a></div><span class='due over'>OVERDUE 10/23 (3d)</span></div><div class="ib-ask">Pick the walnut wear layer, 4mm or 6mm, so CO #1 can go to T&amp;T</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Walcott%201500%20LSD%20%2322A&amp;body=Re%3A%20Walcott%201500%20LSD%20%2322A%0APick%20the%20walnut%20wear%20layer%2C%204mm%20or%206mm%2C%20so%20CO%20%231%20can%20go%20to%20T%26T">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Walcott%201500%20LSD%20%2322A&amp;body=Re%3A%20Walcott%201500%20LSD%20%2322A%0APick%20the%20walnut%20wear%20layer%2C%204mm%20or%206mm%2C%20so%20CO%20%231%20can%20go%20to%20T%26T">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22Pa4pkZPaiU" target="_blank" rel="noopener">28 East</a></div><span class='due'>due 10/30 (4d)</span></div><div class="ib-ask">Review: Howard Harris plank revision</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%2028%20East&amp;body=Re%3A%2028%20East%0AReview%3A%20Howard%20Harris%20plank%20revision">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%2028%20East&amp;body=Re%3A%2028%20East%0AReview%3A%20Howard%20Harris%20plank%20revision">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a></div><span class='due'>no due date</span></div><div class="ib-ask">Waiting on JL&#x27;s photos (closet built-in tie-in, trim profile, base shoe) and the east bedroom trim and vent re-measure</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0AWaiting%20on%20JL%27s%20photos%20%28closet%20built-in%20tie-in%2C%20trim%20profile%2C%20base%20shoe%29%20and%20the%20east%20bedroom%20trim%20and%20vent%20re-measure">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0AWaiting%20on%20JL%27s%20photos%20%28closet%20built-in%20tie-in%2C%20trim%20profile%2C%20base%20shoe%29%20and%20the%20east%20bedroom%20trim%20and%20vent%20re-measure">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22Nr6m2WpQWq" target="_blank" rel="noopener">Penny Wolf</a></div><span class='due'>due 10/29 (3d)</span></div><div class="ib-ask">Review the stair CO budget with JV</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Penny%20Wolf&amp;body=Re%3A%20Penny%20Wolf%0AReview%20the%20stair%20CO%20budget%20with%20JV">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Penny%20Wolf&amp;body=Re%3A%20Penny%20Wolf%0AReview%20the%20stair%20CO%20budget%20with%20JV">Call me</a></div></div>
+<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pa4pkZPaiU" target="_blank" rel="noopener">28 East</a> <span class="gc">(Harris, 1555 N Astor #28E)</span><span class="tag motion">in motion</span><span class="tag who">reviewer JL</span></div><div class="task">Howard Harris plank revision - to-do reads &quot;JOSE WILL E-MAIL R+Q Mix&quot;</div><div class="block">&#9888; Howard&#x27;s 10/25 note changes the scope: wood cut to 1,535 SF, narrow plank straight-laid on a bias, Select grade with about 25% rift/quartered. The revised estimate is owed this week.</div></div><span class='due'>due 10/30 (4d)</span></div><details class="more"><summary>more (4)</summary><ul class="subs"><li>XPZ quote: 3&quot; plank + 25% rift/QS mix - was due 10/9</li><li>Swap review wrapper + new estimate doc - was due 10/9</li></ul><div class="block">&#9888; Waiting on XPZ (Jose Antonio Iglesias) for the 3&quot; plank price and the rift/QS mix price (OI-111, OI-112); no reply yet.</div><div class="block">&#9888; Howard still has to confirm the sound subfloor under the new carpet areas and 3/4&quot; thickness (OI-113, OI-114); routed via JL.</div></details></div>
+<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdpLsx2xMu" target="_blank" rel="noopener">Thierer Water Damage</a> <span class="gc">(Legacy Custom Homes)</span></div><div class="task">Sketch approved, waiting on Dutko lead time - 1126 Michigan Beams</div><div class="block">&#9888; Legacy approved the beam sketch 10/22. Waiting on Dutko&#x27;s quote (material only vs full fab, 17 beams) and lead time; 19 ft beams confirmed possible.</div></div><span class='due hot'>due 10/27 (1d)</span></div></div>
+<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22NhTt4W7LgY" target="_blank" rel="noopener">Blue Kettle</a> <span class="gc">(Ruvin Bros)</span><span class="tag motion">in motion</span></div><div class="task">Cut sheet out for AOR approval - RFC Box Beam RFI41</div><div class="block">&#9888; Waiting on Ruvin Bros / AOR (Dave Deblitz) to approve the entry-beam cut sheet, sent 10/21 and again 10/23. Ruvin already answered the face-height question 10/20.</div></div><span class='due hot'>due 10/27 (1d)</span></div><details class="more"><summary>more (1)</summary><div class="block">&#9888; Dutko says the blocks will not be notched into the wood and material is 3/4in, so the drawing needs a revision before cutting.</div></details></div>
+<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a> <span class="gc">(2126 N Kenmore)</span><span class="tag who">waiting on JL</span><span class="tag decision">needs John</span></div><div class="task">To-do reads &quot;DEAD? CANNOT GET IPE&quot;. Pick-one options: Cherry repair $19,397 / Allegheny rift WO full replacement $51,702</div><div class="block">&#9888; Waiting on JL&#x27;s photos (closet built-in tie-in, trim profile, base shoe) and the east bedroom trim and vent re-measure. The to-do name says DEAD?, which is not confirmed.</div></div><span class='due'>no due date</span></div></div>
+<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgwVc8zsJ" target="_blank" rel="noopener">Ginsburg - 885 Bluff St</a> <span class="gc">(JMD Builders)</span><span class="tag motion">in motion</span></div><div class="task">Waiting on plans from JMD (to-do: &quot;NEED PLANS - per JMD&quot;)</div><div class="block">&#9888; JMD owes a real 2nd-floor drawing; nothing has arrived.</div></div><span class='due'>due 10/31 (5d)</span></div></div>
+<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PKKSVnCZcG" target="_blank" rel="noopener">Buck Moon Ranch</a></div><div class="task">Estimate revision - GC quantities needed</div><div class="block">&#9888; Waiting on Ryan Deppen (Fortenberry &amp; Ricks) for ceiling SF and the stair metal detail. Grace asked for the revision 10/21; none sent yet.</div></div><span class='due'>due 10/31 (5d)</span></div></div>
 </div>
 </section>
-
+</aside>
+<main class="main-col">
 <section class="group" id="ready-to-review">
 <h2>Ready to review <span class="n">5</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
@@ -181,30 +217,16 @@ footer ul{margin:4px 0 0;padding-left:19px}
 </section>
 
 <section class="group open" id="overdue">
-<h2>Overdue <span class="n">3</span><span class="chev">&#9656;</span></h2>
+<h2>Overdue <span class="n">1</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
 <div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PczmeRkR6e" target="_blank" rel="noopener">Sheahin Board Repair</a> <span class="gc">(DeGroot)</span></div><div class="task">Sub-task - Board repair T&amp;M (IN PROGRESS); job set up, T&amp;M CO pending</div><div class="block">&#9888; JT shows no documents at all on this job, so the T&amp;M change order has not been issued.</div></div><span class='due over'>OVERDUE 9/11 (45d)</span></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>-JL Review- DeGroot Sheahin HB CO - no due date</li></ul></details></div>
-<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PXetVMngfF" target="_blank" rel="noopener">2350 N Orchard Refinishing</a> <span class="gc">(Mumford #501)</span></div><div class="task">Sub-tasks only, no estimate to-do</div><div class="block">&#9888; Estimate, deposit, PO and Change Order (approved 10/2) are all in JT, so these look like field/shop work, not estimating.</div></div><span class='due over'>OVERDUE 10/2 (24d)</span></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Sand new bedroom/hallway material, match existing color - due 10/2</li><li>Deep clean + screen and coat remaining unit - due 10/2</li></ul></details></div>
-<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PfjGLuVBbe" target="_blank" rel="noopener">3200 N LSD #410</a></div><div class="task">Sub-task only - Waterfall both steps + elongated step detail</div><div class="block">&#9888; The estimate was issued 10/14 and shows denied in JT, so this sub-task looks finished.</div></div><span class='due over'>OVERDUE 10/7 (19d)</span></div></div>
-</div>
-</section>
-
-<section class="group" id="others-owe-info">
-<h2>Others owe info <span class="n">6</span><span class="chev">&#9656;</span></h2>
-<div class="group-body">
-<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pa4pkZPaiU" target="_blank" rel="noopener">28 East</a> <span class="gc">(Harris, 1555 N Astor #28E)</span><span class="tag motion">in motion</span><span class="tag who">reviewer JL</span><span class="tag decision">needs John</span></div><div class="task">Howard Harris plank revision - to-do reads &quot;JOSE WILL E-MAIL R+Q Mix&quot;</div><div class="block">&#9888; Howard&#x27;s 10/25 note changes the scope: wood cut to 1,535 SF, narrow plank straight-laid on a bias, Select grade with about 25% rift/quartered. The revised estimate is owed this week.</div></div><span class='due'>due 10/30 (4d)</span></div><details class="more"><summary>more (4)</summary><ul class="subs"><li>XPZ quote: 3&quot; plank + 25% rift/QS mix - was due 10/9</li><li>Swap review wrapper + new estimate doc - was due 10/9</li></ul><div class="block">&#9888; Waiting on XPZ (Jose Antonio Iglesias) for the 3&quot; plank price and the rift/QS mix price (OI-111, OI-112); no reply yet.</div><div class="block">&#9888; Howard still has to confirm the sound subfloor under the new carpet areas and 3/4&quot; thickness (OI-113, OI-114); routed via JL.</div></details></div>
-<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdpLsx2xMu" target="_blank" rel="noopener">Thierer Water Damage</a> <span class="gc">(Legacy Custom Homes)</span></div><div class="task">Sketch approved, waiting on Dutko lead time - 1126 Michigan Beams</div><div class="block">&#9888; Legacy approved the beam sketch 10/22. Waiting on Dutko&#x27;s quote (material only vs full fab, 17 beams) and lead time; 19 ft beams confirmed possible.</div></div><span class='due hot'>due 10/27 (1d)</span></div></div>
-<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22NhTt4W7LgY" target="_blank" rel="noopener">Blue Kettle</a> <span class="gc">(Ruvin Bros)</span><span class="tag motion">in motion</span></div><div class="task">Cut sheet out for AOR approval - RFC Box Beam RFI41</div><div class="block">&#9888; Waiting on Ruvin Bros / AOR (Dave Deblitz) to approve the entry-beam cut sheet, sent 10/21 and again 10/23. Ruvin already answered the face-height question 10/20.</div></div><span class='due hot'>due 10/27 (1d)</span></div><details class="more"><summary>more (1)</summary><div class="block">&#9888; Dutko says the blocks will not be notched into the wood and material is 3/4in, so the drawing needs a revision before cutting.</div></details></div>
-<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a> <span class="gc">(2126 N Kenmore)</span><span class="tag who">waiting on JL</span><span class="tag decision">needs John</span></div><div class="task">To-do reads &quot;DEAD? CANNOT GET IPE&quot;. Pick-one options: Cherry repair $19,397 / Allegheny rift WO full replacement $51,702</div><div class="block">&#9888; Waiting on JL&#x27;s photos (closet built-in tie-in, trim profile, base shoe) and the east bedroom trim and vent re-measure. The to-do name says DEAD?, which is not confirmed.</div></div><span class='due'>no due date</span></div></div>
-<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgwVc8zsJ" target="_blank" rel="noopener">Ginsburg - 885 Bluff St</a> <span class="gc">(JMD Builders)</span><span class="tag motion">in motion</span></div><div class="task">Waiting on plans from JMD (to-do: &quot;NEED PLANS - per JMD&quot;)</div><div class="block">&#9888; JMD owes a real 2nd-floor drawing; nothing has arrived.</div></div><span class='due'>due 10/31 (5d)</span></div></div>
-<div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PKKSVnCZcG" target="_blank" rel="noopener">Buck Moon Ranch</a></div><div class="task">Estimate revision - GC quantities needed</div><div class="block">&#9888; Waiting on Ryan Deppen (Fortenberry &amp; Ricks) for ceiling SF and the stair metal detail. Grace asked for the revision 10/21; none sent yet.</div></div><span class='due'>due 10/31 (5d)</span></div></div>
 </div>
 </section>
 
 <section class="group" id="not-yet-started">
 <h2>Not yet started <span class="n">3</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a></div><div class="task">New estimate (site visit / retail) - needs input from MB/JL</div><div class="block">&#9888; Nothing received from MB or JL yet.</div></div><span class='due hot'>due 10/26 (0d)</span></div></div>
+<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a><span class="tag decision">needs John</span></div><div class="task">New estimate (site visit / retail) - needs input from MB/JL</div><div class="block">&#9888; Nothing received from MB or JL yet.</div></div><span class='due hot'>due 10/26 (0d)</span></div></div>
 <div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgnvWEsmrN" target="_blank" rel="noopener">Lewis Vent &amp; Attic Stock 2026</a></div><div class="task">MB review - one 4x10 white oak flush vent + 100 SF attic stock of the original floor</div><div class="block">&#9888; MB wants the mill (XPZ) to confirm it can still make the sawn-face texture and color, and the price, before the estimate goes out.</div></div><span class='due'>due 10/30 (4d)</span></div></div>
 <div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PZFvD3wMBR" target="_blank" rel="noopener">1646 N Oakley</a> <span class="gc">(Formed Space GC)</span></div><div class="task">New estimate - Formed Space GC, 1646 N Oakley</div><div class="block">&#9888; MP asked for the added plank SF on the final layouts and a left vs right chevron piece count. Change Order 874Catfish-11 has been pending customer since 10/5.</div></div><span class='due'>due 10/30 (4d)</span></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Price fireplace/hearth border (get A302) - due 10/20</li></ul></details></div>
 </div>
@@ -226,7 +248,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
 <h2>Contract flip in review <span class="n">2</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
 <div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PGxWJcjDqU" target="_blank" rel="noopener">Mills #3500</a><span class="tag motion">in motion</span></div><div class="task">Contract flip (HOLD) - verified, choose material vendor</div><div class="block">&#9888; On HOLD: material and shop process being settled before the flip. JT already shows the deposit and two approved POs, but the flip is not confirmed.</div></div><span class='due hot'>due 10/28 (2d)</span></div></div>
-<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdWszVQt7G" target="_blank" rel="noopener">Meister Residence</a></div><div class="task">Flip contract</div><div class="block">&#9888; Estimate 120Sheridan-1 was approved 8/28; still no deposit invoice or PO in JT. The to-do has no end date - confirm it belongs.</div></div><span class='due'>no due date</span></div></div>
+<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdWszVQt7G" target="_blank" rel="noopener">Meister Residence</a><span class="tag who">owner MP / Yesi</span></div><div class="task">Flip contract</div><div class="block">&#9888; Flip owned by MP/Yesi; estimate approved 8/28, no deposit or PO in JT yet</div></div><span class='due'>no due date</span></div></div>
 </div>
 </section>
 
@@ -253,23 +275,34 @@ footer ul{margin:4px 0 0;padding-left:19px}
 <section class="group" id="change-orders">
 <h2>Change orders <span class="n">4</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a></div><div class="task">C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="block">&#9888; Waiting on MB to confirm the C-cap material is in the shop (asked 10/22). Walkthrough time is not on the calendar yet.</div></div><span class='due hot'>due 10/28 (2d)</span></div></div>
-<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22Nr6m2WpQWq" target="_blank" rel="noopener">Penny Wolf</a><span class="tag motion">in motion</span><span class="tag who">reviewer JL (with JV)</span><span class="tag decision">needs John</span></div><div class="task">CO#1 - stair CO: &quot;PRICE STAIR FINISH - Review and Revise Stairs if Needed&quot;. Jim&#x27;s 10/8 note: JL reviews the stair CO budget, with JV for clarity</div><div class="block">&#9888; To-do is not named READY, so it stays in change orders until it is. A sample request was created 10/22; no change order document yet.</div></div><span class='due'>due 10/29 (3d)</span></div></div>
-<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdSzDXXFYf" target="_blank" rel="noopener">Chudacoff Maintenance</a></div><div class="task">C/O #2 - vents change order (separate from C/O #1 outlet covers)</div><div class="block">&#9888; JT to-do has no end date; the vents CO is not built. Also unresolved: draft CO #64 ($6,215), CO #65 ($2,275 pending since 8/28), Final Invoice #60 ($25,919.99 pending since 6/16).</div></div><span class='due'>no due date</span></div></div>
-<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PJYYg9D4fY" target="_blank" rel="noopener">Cruz Residence</a></div><div class="task">Change order to-do - bury Chudacoff 1/4&quot; cork</div><div class="block">&#9888; The JT to-do has no end date - confirm it still belongs.</div></div><span class='due'>no due date</span></div></div>
+<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a><span class="tag decision">needs John</span></div><div class="task">C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="block">&#9888; Waiting on MB to confirm the C-cap material is in the shop (asked 10/22). Walkthrough time is not on the calendar yet.</div></div><span class='due hot'>due 10/28 (2d)</span></div></div>
+<div class="card motion"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22Nr6m2WpQWq" target="_blank" rel="noopener">Penny Wolf</a><span class="tag motion">in motion</span><span class="tag who">reviewer JL (with JV)</span></div><div class="task">CO#1 - stair CO: &quot;PRICE STAIR FINISH - Review and Revise Stairs if Needed&quot;. Jim&#x27;s 10/8 note: JL reviews the stair CO budget, with JV for clarity</div><div class="block">&#9888; To-do is not named READY, so it stays in change orders until it is. A sample request was created 10/22; no change order document yet.</div></div><span class='due'>due 10/29 (3d)</span></div></div>
+<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdSzDXXFYf" target="_blank" rel="noopener">Chudacoff Maintenance</a></div><div class="task">C/O #2 - vents change order (separate from C/O #1 outlet covers)</div><div class="block">&#9888; On the Fri 10/30 production agenda.</div></div><span class='due'>no due date</span></div></div>
+<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PJYYg9D4fY" target="_blank" rel="noopener">Cruz Residence</a></div><div class="task">Change order to-do - bury Chudacoff 1/4&quot; cork</div><div class="block">&#9888; On the Fri 10/30 production agenda.</div></div><span class='due'>no due date</span></div></div>
 </div>
 </section>
 
 <section class="group" id="sub-tasks-without-a-parent-estimate">
 <h2>Sub-tasks without a parent estimate <span class="n">1</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PatGS7ykvb" target="_blank" rel="noopener">2430 N Lakeview #5S</a> <span class="gc">(Power Construction)</span></div><div class="task">Sub-tasks only, no due dates</div></div><span class='due'>no due date</span></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Confirm sub-floor (sleepers?) / exploratory scope</li><li>Get March S&amp;F color &amp; finish records (client)</li></ul></details></div>
+<div class="card"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22PatGS7ykvb" target="_blank" rel="noopener">2430 N Lakeview #5S</a> <span class="gc">(Power Construction)</span></div><div class="task">Sub-tasks only, no due dates</div><div class="block">&#9888; On the Fri 10/30 production agenda.</div></div><span class='due'>no due date</span></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Confirm sub-floor (sleepers?) / exploratory scope</li><li>Get March S&amp;F color &amp; finish records (client)</li></ul></details></div>
 </div>
 </section>
 
 
 <footer><div class="ft">Changed since yesterday</div><ul><li>Bigane, Lundhaus, Wujcik and 10 Maple Hill now read as pricing work in progress; Thierer and Blue Kettle show who they are waiting on.</li><li>Walcott: CO #1 is not yet issued to T&amp;T; JL still has to pick the walnut wear layer. The rift/liner quote to-do closed.</li><li>Vaugh 900 moved to Sent, awaiting customer. Vallone, Fehlan and Kirovski added under Ready to review; 1952 W Barry is off the list.</li></ul></footer>
 
+</main>
+<aside class="side-col">
+<section class="group open" id="inbox">
+<h2>John&#x27;s inbox <span class="n">4</span><span class="chev">&#9656;</span></h2>
+<div class="group-body">
+<div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PVKF4TE7MM" target="_blank" rel="noopener">Walcott 1500 LSD #22A</a></div><span class='due over'>OVERDUE 10/23 (3d)</span></div><div class="ib-ask">Pick the walnut wear layer, 4mm or 6mm, so CO #1 can go to T&amp;T</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Walcott%201500%20LSD%20%2322A&amp;body=Re%3A%20Walcott%201500%20LSD%20%2322A%0APick%20the%20walnut%20wear%20layer%2C%204mm%20or%206mm%2C%20so%20CO%20%231%20can%20go%20to%20T%26T">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Walcott%201500%20LSD%20%2322A&amp;body=Re%3A%20Walcott%201500%20LSD%20%2322A%0APick%20the%20walnut%20wear%20layer%2C%204mm%20or%206mm%2C%20so%20CO%20%231%20can%20go%20to%20T%26T">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a></div><span class='due'>no due date</span></div><div class="ib-ask">Waiting on JL&#x27;s photos (closet built-in tie-in, trim profile, base shoe) and the east bedroom trim and vent re-measure</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0AWaiting%20on%20JL%27s%20photos%20%28closet%20built-in%20tie-in%2C%20trim%20profile%2C%20base%20shoe%29%20and%20the%20east%20bedroom%20trim%20and%20vent%20re-measure">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0AWaiting%20on%20JL%27s%20photos%20%28closet%20built-in%20tie-in%2C%20trim%20profile%2C%20base%20shoe%29%20and%20the%20east%20bedroom%20trim%20and%20vent%20re-measure">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a></div><span class='due hot'>due 10/26 (0d)</span></div><div class="ib-ask">New estimate (site visit / retail) - needs input from MB/JL</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Ya%20Stryczula&amp;body=Re%3A%20Ya%20Stryczula%0ANew%20estimate%20%28site%20visit%20%2F%20retail%29%20-%20needs%20input%20from%20MB%2FJL">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Ya%20Stryczula&amp;body=Re%3A%20Ya%20Stryczula%0ANew%20estimate%20%28site%20visit%20%2F%20retail%29%20-%20needs%20input%20from%20MB%2FJL">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a></div><span class='due hot'>due 10/28 (2d)</span></div><div class="ib-ask">Walkthrough notes: C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Macia&amp;body=Re%3A%20Macia%0AWalkthrough%20notes%3A%20C-Cap%20Addition%20%28CO%2315%29%20-%20walkthrough%20with%20JL%20Tue%2010%2F27%2C%20budget%20prepared">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Macia&amp;body=Re%3A%20Macia%0AWalkthrough%20notes%3A%20C-Cap%20Addition%20%28CO%2315%29%20-%20walkthrough%20with%20JL%20Tue%2010%2F27%2C%20budget%20prepared">Call me</a></div></div>
+</div>
+</section>
+
+</aside>
+</div>
 </div>
 <script>
 (function(){
