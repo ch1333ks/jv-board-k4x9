@@ -194,7 +194,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
 
 <header>
   <h1>Bid Board</h1>
-  <div class="stamp">Updated 10/27/2026 5:38 AM &middot; 28 in flight (+14 sent, awaiting customer) &middot; 16 due within 7 days <button type="button" class="refresh" id="refresh" data-mode="public" data-built="1793097517195">Refresh</button></div>
+  <div class="stamp">Updated 10/27/2026 5:54 AM &middot; 28 in flight (+14 sent, awaiting customer) &middot; 16 due within 7 days <button type="button" class="refresh" id="refresh" data-mode="public">Refresh</button></div>
   <nav class="chips" aria-label="Jump to a section"><a class="chip inbox" href="#inbox"><b>4</b> John's inbox</a><a class="chip hot" href="#overdue"><b>1</b> Overdue</a><a class="chip" href="#ready-to-review"><b>6</b> Ready to review</a><a class="chip" href="#others-owe-info"><b>7</b> Waiting on others</a><a class="chip" href="#sent-awaiting-customer"><b>14</b> Sent</a></nav>
 </header>
 
@@ -348,29 +348,31 @@ footer ul{margin:4px 0 0;padding-left:19px}
     });
   });
   if (location.hash) jump(location.hash.slice(1), false);
-  // Refresh: local copy starts refresh_board.ps1 via apexboard: and reloads until a newer build lands; public just reloads.
+  // Refresh: the local copy asks the local board server (board_server.py, 127.0.0.1:8765) to pull live JobTread and
+  // rebuild, then reloads once; opened as a file it hops to the server first. The public page just reloads.
   var rb = document.getElementById('refresh');
+  var SERVER = 'http://127.0.0.1:8765/';
   if (rb){
-    var KEY = 'bidboard-refresh', built = +rb.getAttribute('data-built');
-    function getT(){ try { return +localStorage.getItem(KEY) || 0; } catch(e){ return 0; } }
-    function setT(v){ try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch(e){} }
-    function busy(label){ rb.textContent = label; rb.disabled = true; }
-    var t = getT();
-    if (t){
-      if (built >= t){ setT(0); rb.textContent = 'Refreshed'; }
-      else if (Date.now() - t > 180000){ setT(0); rb.textContent = 'Refresh failed'; rb.classList.add('fail');
-        rb.title = 'See C:\\Users\\Jim Valfre\\.claude\\ops-team\\logs\\board-refresh.log'; }
-      else { busy('Refreshing\u2026'); setTimeout(function(){ location.reload(); }, 5000); }
+    var local = rb.getAttribute('data-mode') === 'local';
+    var served = location.protocol === 'http:' && location.port === '8765';
+    function fail(msg){
+      rb.disabled = false; rb.textContent = 'Refresh failed'; rb.classList.add('fail');
+      rb.title = (msg || '') + ' (log: C:\\Users\\Jim Valfre\\.claude\\ops-team\\logs\\board-refresh.log)';
     }
-    rb.addEventListener('click', function(){
-      if (rb.getAttribute('data-mode') === 'local'){
-        setT(Date.now()); busy('Refreshing\u2026');
-        location.href = 'apexboard://refresh';
-        setTimeout(function(){ location.reload(); }, 8000);
-      } else {
-        location.replace(location.pathname + '?r=' + Date.now() + location.hash);
-      }
-    });
+    function go(){
+      if (!local){ location.replace(location.pathname + '?r=' + Date.now() + location.hash); return; }
+      if (!served){ location.href = SERVER + '?refresh=1' + location.hash; return; }
+      rb.disabled = true; rb.textContent = 'Refreshing\u2026'; rb.classList.remove('fail');
+      fetch('/refresh', {method: 'POST', headers: {'X-Board': '1'}})
+        .then(function(r){ return r.json(); })
+        .then(function(j){ if (j.ok) location.replace('/' + location.hash); else fail(j.error); })
+        .catch(function(e){ fail(String(e)); });
+    }
+    rb.addEventListener('click', go);
+    if (local && served && /[?&]refresh=1/.test(location.search)){
+      history.replaceState(null, '', '/' + location.hash);
+      go();
+    }
   }
 })();
 </script>
