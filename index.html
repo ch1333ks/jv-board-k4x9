@@ -32,7 +32,7 @@
      height, the three columns equal width, darker bars with white text so bar text stands out. The Work Plan and
      Work Log tabs (work_plan_page_template.html, work_log.py) share these tokens and stay light only too. */
 :root{
-  --bg:#4E535B; --page-ink:#F4F5F7; --card:#E8EAED; --ink:#1C2136; --muted:#424960; --line:#CBCFD5;
+  --bg:#4E535B; --page-ink:#F4F5F7; --card:#F4F4F2; --ink:#1C2136; --muted:#424960; --line:#D9D9D4;
   --steel:#3B62B4; --brick:#9B1C3F; --brick-ink:#9B1C3F; --green:#12876B; --amber:#7856D6;
   --chip-bg:#E6EAF9; --brick-wash:#FCF0F5; --green-wash:#E9F7F2; --amber-wash:#F0ECFC;
   --meter-track:#E6E0D0; --shadow:none;
@@ -114,7 +114,7 @@ h2 .chev{margin-left:auto;font-size:12px;color:var(--bar-ink);opacity:1;transiti
 .group:not(.open) .card .job{font-size:14.5px;line-height:1.35}
 .group:not(.open) .card .gc{display:none}
 .group:not(.open) .card .due{font-size:12.5px}
-.group:not(.open) .card .due.over{padding:1px 7px}
+.group:not(.open) .card .due.over{font-size:10px;padding:0 4px}
 .group:not(.open) .card .tag{font-size:11px;padding:2px 8px}
 .group:not(.open) .card .task,
 .group:not(.open) .card .block,
@@ -140,7 +140,7 @@ h2 .chev{margin-left:auto;font-size:12px;color:var(--bar-ink);opacity:1;transiti
 .gc{color:var(--muted);font-weight:400}
 .task{color:var(--muted);font-size:15px;margin-top:4px}
 .due{font-size:13.5px;font-weight:600;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.due.over{color:#fff;background:var(--brick);border-radius:2px;padding:1px 6px;font-size:11.5px}
+.due.over{color:#fff;background:var(--brick);border-radius:2px;padding:0 4px;font-size:10px;line-height:1.5;letter-spacing:.02em}
 .due.hot{color:var(--brick-ink)}
 .tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;padding:2px 7px;border-radius:2px;
   vertical-align:2px;margin-left:8px}
@@ -188,7 +188,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
   .group:not(.open) h2{padding:9px 12px}
   .group:not(.open) .card{padding:6px 10px 6px 10px;border-left-width:16px}
   .group:not(.open) .card .top{gap:8px}
-  .group:not(.open) .card .due.over{font-size:11px;padding:1px 5px}
+  .group:not(.open) .card .due.over{font-size:10px;padding:0 4px}
   .group:not(.open) .card .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
   .group:not(.open) .card .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .group:not(.open) .card .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
