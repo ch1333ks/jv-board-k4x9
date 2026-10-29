@@ -79,6 +79,7 @@ header{margin-bottom:18px}
 .refresh{margin-left:8px;padding:3px 10px;border-radius:var(--r);background:var(--bar);color:var(--bar-ink);border:1px solid var(--bar);
 font:inherit;font-size:13px;font-weight:600;cursor:pointer;vertical-align:baseline}
 .refresh:hover{border-color:var(--page-ink)}
+a.refresh{text-decoration:none;display:inline-block}
 .refresh:disabled{cursor:progress;color:#B9BDC4}
 .refresh.fail{color:#FFB3C6;border-color:var(--brick)}
 .chip.inbox{background:var(--amber-wash);color:var(--amber);border-color:#D6CCF3}
@@ -229,7 +230,17 @@ footer ul{margin:4px 0 0;padding-left:19px}
   border:1px solid var(--bar);background:var(--bar);color:var(--bar-ink)}
 .seditor button.cancel{background:none;color:var(--ink);border-color:var(--line)}
 .seditor .msg{font-size:12.5px;color:var(--brick)}
-.sedit:focus-visible,.seditor button:focus-visible,.seditor textarea:focus-visible{outline:2px solid var(--steel);outline-offset:1px}
+/* ⚠ lines (local board, Jim 2026-10-29): click to select, then Dismiss once the line is past the point it refers to */
+.block[data-b]{cursor:pointer;border-radius:var(--r);margin-left:-4px;margin-right:-4px;padding:0 4px}
+.block[data-b]:hover{background:#ECEAF6}
+.block[data-b].sel{background:#E4E0F4;box-shadow:inset 0 0 0 1px #B9B0E2}
+.block .bacts{display:flex;gap:6px;margin:4px 0 2px}
+.block .bacts button{font:inherit;font-size:12px;font-weight:600;border-radius:var(--r);padding:1px 9px;cursor:pointer;
+  border:1px solid var(--bar);background:var(--bar);color:var(--bar-ink)}
+.block .bacts button.cancel{background:none;color:var(--ink);border-color:var(--line)}
+.brestore{display:block;margin-top:4px;font:inherit;font-size:11.5px;color:var(--steel);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline dotted}
+.group:not(.open) .brestore{display:none}
+.block[data-b]:focus-visible,.sedit:focus-visible,.seditor button:focus-visible,.seditor textarea:focus-visible{outline:2px solid var(--steel);outline-offset:1px}
 </style>
 </head>
 <body>
@@ -291,7 +302,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
 <section class="group open" id="overdue">
 <h2>Estimates - Overdue <span class="n">2</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22NhTt4W7LgY" target="_blank" rel="noopener">Blue Kettle</a> <span class="gc">(Ruvin Bros)</span><span class="tag motion">in motion</span></div><div class="task">Cut sheet out for AOR approval - RFC Box Beam RFI41</div><div class="block">&#9888; Waiting on Ruvin Bros / AOR (Dave Deblitz) to approve the entry-beam cut sheet, sent 10/21 and again 10/23. Ruvin already answered the face-height question 10/20.</div></div></div><details class="more"><summary>more (1)</summary><div class="block">&#9888; Dutko says the blocks will not be notched into the wood and material is 3/4in, so the drawing needs a revision before cutting.</div></details></div>
+<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22NhTt4W7LgY" target="_blank" rel="noopener">Blue Kettle</a> <span class="gc">(Ruvin Bros)</span><span class="tag motion">in motion</span></div><div class="task">Cut sheet out for AOR approval - RFC Box Beam RFI41</div><div class="block">&#9888; Dutko says the blocks will not be notched into the wood and material is 3/4in, so the drawing needs a revision before cutting.</div></div></div></div>
 <div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/26 (3d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a><span class="tag decision">needs John</span></div><div class="task">New estimate (site visit / retail) - needs input from MB/JL</div><div class="block">&#9888; Nothing received from MB or JL yet.</div></div></div></div>
 </div>
 </section>
@@ -434,6 +445,46 @@ footer ul{margin:4px 0 0;padding-left:19px}
         };
       })
       .catch(function(){ box.innerHTML = '<div class="msg">Open the board from http://127.0.0.1:8765/ to edit.</div>'; });
+  });
+  // ⚠ lines (local board only, Jim 2026-10-29): click or Enter selects a line and shows Dismiss; Dismiss stores it in
+  // board-overrides.json through board_server.py so a later agent refresh can't bring the same text back.
+  function selectBlock(bl){
+    var was = bl.classList.contains('sel');
+    Array.prototype.slice.call(document.querySelectorAll('.block.sel')).forEach(function(x){
+      x.classList.remove('sel'); var a = x.querySelector('.bacts'); if (a) a.remove();
+    });
+    if (was) return;
+    bl.classList.add('sel');
+    var acts = document.createElement('div');
+    acts.className = 'bacts';
+    acts.innerHTML = '<button type="button" class="dismiss">Dismiss</button><button type="button" class="cancel">Cancel</button>';
+    bl.appendChild(acts);
+    acts.querySelector('.cancel').onclick = function(e){ e.stopPropagation(); selectBlock(bl); };
+    acts.querySelector('.dismiss').onclick = function(e){
+      e.stopPropagation();
+      var btn = this; btn.disabled = true; btn.textContent = 'Dismissing...';
+      post('/card/dismiss', {job: bl.getAttribute('data-job'), b: bl.getAttribute('data-b')})
+        .then(function(r){ if (r.ok){ location.reload(); return; } btn.disabled = false; btn.textContent = 'Dismiss'; btn.title = 'Not saved: ' + r.error; })
+        .catch(function(){ btn.disabled = false; btn.textContent = 'Dismiss'; btn.title = 'Not saved: open the board from http://127.0.0.1:8765/'; });
+    };
+  }
+  document.addEventListener('click', function(e){
+    var rs = e.target.closest && e.target.closest('.brestore');
+    if (rs){
+      rs.disabled = true;
+      post('/card/dismiss', {job: rs.getAttribute('data-job'), restore: true})
+        .then(function(r){ if (r.ok) location.reload(); else { rs.disabled = false; rs.title = 'Not saved: ' + r.error; } })
+        .catch(function(){ rs.disabled = false; });
+      return;
+    }
+    var bl = e.target.closest && e.target.closest('.block[data-b]');
+    if (!bl || e.target.closest('.bacts') || !bl.closest('.group.open')) return;
+    if (String(window.getSelection && window.getSelection())) return;  // let Jim drag-select and copy the text
+    selectBlock(bl);
+  });
+  document.addEventListener('keydown', function(e){
+    var bl = e.target.closest && e.target.closest('.block[data-b]');
+    if (bl && e.target === bl && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); selectBlock(bl); }
   });
   // Done boxes (local board only): tick the card's Weekly Work Plan row through board_server.py; the server writes
   // the workbook, rebuilds this page and the plan pages, so a reload shows every copy in step.
