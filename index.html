@@ -156,16 +156,16 @@ details.more .fulltask{font-size:13.5px;color:var(--muted);margin-top:2px}
 ul.subs{margin:6px 0 0;padding-left:19px;display:flex;flex-direction:column;gap:4px}
 ul.subs li{font-size:13.5px;color:var(--muted)}
 /* John's inbox */
-.ib{background:var(--card);border:1px solid var(--line);border-left:18px solid var(--amber);border-radius:var(--r);
-  padding:12px 16px 14px 16px;margin:10px 0;box-shadow:var(--shadow)}
-.group:not(.open) .ib{padding:6px 14px;margin:5px 0;border-left-width:20px;cursor:pointer}
+.ib{background:var(--card);border:1px solid var(--line);border-left:8px solid var(--amber);border-radius:var(--r);
+  padding:6px 10px;margin:6px 0;box-shadow:var(--shadow)}
+.group:not(.open) .ib{padding:4px 10px;margin:4px 0;border-left-width:8px;cursor:pointer}
 .ib-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.ib-job{font-weight:700;font-size:16.5px;min-width:0}
+.ib-job{font-weight:700;font-size:14px;min-width:0}
 .ib-job a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
-.ib-ask{margin-top:4px;font-size:15px}
-.ib-btns{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 18px;border-radius:var(--r);font-weight:600;
-  font-size:15px;text-decoration:none;border:2px solid var(--green);flex:1 1 130px;max-width:240px}
+.ib-ask{margin-top:2px;font-size:13px;color:var(--muted)}
+.ib-btns{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:24px;padding:0 10px;border-radius:var(--r);font-weight:600;
+  font-size:12px;text-decoration:none;border:1px solid var(--green);flex:none}
 .btn.approve{background:var(--green);color:#fff}
 .btn.call{background:var(--card);color:var(--green)}
 .ib-empty{color:var(--muted);padding:10px 4px}
@@ -188,7 +188,6 @@ footer ul{margin:4px 0 0;padding-left:19px}
   .group:not(.open) .card .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .group:not(.open) .card .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
   .group:not(.open) .card .due{font-size:12px}
-  .btn{flex:1 1 40%;max-width:none}
 }
 /* Work Plan link (Jim 2026-10-29): tabs on the local board, a Done box on cards that are on this week's plan */
 .tabs{display:inline-flex;gap:4px;vertical-align:middle;flex-wrap:wrap}
@@ -242,6 +241,12 @@ footer ul{margin:4px 0 0;padding-left:19px}
 <div class="card stall"><div class="top"><div><div class="job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a><span class="tag decision">needs John</span></div><div class="task">C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="block">&#9888; Waiting on MB to confirm the C-cap material is in the shop (asked 10/22). Walkthrough time is not on the calendar yet.</div></div><div class="right"><span class='due over'>OVERDUE 10/28 (1d)</span></div></div></div>
 </div>
 </section>
+<section class="group open" id="inbox">
+<h2>John&#x27;s inbox <span class="n">4</span><span class="chev">&#9656;</span></h2>
+<div class="group-body">
+<div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a></div><span class='due over'>OVERDUE 10/26 (3d)</span></div><div class="ib-ask">New estimate (site visit / retail) - needs input from MB/JL</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Ya%20Stryczula&amp;body=Re%3A%20Ya%20Stryczula%0ANew%20estimate%20%28site%20visit%20%2F%20retail%29%20-%20needs%20input%20from%20MB%2FJL">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Ya%20Stryczula&amp;body=Re%3A%20Ya%20Stryczula%0ANew%20estimate%20%28site%20visit%20%2F%20retail%29%20-%20needs%20input%20from%20MB%2FJL">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a></div><span class='due'>no due date</span></div><div class="ib-ask">Decide whether the job is dead or still going</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0ADecide%20whether%20the%20job%20is%20dead%20or%20still%20going">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0ADecide%20whether%20the%20job%20is%20dead%20or%20still%20going">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PgnvWEsmrN" target="_blank" rel="noopener">Lewis Vent &amp; Attic Stock 2026</a></div><span class='due hot'>due 10/30 (1d)</span></div><div class="ib-ask">Check whether we can still get the material from Jose</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026&amp;body=Re%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026%0ACheck%20whether%20we%20can%20still%20get%20the%20material%20from%20Jose">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026&amp;body=Re%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026%0ACheck%20whether%20we%20can%20still%20get%20the%20material%20from%20Jose">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a></div><span class='due over'>OVERDUE 10/28 (1d)</span></div><div class="ib-ask">Walkthrough notes: C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Macia&amp;body=Re%3A%20Macia%0AWalkthrough%20notes%3A%20C-Cap%20Addition%20%28CO%2315%29%20-%20walkthrough%20with%20JL%20Tue%2010%2F27%2C%20budget%20prepared">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Macia&amp;body=Re%3A%20Macia%0AWalkthrough%20notes%3A%20C-Cap%20Addition%20%28CO%2315%29%20-%20walkthrough%20with%20JL%20Tue%2010%2F27%2C%20budget%20prepared">Call me</a></div></div>
+</div>
+</section>
 </aside>
 <main class="main-col">
 <section class="group" id="ready-to-review">
@@ -293,12 +298,6 @@ footer ul{margin:4px 0 0;padding-left:19px}
 
 </main>
 <aside class="side-col">
-<section class="group open" id="inbox">
-<h2>John&#x27;s inbox <span class="n">4</span><span class="chev">&#9656;</span></h2>
-<div class="group-body">
-<div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a></div><span class='due over'>OVERDUE 10/26 (3d)</span></div><div class="ib-ask">New estimate (site visit / retail) - needs input from MB/JL</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Ya%20Stryczula&amp;body=Re%3A%20Ya%20Stryczula%0ANew%20estimate%20%28site%20visit%20%2F%20retail%29%20-%20needs%20input%20from%20MB%2FJL">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Ya%20Stryczula&amp;body=Re%3A%20Ya%20Stryczula%0ANew%20estimate%20%28site%20visit%20%2F%20retail%29%20-%20needs%20input%20from%20MB%2FJL">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a></div><span class='due'>no due date</span></div><div class="ib-ask">Decide whether the job is dead or still going</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0ADecide%20whether%20the%20job%20is%20dead%20or%20still%20going">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Hawilo%20Water%20Damage&amp;body=Re%3A%20Hawilo%20Water%20Damage%0ADecide%20whether%20the%20job%20is%20dead%20or%20still%20going">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22PgnvWEsmrN" target="_blank" rel="noopener">Lewis Vent &amp; Attic Stock 2026</a></div><span class='due hot'>due 10/30 (1d)</span></div><div class="ib-ask">Check whether we can still get the material from Jose</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026&amp;body=Re%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026%0ACheck%20whether%20we%20can%20still%20get%20the%20material%20from%20Jose">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026&amp;body=Re%3A%20Lewis%20Vent%20%26%20Attic%20Stock%202026%0ACheck%20whether%20we%20can%20still%20get%20the%20material%20from%20Jose">Call me</a></div></div><div class="ib"><div class="ib-top"><div class="ib-job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a></div><span class='due over'>OVERDUE 10/28 (1d)</span></div><div class="ib-ask">Walkthrough notes: C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="ib-btns"><a class="btn approve" href="mailto:jvalfre@apexwoodfloors.com?subject=Approve%3A%20Macia&amp;body=Re%3A%20Macia%0AWalkthrough%20notes%3A%20C-Cap%20Addition%20%28CO%2315%29%20-%20walkthrough%20with%20JL%20Tue%2010%2F27%2C%20budget%20prepared">Approve</a><a class="btn call" href="mailto:jvalfre@apexwoodfloors.com?subject=Call%20me%3A%20Macia&amp;body=Re%3A%20Macia%0AWalkthrough%20notes%3A%20C-Cap%20Addition%20%28CO%2315%29%20-%20walkthrough%20with%20JL%20Tue%2010%2F27%2C%20budget%20prepared">Call me</a></div></div>
-</div>
-</section>
 <section class="group" id="sent-awaiting-customer">
 <h2>Sent, awaiting customer <span class="n">14</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
