@@ -27,13 +27,16 @@
    - 2026-10-26 (Jim): "Others owe info" (Waiting on others) sits in a LEFT column beside the main column. Under 1240px
      it drops below the main column (inbox stays right); under 980px everything stacks: main, waiting, inbox.
      "Contract flip in review" and the change-order sections sit under it in the same left column; "Sent, awaiting
-     customer" sits under John's inbox on the right (Jim 2026-10-26; LEFT_STAGES / RIGHT_STAGES in build_board.py). */
+     customer" sits under John's inbox on the right (Jim 2026-10-26; LEFT_STAGES / RIGHT_STAGES in build_board.py).
+   - 2026-10-29 (Jim): flatter, less bubbly (4px corners, no shadows, square chips/tags), title bars about half the
+     height, the three columns equal width, darker bars with white text so bar text stands out. The Work Plan and
+     Work Log tabs (work_plan_page_template.html, work_log.py) share these tokens and stay light only too. */
 :root{
-  --bg:#FAF6EC; --card:#FFFFFF; --ink:#1C2136; --muted:#5B6482; --line:#E6E0D0;
+  --bg:#FAF6EC; --card:#FFFFFF; --ink:#1C2136; --muted:#4F5875; --line:#E6E0D0;
   --steel:#3B62B4; --brick:#C23A61; --brick-ink:#C23A61; --green:#12876B; --amber:#7856D6;
   --chip-bg:#E6EAF9; --brick-wash:#FCF0F5; --green-wash:#E9F7F2; --amber-wash:#F0ECFC;
-  --meter-track:#E6E0D0; --shadow:0 1px 2px rgba(28,33,54,.07);
-  --bar:#55575F; --bar-hover:#46484F; --bar-ink:#F5F3EE;
+  --meter-track:#E6E0D0; --shadow:none;
+  --bar:#3E4149; --bar-hover:#30333A; --bar-ink:#FFFFFF; --r:4px;
   color-scheme: light;
 }
 *{box-sizing:border-box}
@@ -43,7 +46,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Public Sans",-apple-syst
 .wrap{max-width:1240px;margin:0 auto}
 .wrap.three{max-width:1560px}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;grid-template-areas:"main side";gap:24px;align-items:start}
-.layout.three{grid-template-columns:320px minmax(0,1fr) 340px;grid-template-areas:"left main side"}
+.layout.three{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:"left main side"}
 .main-col{grid-area:main}
 .side-col{grid-area:side}
 .left-col{grid-area:left}
@@ -69,18 +72,18 @@ header h1{font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size
 .stamp{color:var(--muted);font-size:13px;margin-top:4px;font-variant-numeric:tabular-nums}
 header{margin-bottom:18px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.chip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;min-height:40px;border-radius:20px;background:var(--card);
+.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;min-height:34px;border-radius:var(--r);background:var(--card);
   border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;box-shadow:var(--shadow)}
 .chip b{font-family:Archivo,sans-serif;font-size:15px;font-variant-numeric:tabular-nums}
 .chip:hover{border-color:var(--muted)}
-.refresh{margin-left:8px;padding:3px 12px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+.refresh{margin-left:8px;padding:3px 12px;border-radius:var(--r);border:1px solid var(--line);background:var(--card);color:var(--ink);
 font:inherit;font-size:13px;font-weight:600;cursor:pointer;vertical-align:baseline}
 .refresh:hover{border-color:var(--muted)}
 .refresh:disabled{cursor:progress;color:var(--muted)}
 .refresh.fail{color:var(--brick);border-color:var(--brick)}
 .chip.inbox{background:var(--amber-wash);color:var(--amber);border-color:#D6CCF3}
 .chip.hot b{color:var(--brick)}
-.meter{margin-top:28px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow)}
+.meter{margin-top:28px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
 .meter .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
   font-size:13px;font-variant-numeric:tabular-nums}
 .meter .pct{font-family:Archivo,sans-serif;font-weight:700;font-size:17px;color:var(--green)}
@@ -91,17 +94,17 @@ font:inherit;font-size:13px;font-weight:600;cursor:pointer;vertical-align:baseli
 .meter .note{font-size:12.5px;color:var(--muted);line-height:1.5}
 .meter .note b{color:var(--amber)}
 .group{margin-top:12px;scroll-margin-top:12px}
-h2{font-family:Archivo,sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.05em;
-  color:var(--bar-ink);margin:0;padding:16px 20px;background:var(--bar);border-radius:8px;
+h2{font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--bar-ink);margin:0;padding:7px 12px;background:var(--bar);border-radius:var(--r);
   display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
 h2:hover{background:var(--bar-hover)}
-h2 .n{order:-1;background:var(--card);color:var(--ink);border-radius:12px;padding:3px 12px;min-width:36px;text-align:center;
-  font-family:Archivo,sans-serif;font-size:17px;font-weight:700;letter-spacing:0;line-height:1.25;font-variant-numeric:tabular-nums}
-h2 .chev{margin-left:auto;font-size:13px;color:var(--bar-ink);opacity:.75;transition:transform .15s ease}
+h2 .n{order:-1;background:var(--card);color:var(--ink);border-radius:var(--r);padding:1px 8px;min-width:30px;text-align:center;
+  font-family:Archivo,sans-serif;font-size:14px;font-weight:700;letter-spacing:0;line-height:1.3;font-variant-numeric:tabular-nums}
+h2 .chev{margin-left:auto;font-size:12px;color:var(--bar-ink);opacity:1;transition:transform .15s ease}
 .group.open h2 .chev{transform:rotate(90deg)}
 .group:not(.open) h2{
-  font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:17px;
-  text-transform:none;letter-spacing:normal;padding:15px 20px
+  font-family:"Public Sans",-apple-system,"Segoe UI",sans-serif;font-weight:600;font-size:14.5px;
+  text-transform:none;letter-spacing:normal;padding:7px 12px
 }
 .group-body{padding-top:2px}
 .group:not(.open) .card{padding:6px 16px 6px 14px;margin:5px 0;border-left-width:20px;cursor:pointer}
@@ -119,7 +122,7 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--bar-ink);opacity:.75;transi
 .group:not(.open) .ib-ask,
 .group:not(.open) .ib-btns,
 .group:not(.open) .ib-empty{display:none}
-.card{background:var(--card);border:1px solid var(--line);border-left:28px solid var(--steel);border-radius:8px;
+.card{background:var(--card);border:1px solid var(--line);border-left:28px solid var(--steel);border-radius:var(--r);
   padding:16px 20px 16px 22px;margin:12px 0;box-shadow:var(--shadow)}
 .card.stall{border-left-color:var(--brick)}
 .card.motion{border-left-color:var(--green)}
@@ -132,9 +135,9 @@ h2 .chev{margin-left:auto;font-size:13px;color:var(--bar-ink);opacity:.75;transi
 .gc{color:var(--muted);font-weight:400}
 .task{color:var(--muted);font-size:15px;margin-top:4px}
 .due{font-size:13.5px;font-weight:600;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.due.over{color:#fff;background:var(--brick);border-radius:4px;padding:3px 9px}
+.due.over{color:#fff;background:var(--brick);border-radius:2px;padding:3px 9px}
 .due.hot{color:var(--brick-ink)}
-.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;padding:3px 10px;border-radius:10px;
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;padding:2px 7px;border-radius:2px;
   vertical-align:2px;margin-left:8px}
 .tag.ready{background:#DDF1E8;color:#0E6B55;box-shadow:inset 0 0 0 1px #A9DCC8}
 .tag.motion{background:var(--green-wash);color:var(--green)}
@@ -153,7 +156,7 @@ details.more .fulltask{font-size:13.5px;color:var(--muted);margin-top:2px}
 ul.subs{margin:6px 0 0;padding-left:19px;display:flex;flex-direction:column;gap:4px}
 ul.subs li{font-size:13.5px;color:var(--muted)}
 /* John's inbox */
-.ib{background:var(--card);border:1px solid var(--line);border-left:18px solid var(--amber);border-radius:8px;
+.ib{background:var(--card);border:1px solid var(--line);border-left:18px solid var(--amber);border-radius:var(--r);
   padding:12px 16px 14px 16px;margin:10px 0;box-shadow:var(--shadow)}
 .group:not(.open) .ib{padding:6px 14px;margin:5px 0;border-left-width:20px;cursor:pointer}
 .ib-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
@@ -161,7 +164,7 @@ ul.subs li{font-size:13.5px;color:var(--muted)}
 .ib-job a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
 .ib-ask{margin-top:4px;font-size:15px}
 .ib-btns{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:8px;font-weight:600;
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 18px;border-radius:var(--r);font-weight:600;
   font-size:15px;text-decoration:none;border:2px solid var(--green);flex:1 1 130px;max-width:240px}
 .btn.approve{background:var(--green);color:#fff}
 .btn.call{background:var(--card);color:var(--green)}
@@ -177,7 +180,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
   .top > div{flex:1 1 100%}
   .top > .due{order:-1}
   .tag{margin-left:0;margin-right:6px}
-  .group:not(.open) h2{padding:19px 18px}
+  .group:not(.open) h2{padding:9px 12px}
   .group:not(.open) .card{padding:6px 10px 6px 10px;border-left-width:16px}
   .group:not(.open) .card .top{gap:8px}
   .group:not(.open) .card .due.over{font-size:11px;padding:1px 5px}
@@ -189,11 +192,11 @@ footer ul{margin:4px 0 0;padding-left:19px}
 }
 /* Work Plan link (Jim 2026-10-29): tabs on the local board, a Done box on cards that are on this week's plan */
 .tabs{display:inline-flex;gap:4px;vertical-align:middle;flex-wrap:wrap}
-.tabs a{padding:3px 10px;border-radius:4px;text-decoration:none;font-weight:600;font-size:13px;border:1px solid currentColor;opacity:.85}
-.tabs a[aria-current="page"]{opacity:1;background:#2c5f8a;color:#fff;border-color:#2c5f8a}
+.tabs a{padding:3px 10px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:13px;border:1px solid currentColor;opacity:.85}
+.tabs a[aria-current="page"]{opacity:1;background:var(--bar);color:var(--bar-ink);border-color:var(--bar)}
 .card .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
 .pbox{font-size:12px;display:inline-flex;gap:4px;align-items:center;cursor:pointer;white-space:nowrap}
-.pbox input{width:15px;height:15px;margin:0;accent-color:#2c5f8a}
+.pbox input{width:15px;height:15px;margin:0;accent-color:var(--bar)}
 .card.pdone{opacity:.6}
 .card.pdone .job a,.card.pdone .task{text-decoration:line-through}
 </style>
