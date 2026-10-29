@@ -32,11 +32,11 @@
      height, the three columns equal width, darker bars with white text so bar text stands out. The Work Plan and
      Work Log tabs (work_plan_page_template.html, work_log.py) share these tokens and stay light only too. */
 :root{
-  --bg:#9EA3AB; --card:#FFFFFF; --ink:#1C2136; --muted:#424960; --line:#E6E0D0;
+  --bg:#4E535B; --page-ink:#F4F5F7; --card:#E8EAED; --ink:#1C2136; --muted:#424960; --line:#CBCFD5;
   --steel:#3B62B4; --brick:#C23A61; --brick-ink:#C23A61; --green:#12876B; --amber:#7856D6;
   --chip-bg:#E6EAF9; --brick-wash:#FCF0F5; --green-wash:#E9F7F2; --amber-wash:#F0ECFC;
   --meter-track:#E6E0D0; --shadow:none;
-  --bar:#3E4149; --bar-hover:#30333A; --bar-ink:#FFFFFF; --r:4px;
+  --bar:#2A2D33; --bar-hover:#1F2126; --bar-ink:#FFFFFF; --r:4px;
   color-scheme: light;
 }
 *{box-sizing:border-box}
@@ -68,19 +68,19 @@ body{background:var(--bg);color:var(--ink);font-family:"Public Sans",-apple-syst
   .layout,.layout.three{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "left" "side"}
   .wrap,.wrap.three{max-width:860px}
 }
-header h1{font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size:27px;margin:0;letter-spacing:-.01em}
-.stamp{color:var(--ink);font-size:13px;margin-top:4px;font-variant-numeric:tabular-nums}
+header h1{color:var(--page-ink);font-family:Archivo,-apple-system,sans-serif;font-weight:700;font-size:27px;margin:0;letter-spacing:-.01em}
+.stamp{color:var(--page-ink);font-size:13px;margin-top:4px;font-variant-numeric:tabular-nums}
 header{margin-bottom:18px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;min-height:34px;border-radius:var(--r);background:var(--card);
   border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;box-shadow:var(--shadow)}
 .chip b{font-family:Archivo,sans-serif;font-size:15px;font-variant-numeric:tabular-nums}
 .chip:hover{border-color:var(--muted)}
-.refresh{margin-left:8px;padding:3px 12px;border-radius:var(--r);border:1px solid var(--line);background:var(--card);color:var(--ink);
+.refresh{margin-left:8px;padding:3px 10px;border-radius:var(--r);background:var(--bar);color:var(--bar-ink);border:1px solid var(--bar);
 font:inherit;font-size:13px;font-weight:600;cursor:pointer;vertical-align:baseline}
-.refresh:hover{border-color:var(--muted)}
-.refresh:disabled{cursor:progress;color:var(--muted)}
-.refresh.fail{color:var(--brick);border-color:var(--brick)}
+.refresh:hover{border-color:var(--page-ink)}
+.refresh:disabled{cursor:progress;color:#B9BDC4}
+.refresh.fail{color:#FFB3C6;border-color:var(--brick)}
 .chip.inbox{background:var(--amber-wash);color:var(--amber);border-color:#D6CCF3}
 .chip.hot b{color:var(--brick)}
 .meter{margin-top:28px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
@@ -172,9 +172,9 @@ ul.subs li{font-size:13.5px;color:var(--muted)}
   font-size:12px;text-decoration:none;border:1px solid var(--green);flex:none}
 .btn.approve{background:var(--green);color:#fff}
 .btn.call{background:var(--card);color:var(--green)}
-.ib-empty{color:var(--muted);padding:10px 4px}
-footer{color:var(--muted);font-size:13px;margin-top:18px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
-footer .ft{font-weight:600;color:var(--ink);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.ib-empty{color:var(--page-ink);padding:10px 4px}
+footer{color:var(--page-ink);font-size:13px;margin-top:18px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
+footer .ft{font-weight:600;color:var(--page-ink);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
 footer ul{margin:4px 0 0;padding-left:19px}
 @media (max-width:600px){
   body{padding:20px 12px 40px}
@@ -195,8 +195,9 @@ footer ul{margin:4px 0 0;padding-left:19px}
 }
 /* Work Plan link (Jim 2026-10-29): tabs on the local board, a Done box on cards that are on this week's plan */
 .tabs{display:inline-flex;gap:4px;vertical-align:middle;flex-wrap:wrap}
-.tabs a{padding:3px 10px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:13px;border:1px solid currentColor;opacity:.85}
-.tabs a[aria-current="page"]{opacity:1;background:var(--bar);color:var(--bar-ink);border-color:var(--bar)}
+.tabs a{padding:3px 10px;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:13px;background:var(--bar);color:var(--bar-ink);border:1px solid var(--bar)}
+.tabs a:hover{border-color:var(--page-ink)}
+.tabs a[aria-current="page"]{box-shadow:inset 0 -3px 0 var(--page-ink)}
 .card .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
 .pbox{font-size:12px;display:inline-flex;gap:4px;align-items:center;cursor:pointer;white-space:nowrap}
 .pbox input{width:15px;height:15px;margin:0;accent-color:var(--bar)}
