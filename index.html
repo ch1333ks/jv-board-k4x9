@@ -57,9 +57,9 @@ body{background:var(--bg);color:var(--ink);font-family:"Public Sans",-apple-syst
 .left-col .top > .due,.side-col .top > .due{order:-1}
 .left-col .tag,.side-col .tag{margin-left:0;margin-right:6px}
 .left-col .card,.side-col .card{border-left-width:18px;padding:14px}
-.left-col .group:not(.open) .card .job,.side-col .group:not(.open) .card .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
-.left-col .group:not(.open) .card .job a,.side-col .group:not(.open) .card .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.left-col .group:not(.open) .card .tag,.side-col .group:not(.open) .card .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
+.left-col .card.mini .job,.side-col .card.mini .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
+.left-col .card.mini .job a,.side-col .card.mini .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.left-col .card.mini .tag,.side-col .card.mini .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
 @media (max-width:1240px){
   .wrap.three{max-width:1240px}
   .layout.three{grid-template-columns:minmax(0,1fr) 340px;grid-template-areas:"main side" "left side"}
@@ -108,18 +108,18 @@ h2 .chev{margin-left:auto;font-size:12px;color:var(--bar-ink);opacity:1;transiti
   text-transform:none;letter-spacing:normal;padding:7px 12px
 }
 .group-body{padding-top:2px}
-.group:not(.open) .card{padding:6px 16px 6px 14px;margin:5px 0;border-left-width:20px;cursor:pointer}
-.group:not(.open) .card:hover{box-shadow:0 0 0 1px var(--muted)}
-.group:not(.open) .card .top{flex-wrap:nowrap;align-items:center;gap:10px}
-.group:not(.open) .card .top > div{min-width:0;flex:1 1 auto}
-.group:not(.open) .card .job{font-size:14.5px;line-height:1.35}
-.group:not(.open) .card .gc{display:none}
-.group:not(.open) .card .due{font-size:12.5px}
-.group:not(.open) .card .due.over{font-size:10px;padding:0 4px}
-.group:not(.open) .card .tag{font-size:11px;padding:2px 8px}
-.group:not(.open) .card .task,
-.group:not(.open) .card .block,
-.group:not(.open) .card .more,
+.card.mini{padding:6px 16px 6px 14px;margin:5px 0;border-left-width:20px;cursor:pointer}
+.card.mini:hover{box-shadow:0 0 0 1px var(--muted)}
+.card.mini .top{flex-wrap:nowrap;align-items:center;gap:10px}
+.card.mini .top > div{min-width:0;flex:1 1 auto}
+.card.mini .job{font-size:14.5px;line-height:1.35}
+.card.mini .gc{display:none}
+.card.mini .due{font-size:12.5px}
+.card.mini .due.over{font-size:10px;padding:0 4px}
+.card.mini .tag{font-size:11px;padding:2px 8px}
+.card.mini .task,
+.card.mini .block,
+.card.mini .more,
 .group:not(.open) .ib-ask,
 .group:not(.open) .ib-btns,
 .group:not(.open) .ib-empty{display:none}
@@ -187,13 +187,13 @@ footer ul{margin:4px 0 0;padding-left:19px}
   .top > .due{order:-1}
   .tag{margin-left:0;margin-right:6px}
   .group:not(.open) h2{padding:9px 12px}
-  .group:not(.open) .card{padding:6px 10px 6px 10px;border-left-width:16px}
-  .group:not(.open) .card .top{gap:8px}
-  .group:not(.open) .card .due.over{font-size:10px;padding:0 4px}
-  .group:not(.open) .card .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
-  .group:not(.open) .card .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .group:not(.open) .card .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
-  .group:not(.open) .card .due{font-size:12px}
+  .card.mini{padding:6px 10px 6px 10px;border-left-width:16px}
+  .card.mini .top{gap:8px}
+  .card.mini .due.over{font-size:10px;padding:0 4px}
+  .card.mini .job{display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px}
+  .card.mini .job a{min-width:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card.mini .tag{margin-left:0;font-size:10.5px;padding:1px 6px;letter-spacing:.02em}
+  .card.mini .due{font-size:12px}
 }
 /* Work Plan link (Jim 2026-10-29): tabs on the local board, a Done box on cards that are on this week's plan */
 .tabs{display:inline-flex;gap:4px;vertical-align:middle;flex-wrap:wrap}
@@ -203,15 +203,15 @@ footer ul{margin:4px 0 0;padding-left:19px}
 .card .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none;order:1}
 /* open cards with a right stack (Jim 2026-10-29): float the badge/Done/Edit stack so the description runs the full
    card width below it, with the right margin matching the left */
-.group.open .card:has(.top > .right){padding-right:22px}
-.group.open .card .top:has(> .right){display:flow-root}
-.group.open .card .top > .right{float:right;margin:2px 0 4px 14px;gap:2px}
+.card:not(.mini):has(.top > .right){padding-right:22px}
+.card:not(.mini) .top:has(> .right){display:flow-root}
+.card:not(.mini) .top > .right{float:right;margin:2px 0 4px 14px;gap:2px}
 /* overdue cards shorter (Jim 2026-10-29) */
-.group.open .card.over{padding-top:10px;padding-bottom:10px;margin:8px 0}
-.group.open .card.over .task{margin-top:2px}
-.group.open .card.over .block{margin-top:4px;line-height:1.45}
-.group.open .card.over details.more{margin-top:2px}
-.group.open .card.over details.more summary{padding:2px 0}
+.card:not(.mini).over{padding-top:10px;padding-bottom:10px;margin:8px 0}
+.card:not(.mini).over .task{margin-top:2px}
+.card:not(.mini).over .block{margin-top:4px;line-height:1.45}
+.card:not(.mini).over details.more{margin-top:2px}
+.card:not(.mini).over details.more summary{padding:2px 0}
 .pbox{font-size:12px;display:inline-flex;gap:4px;align-items:center;cursor:pointer;white-space:nowrap}
 .pbox input{width:15px;height:15px;margin:0;accent-color:var(--bar)}
 .card.pdone{opacity:.6}
@@ -220,7 +220,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
 .sedit{font:inherit;font-size:11.5px;font-weight:600;background:none;border:1px solid var(--line);color:var(--steel);
   border-radius:var(--r);padding:1px 7px;cursor:pointer}
 .sedit:hover{border-color:var(--steel)}
-.group:not(.open) .sedit{display:none}
+.card.mini .sedit,.card.mini .cmts{display:none}
 .seditor{margin-top:8px;display:flex;flex-direction:column;gap:6px}
 .seditor textarea{font:inherit;font-size:14px;width:100%;min-height:70px;padding:6px;border:1px solid var(--line);
   border-radius:var(--r);background:#F6F7F9;color:var(--ink);box-sizing:border-box}
@@ -230,6 +230,19 @@ footer ul{margin:4px 0 0;padding-left:19px}
   border:1px solid var(--bar);background:var(--bar);color:var(--bar-ink)}
 .seditor button.cancel{background:none;color:var(--ink);border-color:var(--line)}
 .seditor .msg{font-size:12.5px;color:var(--brick)}
+/* comments + urgent open items (Jim 2026-10-30): any card with a comment or an urgent OI shows expanded */
+.cmts{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+.cm{font-size:13.5px;background:#FFF8DC;border:1px solid #E6D9A3;border-radius:var(--r);padding:3px 8px;overflow-wrap:anywhere}
+.cm.jt{background:#EEF1FA;border-color:#CBD3EC}
+.cm .cmd{font-weight:700;font-size:12px;color:var(--muted);margin-right:4px}
+.cmdel{font:inherit;background:none;border:0;color:var(--muted);cursor:pointer;float:right;padding:0 2px}
+.urg{font-size:13px;font-weight:600;background:var(--brick-wash);color:var(--brick);border:1px solid #E7B9C8;border-radius:var(--r);padding:3px 8px}
+.urg button,.cmadd{font:inherit;font-size:11.5px;font-weight:600;border:1px solid var(--line);background:none;color:var(--steel);border-radius:var(--r);padding:1px 7px;cursor:pointer;margin-left:6px}
+.cmadd{align-self:flex-start;margin-left:0}
+.cmedit{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.cmedit textarea{font:inherit;font-size:14px;width:100%;min-height:56px;padding:6px;border:1px solid var(--line);border-radius:var(--r);background:#F6F7F9;color:var(--ink)}
+.cmedit button{font:inherit;font-size:12.5px;font-weight:600;border-radius:var(--r);padding:3px 10px;cursor:pointer;border:1px solid var(--bar);background:var(--bar);color:var(--bar-ink);margin-right:6px}
+.cmedit button.cancel{background:none;color:var(--ink);border-color:var(--line)}
 /* ⚠ lines (local board, Jim 2026-10-29): click to select, then Dismiss once the line is past the point it refers to */
 .block[data-b]{cursor:pointer;border-radius:var(--r);margin-left:-4px;margin-right:-4px;padding:0 4px}
 .block[data-b]:hover{background:#ECEAF6}
@@ -239,7 +252,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
   border:1px solid var(--bar);background:var(--bar);color:var(--bar-ink)}
 .block .bacts button.cancel{background:none;color:var(--ink);border-color:var(--line)}
 .brestore{display:block;margin-top:4px;font:inherit;font-size:11.5px;color:var(--steel);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline dotted}
-.group:not(.open) .brestore{display:none}
+.card.mini .brestore{display:none}
 .block[data-b]:focus-visible,.sedit:focus-visible,.seditor button:focus-visible,.seditor textarea:focus-visible{outline:2px solid var(--steel);outline-offset:1px}
 </style>
 </head>
@@ -248,7 +261,7 @@ footer ul{margin:4px 0 0;padding-left:19px}
 
 <header>
   <h1>Bid Board</h1>
-  <div class="stamp">Updated 10/30/2026 2:25 AM &middot; 24 in flight (+14 sent, awaiting customer) &middot; 12 due within 7 days <button type="button" class="refresh" id="refresh" data-mode="public">Refresh</button> <a class="refresh" href="work-plan.html">Work plan</a></div>
+  <div class="stamp">Updated 10/30/2026 8:48 AM &middot; 24 in flight (+14 sent, awaiting customer) &middot; 12 due within 7 days <button type="button" class="refresh" id="refresh" data-mode="public">Refresh</button> <a class="refresh" href="work-plan.html">Work plan</a></div>
   <nav class="chips" aria-label="Jump to a section"><a class="chip inbox" href="#inbox"><b>4</b> Needs John's Input</a><a class="chip hot" href="#overdue"><b>3</b> Overdue</a><a class="chip" href="#ready-to-review"><b>4</b> Ready to review</a><a class="chip" href="#others-owe-info"><b>5</b> Waiting on others</a><a class="chip" href="#sent-awaiting-customer"><b>14</b> Sent</a></nav>
 </header>
 
@@ -257,28 +270,28 @@ footer ul{margin:4px 0 0;padding-left:19px}
 <section class="group" id="in-progress">
 <h2>In Progress <span class="n">4</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgDSSNB6Hu" target="_blank" rel="noopener">Bhasin-6056 Dune Path</a> <span class="gc">(Power Construction Company)</span><span class="tag motion">in motion</span></div><div class="task">Takeoff - Power Construction Company, 6056 Dune Path</div><div class="block">&#9888; GC bid is due 10/30; 10/28 is the internal date.</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Diff Bhasin set vs Downey IFC set - was due 10/20</li><li>Price AX324 7.5&quot; relaxed chevron (natural + select alt) - due 10/26</li></ul></details></div>
-<div class="card"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PeLh3aHzJB" target="_blank" rel="noopener">189 E. Lake Shore Drive #11</a> <span class="gc">(Wujcik)</span><span class="tag motion">in motion</span></div><div class="task">Re-price Addendum 1 (Wujcik); GC answers are back</div><div class="block">&#9888; Maxx sent the GC&#x27;s RFI answers 10/22 and Jim said he would come back asap. Estimate 189ELSD11-1 is already approved, so this is an addendum price.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Itemized CO proposal (adds + credits) to Maxx - was due 10/20</li></ul></details></div>
-<div class="card"><div class="top"><div class="right"><span class='due'>due 11/2 (3d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pa5R2ChsEH" target="_blank" rel="noopener">JAR Personal Residence</a> <span class="gc">(2622 Harrison St, Evanston)</span><span class="tag motion">in motion</span></div><div class="task">Revise estimate, JL do you have answers from Jonathan about the stairs per your phone call?</div><div class="block">&#9888; Start time moved to 10:30 AM. Bring the basement stair questions (tread/winder count, who supplies winders and nosing). Bid due 10/30.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Walk-through 10/27 10am - due 10/27</li></ul></details></div>
-<div class="card"><div class="top"><div class="right"><span class='due'>due 11/6 (7d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PggHxbsmS2" target="_blank" rel="noopener">10 Maple Hill</a> <span class="gc">(Power Construction, Maple Hill Res)</span><span class="tag motion">in motion</span></div><div class="task">Pricing - verify existing on site (Power Construction)</div><div class="block">&#9888; The architect answered part of the RFI 10/22 (match the dining room on site, rounded-nosing steps); the rest is waiting on Power&#x27;s design team. GC bid is due Mon 11/9.</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Price WD-1 herringbone + border (spec TBD) - due 11/6</li><li>Price wood steps + fam rm patch/match + thresholds - due 11/6</li></ul></details></div>
+<div class="card mini"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgDSSNB6Hu" target="_blank" rel="noopener">Bhasin-6056 Dune Path</a> <span class="gc">(Power Construction Company)</span><span class="tag motion">in motion</span></div><div class="task">Takeoff - Power Construction Company, 6056 Dune Path</div><div class="block">&#9888; GC bid is due 10/30; 10/28 is the internal date.</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Diff Bhasin set vs Downey IFC set - was due 10/20</li><li>Price AX324 7.5&quot; relaxed chevron (natural + select alt) - due 10/26</li></ul></details></div>
+<div class="card mini"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PeLh3aHzJB" target="_blank" rel="noopener">189 E. Lake Shore Drive #11</a> <span class="gc">(Wujcik)</span><span class="tag motion">in motion</span></div><div class="task">Re-price Addendum 1 (Wujcik); GC answers are back</div><div class="block">&#9888; Maxx sent the GC&#x27;s RFI answers 10/22 and Jim said he would come back asap. Estimate 189ELSD11-1 is already approved, so this is an addendum price.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Itemized CO proposal (adds + credits) to Maxx - was due 10/20</li></ul></details></div>
+<div class="card" data-xp="1"><div class="top"><div class="right"><span class='due'>due 11/2 (3d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pa5R2ChsEH" target="_blank" rel="noopener">JAR Personal Residence</a> <span class="gc">(2622 Harrison St, Evanston)</span><span class="tag motion">in motion</span></div><div class="task">Revise estimate, JL do you have answers from Jonathan about the stairs per your phone call?</div><div class="block">&#9888; Start time moved to 10:30 AM. Bring the basement stair questions (tread/winder count, who supplies winders and nosing). Bid due 10/30.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Walk-through 10/27 10am - due 10/27</li></ul></details></div>
+<div class="card mini"><div class="top"><div class="right"><span class='due'>due 11/6 (7d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PggHxbsmS2" target="_blank" rel="noopener">10 Maple Hill</a> <span class="gc">(Power Construction, Maple Hill Res)</span><span class="tag motion">in motion</span></div><div class="task">Pricing - verify existing on site (Power Construction)</div><div class="block">&#9888; The architect answered part of the RFI 10/22 (match the dining room on site, rounded-nosing steps); the rest is waiting on Power&#x27;s design team. GC bid is due Mon 11/9.</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Price WD-1 herringbone + border (spec TBD) - due 11/6</li><li>Price wood steps + fam rm patch/match + thresholds - due 11/6</li></ul></details></div>
 </div>
 </section>
 <section class="group" id="not-yet-started">
 <h2>Not Yet Started <span class="n">3</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card nys"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgnvWEsmrN" target="_blank" rel="noopener">Lewis Vent &amp; Attic Stock 2026</a><span class="tag who">waiting on JL</span><span class="tag decision">needs John</span></div><div class="task">MB review - one 4x10 white oak flush vent + 100 SF attic stock of the original floor</div><div class="block">&#9888; MB wants the mill (XPZ) to confirm it can still make the sawn-face texture and color, and the price, before the estimate goes out.</div></div></div></div>
-<div class="card nys"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PZFvD3wMBR" target="_blank" rel="noopener">1646 N Oakley</a> <span class="gc">(Formed Space GC)</span></div><div class="task">Piece Count Done, skill built, AOR has final drawing with Grace.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Price fireplace/hearth border (get A302) - due 10/20</li></ul></details></div>
-<div class="card nys"><div class="top"><div class="right"><span class='due'>due 11/2 (3d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PTACnUkYGA" target="_blank" rel="noopener">Palm Desert</a></div><div class="task">Estimate Revision- 11/2</div><div class="block">&#9888; Draft estimate Eldorado-3 was created in JT 10/29; not yet issued.</div></div></div></div>
+<div class="card mini nys"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgnvWEsmrN" target="_blank" rel="noopener">Lewis Vent &amp; Attic Stock 2026</a><span class="tag who">waiting on JL</span><span class="tag decision">needs John</span></div><div class="task">MB review - one 4x10 white oak flush vent + 100 SF attic stock of the original floor</div><div class="block">&#9888; MB wants the mill (XPZ) to confirm it can still make the sawn-face texture and color, and the price, before the estimate goes out.</div></div></div></div>
+<div class="card nys" data-xp="1"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PZFvD3wMBR" target="_blank" rel="noopener">1646 N Oakley</a> <span class="gc">(Formed Space GC)</span></div><div class="task">Piece Count Done, skill built, AOR has final drawing with Grace.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Price fireplace/hearth border (get A302) - due 10/20</li></ul></details></div>
+<div class="card nys" data-xp="1"><div class="top"><div class="right"><span class='due'>due 11/2 (3d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PTACnUkYGA" target="_blank" rel="noopener">Palm Desert</a></div><div class="task">Estimate Revision- 11/2</div></div></div></div>
 </div>
 </section>
 <section class="group" id="others-owe-info">
 <h2>Others Owe Info <span class="n">5</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card owe"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pa4pkZPaiU" target="_blank" rel="noopener">28 East</a> <span class="gc">(Harris, 1555 N Astor #28E)</span><span class="tag motion">in motion</span></div><div class="task">Need R+Q Mix from Jose</div><div class="block">&#9888; Howard&#x27;s 10/25 note changes the scope: wood cut to 1,535 SF, narrow plank straight-laid on a bias, Select grade with about 25% rift/quartered. The revised estimate is owed this week.</div></div></div><details class="more"><summary>more (4)</summary><ul class="subs"><li>XPZ quote: 3&quot; plank + 25% rift/QS mix - was due 10/9</li><li>Swap review wrapper + new estimate doc - was due 10/9</li></ul><div class="block">&#9888; Waiting on XPZ (Jose Antonio Iglesias) for the 3&quot; plank price and the rift/QS mix price (OI-111, OI-112); no reply yet.</div><div class="block">&#9888; Howard still has to confirm the sound subfloor under the new carpet areas and 3/4&quot; thickness (OI-113, OI-114); routed via JL.</div></details></div>
-<div class="card owe"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a> <span class="gc">(2126 N Kenmore)</span><span class="tag stale">stale</span><span class="tag who">waiting on JL</span><span class="tag decision">needs John</span></div><div class="task">To-do reads &quot;DEAD? CANNOT GET IPE&quot;. Pick-one options: Cherry repair $19,397 / Allegheny rift WO full replacement $51,702</div><div class="block">&#9888; Waiting on JL&#x27;s photos (closet built-in tie-in, trim profile, base shoe) and the east bedroom trim and vent re-measure. The to-do name says DEAD?, which is not confirmed.</div></div></div></div>
-<div class="card owe"><div class="top"><div class="right"><span class='due hot'>due 10/31 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgwVc8zsJ" target="_blank" rel="noopener">Ginsburg - 885 Bluff St</a> <span class="gc">(JMD Builders)</span><span class="tag motion">in motion</span></div><div class="task">Waiting on plans from JMD (to-do: &quot;NEED PLANS - per JMD&quot;)</div><div class="block">&#9888; JMD owes a real 2nd-floor drawing; nothing has arrived.</div></div></div></div>
-<div class="card owe"><div class="top"><div class="right"><span class='due hot'>due 10/31 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PKKSVnCZcG" target="_blank" rel="noopener">Buck Moon Ranch</a></div><div class="task">Estimate revision - GC quantities needed</div><div class="block">&#9888; Waiting on Ryan Deppen (Fortenberry &amp; Ricks) for ceiling SF and the stair metal detail. Grace asked for the revision 10/21; none sent yet.</div></div></div></div>
-<div class="card owe"><div class="top"><div class="right"><span class='due'>due 11/5 (6d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgPrwjtyzx" target="_blank" rel="noopener">Lundhaus</a> <span class="gc">(Fraser Construction, 1660 N Oakley Ave)</span><span class="tag motion">in motion</span><span class="tag who">waiting on Alex Fraser</span></div><div class="task">Pricing - Fraser Construction, 1660 N Oakley Ave (addition + ADU SD pricing)</div><div class="block">&#9888; Q1-Q6 sent to Fraser 10/26, answers by 10/28</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Identify existing basement floor to match (WD-6) - due 11/4</li><li>Price 5&quot; stained white oak (WD-7 coach house) - due 11/4</li></ul></details></div>
+<div class="card owe" data-xp="1"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pa4pkZPaiU" target="_blank" rel="noopener">28 East</a> <span class="gc">(Harris, 1555 N Astor #28E)</span><span class="tag motion">in motion</span></div><div class="task">Need R+Q Mix from Jose</div><div class="block">&#9888; Howard&#x27;s 10/25 note changes the scope: wood cut to 1,535 SF, narrow plank straight-laid on a bias, Select grade with about 25% rift/quartered. The revised estimate is owed this week.</div></div></div><details class="more"><summary>more (4)</summary><ul class="subs"><li>XPZ quote: 3&quot; plank + 25% rift/QS mix - was due 10/9</li><li>Swap review wrapper + new estimate doc - was due 10/9</li></ul><div class="block">&#9888; Waiting on XPZ (Jose Antonio Iglesias) for the 3&quot; plank price and the rift/QS mix price (OI-111, OI-112); no reply yet.</div><div class="block">&#9888; Howard still has to confirm the sound subfloor under the new carpet areas and 3/4&quot; thickness (OI-113, OI-114); routed via JL.</div></details></div>
+<div class="card mini owe"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgSPHz3rA" target="_blank" rel="noopener">Hawilo Water Damage</a> <span class="gc">(2126 N Kenmore)</span><span class="tag stale">stale</span><span class="tag who">waiting on JL</span><span class="tag decision">needs John</span></div><div class="task">To-do reads &quot;DEAD? CANNOT GET IPE&quot;. Pick-one options: Cherry repair $19,397 / Allegheny rift WO full replacement $51,702</div><div class="block">&#9888; Waiting on JL&#x27;s photos (closet built-in tie-in, trim profile, base shoe) and the east bedroom trim and vent re-measure. The to-do name says DEAD?, which is not confirmed.</div></div></div></div>
+<div class="card mini owe"><div class="top"><div class="right"><span class='due hot'>due 10/31 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdgwVc8zsJ" target="_blank" rel="noopener">Ginsburg - 885 Bluff St</a> <span class="gc">(JMD Builders)</span><span class="tag motion">in motion</span></div><div class="task">Waiting on plans from JMD (to-do: &quot;NEED PLANS - per JMD&quot;)</div><div class="block">&#9888; JMD owes a real 2nd-floor drawing; nothing has arrived.</div></div></div></div>
+<div class="card mini owe"><div class="top"><div class="right"><span class='due hot'>due 10/31 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PKKSVnCZcG" target="_blank" rel="noopener">Buck Moon Ranch</a></div><div class="task">Estimate revision - GC quantities needed</div><div class="block">&#9888; Waiting on Ryan Deppen (Fortenberry &amp; Ricks) for ceiling SF and the stair metal detail. Grace asked for the revision 10/21; none sent yet.</div></div></div></div>
+<div class="card owe" data-xp="1"><div class="top"><div class="right"><span class='due'>due 11/5 (6d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgPrwjtyzx" target="_blank" rel="noopener">Lundhaus</a> <span class="gc">(Fraser Construction, 1660 N Oakley Ave)</span><span class="tag motion">in motion</span><span class="tag who">waiting on Alex Fraser</span></div><div class="task">Pricing - Fraser Construction, 1660 N Oakley Ave (addition + ADU SD pricing)</div><div class="block">&#9888; Q1-Q6 sent to Fraser 10/26, answers by 10/28</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Identify existing basement floor to match (WD-6) - due 11/4</li><li>Price 5&quot; stained white oak (WD-7 coach house) - due 11/4</li></ul></details></div>
 </div>
 </section>
 <section class="group open" id="inbox">
@@ -292,25 +305,25 @@ footer ul{margin:4px 0 0;padding-left:19px}
 <section class="group" id="ready-to-review">
 <h2>Estimates - Ready to Review <span class="n">4</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card ready"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PVKF4TE7MM" target="_blank" rel="noopener">Walcott 1500 LSD #22A</a> <span class="gc">(T&amp;T Construction)</span><span class="tag ready">ready to review</span></div><div class="task">Verifying the budget for Foyer change order.</div><div class="block">&#9888; Change Order #10 is a draft at $13,961.00, ready for JL review (polished and verified 10/29); not yet issued. Still to re-confirm: Allegheny closet pricing (5/1 quote) and the 77 SF of 3in rift stock.</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Sample deeper liner/border stain vs field - due 10/30</li><li>Schedule JP to sand color sample spots - due 10/30</li></ul></details></div>
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/29 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgnmBKdefM" target="_blank" rel="noopener">Fehlan - 180 E Pearson #5102</a><span class="tag ready">ready to review</span></div><div class="task">MB review - rough bid, cherry rhombus primary bedroom (350-400 SF)</div><div class="block">&#9888; To-do name says Due 10/28 but its end date is 10/26 - trusting 10/26. Budget started, no estimate document yet; Grace wants a call with the customer first.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>First Grade rhombus sample ($50 + ship) - due 10/28</li></ul></details></div>
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (2d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PWNji9vPet" target="_blank" rel="noopener">Bigane 1865 Fremont</a> <span class="gc">(Bigane Construction Co)</span><span class="tag ready">ready to review</span></div><div class="task">Pricing - new estimate (Bigane Construction Co); flooring supplier quote is in</div><div class="block">&#9888; Freight quote pending from Jessica ($0.70/SF placeholder in the budget). Bid is due to Bigane 10/30.</div></div></div><details class="more"><summary>more (4)</summary><ul class="subs"><li>Revised takeoff off 10.09.26 CD pricing set - due 10/27</li><li>Price 3 1/4&quot; rift sawn WO site finished (material + install) - due 10/28</li><li>Herringbone + border pricing (Foyer/Stair Hall HB, Dining/Living 4-bd border) - due 10/28</li><li>Stair + handrail finishing, separate line (main stair 3 flights + rear stair) - due 10/28</li></ul></details></div>
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/27 (3d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PXYniYrFhy" target="_blank" rel="noopener">Hoffmeister Material</a><span class="tag ready">ready to review</span></div><div class="task">AWAITING Alex Finals on Closets - Hoffmeister - 2361 Long Cove Dr Bar (Due 10/27/26)</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Hoffmeister - 2361 Long Cove Dr - Price bar walls + ceiling (WD-4) from leftover Natural - due 10/27</li></ul></details></div>
+<div class="card ready" data-xp="1"><div class="top"><div class="right"><span class='due hot'>due 10/30 (0d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PVKF4TE7MM" target="_blank" rel="noopener">Walcott 1500 LSD #22A</a> <span class="gc">(T&amp;T Construction)</span><span class="tag ready">ready to review</span></div><div class="task">Verifying the budget for Foyer change order.</div><div class="block">&#9888; Change Order #10 is a draft at $13,961.00, ready for JL review (polished and verified 10/29); not yet issued. Still to re-confirm: Allegheny closet pricing (5/1 quote) and the 77 SF of 3in rift stock.</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Sample deeper liner/border stain vs field - due 10/30</li><li>Schedule JP to sand color sample spots - due 10/30</li></ul></details></div>
+<div class="card mini over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/29 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgnmBKdefM" target="_blank" rel="noopener">Fehlan - 180 E Pearson #5102</a><span class="tag ready">ready to review</span></div><div class="task">MB review - rough bid, cherry rhombus primary bedroom (350-400 SF)</div><div class="block">&#9888; To-do name says Due 10/28 but its end date is 10/26 - trusting 10/26. Budget started, no estimate document yet; Grace wants a call with the customer first.</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>First Grade rhombus sample ($50 + ship) - due 10/28</li></ul></details></div>
+<div class="card mini over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (2d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PWNji9vPet" target="_blank" rel="noopener">Bigane 1865 Fremont</a> <span class="gc">(Bigane Construction Co)</span><span class="tag ready">ready to review</span></div><div class="task">Pricing - new estimate (Bigane Construction Co); flooring supplier quote is in</div><div class="block">&#9888; Freight quote pending from Jessica ($0.70/SF placeholder in the budget). Bid is due to Bigane 10/30.</div></div></div><details class="more"><summary>more (4)</summary><ul class="subs"><li>Revised takeoff off 10.09.26 CD pricing set - due 10/27</li><li>Price 3 1/4&quot; rift sawn WO site finished (material + install) - due 10/28</li><li>Herringbone + border pricing (Foyer/Stair Hall HB, Dining/Living 4-bd border) - due 10/28</li><li>Stair + handrail finishing, separate line (main stair 3 flights + rear stair) - due 10/28</li></ul></details></div>
+<div class="card mini over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/27 (3d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PXYniYrFhy" target="_blank" rel="noopener">Hoffmeister Material</a><span class="tag ready">ready to review</span></div><div class="task">AWAITING Alex Finals on Closets - Hoffmeister - 2361 Long Cove Dr Bar (Due 10/27/26)</div></div></div><details class="more"><summary>more (1)</summary><ul class="subs"><li>Hoffmeister - 2361 Long Cove Dr - Price bar walls + ceiling (WD-4) from leftover Natural - due 10/27</li></ul></details></div>
 </div>
 </section>
 
 <section class="group open" id="overdue">
 <h2>Estimates - Overdue <span class="n">2</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (2d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22NhTt4W7LgY" target="_blank" rel="noopener">Blue Kettle</a> <span class="gc">(Ruvin Bros)</span><span class="tag motion">in motion</span></div><div class="task">Dutko has cut sheets for pricing as of 10/28 - waiting on that then good to go. Ruvin modified the design and included additional details.</div></div></div></div>
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/26 (4d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a><span class="tag decision">needs John</span></div><div class="task">New estimate (site visit / retail) - needs input from MB/JL</div><div class="block">&#9888; Nothing received from MB or JL yet.</div></div></div></div>
+<div class="card over" data-xp="1"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (2d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22NhTt4W7LgY" target="_blank" rel="noopener">Blue Kettle</a> <span class="gc">(Ruvin Bros)</span><span class="tag motion">in motion</span></div><div class="task">Dutko has cut sheets for pricing as of 10/28 - waiting on that then good to go. Ruvin modified the design and included additional details.</div></div></div></div>
+<div class="card mini over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/26 (4d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pb5KJdpc5a" target="_blank" rel="noopener">Ya Stryczula</a><span class="tag decision">needs John</span></div><div class="task">New estimate (site visit / retail) - needs input from MB/JL</div><div class="block">&#9888; Nothing received from MB or JL yet.</div></div></div></div>
 </div>
 </section>
 
 <section class="group" id="sub-tasks-without-a-parent-estimate">
 <h2>Sub-Tasks Without a Parent Estimate <span class="n">1</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card stale"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PatGS7ykvb" target="_blank" rel="noopener">2430 N Lakeview #5S</a> <span class="gc">(Power Construction)</span><span class="tag stale">stale</span></div><div class="task">Sub-tasks only, no due dates</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Confirm sub-floor (sleepers?) / exploratory scope</li><li>Get March S&amp;F color &amp; finish records (client)</li></ul></details></div>
+<div class="card mini stale"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PatGS7ykvb" target="_blank" rel="noopener">2430 N Lakeview #5S</a> <span class="gc">(Power Construction)</span><span class="tag stale">stale</span></div><div class="task">Sub-tasks only, no due dates</div></div></div><details class="more"><summary>more (2)</summary><ul class="subs"><li>Confirm sub-floor (sleepers?) / exploratory scope</li><li>Get March S&amp;F color &amp; finish records (client)</li></ul></details></div>
 </div>
 </section>
 
@@ -322,40 +335,40 @@ footer ul{margin:4px 0 0;padding-left:19px}
 <section class="group" id="contract-flip-in-review">
 <h2>Contract Flip in Review <span class="n">1</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card flip"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdWszVQt7G" target="_blank" rel="noopener">Meister Residence</a><span class="tag stale">stale</span><span class="tag who">owner MP / Yesi</span></div><div class="task">Flip contract</div><div class="block">&#9888; Flip owned by MP/Yesi; estimate approved 8/28, no deposit or PO in JT yet</div></div></div></div>
+<div class="card mini flip"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdWszVQt7G" target="_blank" rel="noopener">Meister Residence</a><span class="tag stale">stale</span><span class="tag who">owner MP / Yesi</span></div><div class="task">Flip contract</div><div class="block">&#9888; Flip owned by MP/Yesi; estimate approved 8/28, no deposit or PO in JT yet</div></div></div></div>
 </div>
 </section>
 <section class="group" id="change-orders">
 <h2>Change Orders <span class="n">3</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/29 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Nr6m2WpQWq" target="_blank" rel="noopener">Penny Wolf</a><span class="tag motion">in motion</span><span class="tag who">reviewer JL (with JV)</span></div><div class="task">CO#1 - stair CO: &quot;PRICE STAIR FINISH - Review and Revise Stairs if Needed&quot;. Jim&#x27;s 10/8 note: JL reviews the stair CO budget, with JV for clarity</div><div class="block">&#9888; To-do is not named READY, so it stays in change orders until it is. A sample request was created 10/22; no change order document yet.</div></div></div></div>
-<div class="card co"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdSzDXXFYf" target="_blank" rel="noopener">Chudacoff Maintenance</a><span class="tag stale">stale</span></div><div class="task">C/O #2 - vents change order (separate from C/O #1 outlet covers)</div><div class="block">&#9888; On the Fri 10/30 production agenda.</div></div></div></div>
-<div class="card co"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PJYYg9D4fY" target="_blank" rel="noopener">Cruz Residence</a><span class="tag stale">stale</span></div><div class="task">Change order to-do - bury Chudacoff 1/4&quot; cork</div><div class="block">&#9888; On the Fri 10/30 production agenda.</div></div></div></div>
+<div class="card mini over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/29 (1d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Nr6m2WpQWq" target="_blank" rel="noopener">Penny Wolf</a><span class="tag motion">in motion</span><span class="tag who">reviewer JL (with JV)</span></div><div class="task">CO#1 - stair CO: &quot;PRICE STAIR FINISH - Review and Revise Stairs if Needed&quot;. Jim&#x27;s 10/8 note: JL reviews the stair CO budget, with JV for clarity</div><div class="block">&#9888; To-do is not named READY, so it stays in change orders until it is. A sample request was created 10/22; no change order document yet.</div></div></div></div>
+<div class="card mini co"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdSzDXXFYf" target="_blank" rel="noopener">Chudacoff Maintenance</a><span class="tag stale">stale</span></div><div class="task">C/O #2 - vents change order (separate from C/O #1 outlet covers)</div><div class="block">&#9888; On the Fri 10/30 production agenda.</div></div></div></div>
+<div class="card mini co"><div class="top"><div class="right"><span class='due'>no due date</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PJYYg9D4fY" target="_blank" rel="noopener">Cruz Residence</a><span class="tag stale">stale</span></div><div class="task">Change order to-do - bury Chudacoff 1/4&quot; cork</div><div class="block">&#9888; On the Fri 10/30 production agenda.</div></div></div></div>
 </div>
 </section>
 <section class="group" id="overdue-change-orders">
 <h2>Overdue Change Orders <span class="n">1</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (2d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a><span class="tag decision">needs John</span></div><div class="task">C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="block">&#9888; Waiting on MB to confirm the C-cap material is in the shop (asked 10/22). Walkthrough time is not on the calendar yet.</div></div></div></div>
+<div class="card mini over"><div class="top"><div class="right"><span class='due over'>OVERDUE 10/28 (2d)</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22NaujCAE267" target="_blank" rel="noopener">Macia</a><span class="tag decision">needs John</span></div><div class="task">C-Cap Addition (CO#15) - walkthrough with JL Tue 10/27, budget prepared</div><div class="block">&#9888; Waiting on MB to confirm the C-cap material is in the shop (asked 10/22). Walkthrough time is not on the calendar yet.</div></div></div></div>
 </div>
 </section>
 <section class="group" id="sent-awaiting-customer">
 <h2>Sent, Awaiting Customer <span class="n">14</span><span class="chev">&#9656;</span></h2>
 <div class="group-body">
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/23</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PfYrdiqnsS" target="_blank" rel="noopener">Vaugh 900</a> <span class="gc">(Armour Drive)</span></div><div class="task">Estimate Vaugh26-1 ($5,690) issued in JT 10/23 (pending customer).</div><div class="block">&#9888; MP asked on the estimate 10/21 whether anything happened; no reply found.</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/22</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PeWTSNP6kc" target="_blank" rel="noopener">Simmons Residence</a></div><div class="task">Estimate 123-Michigan-1 issued in JT 10/22 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/22</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdWiyYCNLd" target="_blank" rel="noopener">LG 1925 Cleveland Lumber</a></div><div class="task">Estimate LG1925-2 issued in JT 10/22 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/21</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PWib3u4iZR" target="_blank" rel="noopener">2550 Lakeview #S2502</a></div><div class="task">Estimate Lakeview#S2502-6 issued in JT 10/21 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/21</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgYwvTdZ48" target="_blank" rel="noopener">JAK St Joseph</a></div><div class="task">Estimate 278Ridgeway-2 issued in JT 10/21 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/21</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PLYaVR3EYK" target="_blank" rel="noopener">Bailey Residence</a></div><div class="task">Estimate 5451-2 issued in JT 10/21 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/20</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PZG5n4e3Sy" target="_blank" rel="noopener">Prendergast-6265 Gesh</a></div><div class="task">Estimate 875Catfish-6 issued in JT 10/20 (pending customer); material-only estimate 875Catfish-7 posted 10/22.</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/20</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgcMTKg5Di" target="_blank" rel="noopener">Lauren Collander</a></div><div class="task">Estimate LaurenCollander-1 issued in JT 10/20 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/20</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgPx7aMivJ" target="_blank" rel="noopener">Kovas Residence</a></div><div class="task">Estimate Kovas-1 issued in JT 10/20 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/19</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgZcnXTDfX" target="_blank" rel="noopener">Kingore</a> <span class="gc">(159 E Walton Pl Unit 8G)</span></div><div class="task">Estimate Kingore26-1 issued in JT 10/19 (pending customer). LED refinish, 1369 SF, field draft ballpark $17,853.</div><div class="block">&#9888; Kingore26-2 (water-based, $22,426 draft) is ready alongside Kingore26-1; the building bans oil-based products.</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/17</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PRps5H66Cw" target="_blank" rel="noopener">2430 N Lakeview Ave 5th &amp; 6th</a></div><div class="task">Estimate 2430LV-10 issued in JT 10/17 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/16</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgLTCpetwM" target="_blank" rel="noopener">3800 N LSD #3B</a></div><div class="task">Estimate 3800NLSD3B-1 issued in JT 10/16 (pending customer).</div></div></div></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/14</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pfa9FETBgD" target="_blank" rel="noopener">Griffith Residence</a> <span class="gc">(JAR LLC, 250 E Pearson #2405)</span></div><div class="task">Estimate 250pear2405-1 issued in JT 10/14 and the proposal emailed to JAR 10/14 22:09. Base sell $94,831 (Euro LED Oil) / $92,433 (Loba);</div><div class="block">&#9888; Freight to Lombard and jamb stock not stated in the supplier&#x27;s 10/14 pricing (OI-116).</div></div></div><details class="more"><summary>more (1)</summary><div class="fulltask">Estimate 250pear2405-1 issued in JT 10/14 and the proposal emailed to JAR 10/14 22:09. Base sell $94,831 (Euro LED Oil) / $92,433 (Loba); options: solid alt -$6,943, demo + subfloor prep +$18,602, floor protection +$3,036.</div></details></div>
-<div class="card sent"><div class="top"><div class="right"><span class='due'>sent 10/13</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PfjKGg7mPJ" target="_blank" rel="noopener">JMD 9W Walton Levin</a> <span class="gc">(9 W Walton #903, JMD Builders)</span><span class="tag motion">in motion</span></div><div class="task">Estimate 9WWalton903-2 issued in JT 10/13 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/23</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PfYrdiqnsS" target="_blank" rel="noopener">Vaugh 900</a> <span class="gc">(Armour Drive)</span></div><div class="task">Estimate Vaugh26-1 ($5,690) issued in JT 10/23 (pending customer).</div><div class="block">&#9888; MP asked on the estimate 10/21 whether anything happened; no reply found.</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/22</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PeWTSNP6kc" target="_blank" rel="noopener">Simmons Residence</a></div><div class="task">Estimate 123-Michigan-1 issued in JT 10/22 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/22</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PdWiyYCNLd" target="_blank" rel="noopener">LG 1925 Cleveland Lumber</a></div><div class="task">Estimate LG1925-2 issued in JT 10/22 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/21</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PWib3u4iZR" target="_blank" rel="noopener">2550 Lakeview #S2502</a></div><div class="task">Estimate Lakeview#S2502-6 issued in JT 10/21 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/21</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgYwvTdZ48" target="_blank" rel="noopener">JAK St Joseph</a></div><div class="task">Estimate 278Ridgeway-2 issued in JT 10/21 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/21</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PLYaVR3EYK" target="_blank" rel="noopener">Bailey Residence</a></div><div class="task">Estimate 5451-2 issued in JT 10/21 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/20</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PZG5n4e3Sy" target="_blank" rel="noopener">Prendergast-6265 Gesh</a></div><div class="task">Estimate 875Catfish-6 issued in JT 10/20 (pending customer); material-only estimate 875Catfish-7 posted 10/22.</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/20</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgcMTKg5Di" target="_blank" rel="noopener">Lauren Collander</a></div><div class="task">Estimate LaurenCollander-1 issued in JT 10/20 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/20</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgPx7aMivJ" target="_blank" rel="noopener">Kovas Residence</a></div><div class="task">Estimate Kovas-1 issued in JT 10/20 (pending customer).</div></div></div></div>
+<div class="card sent" data-xp="1"><div class="top"><div class="right"><span class='due'>sent 10/19</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgZcnXTDfX" target="_blank" rel="noopener">Kingore</a> <span class="gc">(159 E Walton Pl Unit 8G)</span></div><div class="task">Estimate Kingore26-1 issued in JT 10/19 (pending customer). LED refinish, 1369 SF, field draft ballpark $17,853.</div><div class="block">&#9888; Kingore26-2 (water-based, $22,426 draft) is ready alongside Kingore26-1; the building bans oil-based products.</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/17</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PRps5H66Cw" target="_blank" rel="noopener">2430 N Lakeview Ave 5th &amp; 6th</a></div><div class="task">Estimate 2430LV-10 issued in JT 10/17 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/16</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PgLTCpetwM" target="_blank" rel="noopener">3800 N LSD #3B</a></div><div class="task">Estimate 3800NLSD3B-1 issued in JT 10/16 (pending customer).</div></div></div></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/14</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22Pfa9FETBgD" target="_blank" rel="noopener">Griffith Residence</a> <span class="gc">(JAR LLC, 250 E Pearson #2405)</span></div><div class="task">Estimate 250pear2405-1 issued in JT 10/14 and the proposal emailed to JAR 10/14 22:09. Base sell $94,831 (Euro LED Oil) / $92,433 (Loba);</div><div class="block">&#9888; Freight to Lombard and jamb stock not stated in the supplier&#x27;s 10/14 pricing (OI-116).</div></div></div><details class="more"><summary>more (1)</summary><div class="fulltask">Estimate 250pear2405-1 issued in JT 10/14 and the proposal emailed to JAR 10/14 22:09. Base sell $94,831 (Euro LED Oil) / $92,433 (Loba); options: solid alt -$6,943, demo + subfloor prep +$18,602, floor protection +$3,036.</div></details></div>
+<div class="card mini sent"><div class="top"><div class="right"><span class='due'>sent 10/13</span></div><div><div class="job"><a href="https://app.jobtread.com/jobs/22PfjKGg7mPJ" target="_blank" rel="noopener">JMD 9W Walton Levin</a> <span class="gc">(9 W Walton #903, JMD Builders)</span><span class="tag motion">in motion</span></div><div class="task">Estimate 9WWalton903-2 issued in JT 10/13 (pending customer).</div></div></div></div>
 </div>
 </section>
 
@@ -367,6 +380,10 @@ footer ul{margin:4px 0 0;padding-left:19px}
   var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
   function setOpen(g, on){
     g.classList.toggle('open', on);
+    Array.prototype.slice.call(g.querySelectorAll('.card')).forEach(function(cd){  // cards with a comment, urgent item or recent update stay open
+      var keep = cd.getAttribute('data-xp') === '1';
+      cd.classList.toggle('mini', keep ? false : !(on && cd.getAttribute('data-x') === '1'));
+    });
     g.querySelector('h2').setAttribute('aria-expanded', on ? 'true' : 'false');
   }
   groups.forEach(function(group){
@@ -382,9 +399,11 @@ footer ul{margin:4px 0 0;padding-left:19px}
       }
     });
     group.addEventListener('click', function(e){
+      if (e.target.closest('a, button, summary, label, .seditor, .cmedit, textarea')) return;
+      var cd = e.target.closest('.card.mini');
+      if (cd){ cd.classList.remove('mini'); cd.setAttribute('data-x', '1'); return; }  // open just this card
       if (group.classList.contains('open')) return;
-      if (e.target.closest('a, button, summary, label, .seditor')) return;
-      if (e.target.closest('.card, .ib')) setOpen(group, true);
+      if (e.target.closest('.ib')) setOpen(group, true);
     });
   });
   function jump(id, push){
@@ -486,6 +505,32 @@ footer ul{margin:4px 0 0;padding-left:19px}
     var bl = e.target.closest && e.target.closest('.block[data-b]');
     if (bl && e.target === bl && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); selectBlock(bl); }
   });
+  // Comments (local board only, Jim 2026-10-30): Comment opens a box; Add saves it on the card (shown on the public
+  // board too); x deletes it; Disable turns an urgent open item off until Jim re-enables it.
+  document.addEventListener('click', function(e){
+    var t = e.target, add = t.closest && t.closest('.cmadd');
+    if (add){
+      var card = add.closest('.card');
+      if (card.querySelector('.cmedit')) return;
+      var box = document.createElement('div');
+      box.className = 'cmedit';
+      box.innerHTML = '<textarea aria-label="Comment" placeholder="Comment on this card"></textarea><div><button type="button" class="save">Add comment</button><button type="button" class="cancel">Cancel</button></div><div class="msg" style="color:var(--brick);font-size:12.5px"></div>';
+      add.parentNode.appendChild(box);
+      var ta = box.querySelector('textarea'); ta.focus();
+      box.querySelector('.cancel').onclick = function(){ box.remove(); };
+      box.querySelector('.save').onclick = function(){
+        var b = this; if (!ta.value.trim()) return; b.disabled = true;
+        post('/card/comment', {job: add.getAttribute('data-job'), text: ta.value})
+          .then(function(r){ if (r.ok) location.reload(); else { b.disabled = false; box.querySelector('.msg').textContent = 'Not saved: ' + r.error; } })
+          .catch(function(){ b.disabled = false; box.querySelector('.msg').textContent = 'Could not reach the board server.'; });
+      };
+      return;
+    }
+    var del = t.closest && t.closest('.cmdel');
+    if (del){ post('/card/comment', {job: del.getAttribute('data-job'), 'delete': del.getAttribute('data-id')}).then(function(r){ if (r.ok) location.reload(); }); return; }
+    var off = t.closest && t.closest('.urgoff');
+    if (off){ off.disabled = true; post('/card/urgent', {oi: off.getAttribute('data-oi')}).then(function(r){ if (r.ok) location.reload(); else off.disabled = false; }); }
+  });
   // Done boxes (local board only): tick the card's Weekly Work Plan row through board_server.py; the server writes
   // the workbook, rebuilds this page and the plan pages, so a reload shows every copy in step.
   document.addEventListener('change', function(e){
@@ -521,6 +566,12 @@ footer ul{margin:4px 0 0;padding-left:19px}
         .catch(function(e){ fail(String(e)); });
     }
     rb.addEventListener('click', go);
+    var seen = false;
+    try { seen = sessionStorage.getItem('bbLoaded') === '1'; sessionStorage.setItem('bbLoaded', '1'); } catch (x) {}
+    if (!seen && !/[?&]refresh=1/.test(location.search)){  // first load this session: refresh (local) or bypass the cache (public)
+      if (local && served) go();
+      else if (!local){ location.replace(location.pathname + '?r=' + Date.now() + location.hash); }
+    }
     if (local && served && /[?&]refresh=1/.test(location.search)){
       history.replaceState(null, '', '/' + location.hash);
       go();
